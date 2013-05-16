@@ -1,5 +1,6 @@
 ThinkPHP
 Public/index.php
+Public/editor
 *.psd
 Tour/Runtime
 Tour/Conf/config.php
