@@ -30,6 +30,10 @@ class AdminAction extends Action {
 		$pointTypeList = D('PointType')->rList();
 		$this->assign('pointTypeList', $pointTypeList);
 		
+		// 获取标签类型
+		$lineTagList = D('LineTag')->rList();
+		$this->assign('lineTagList', $lineTagList);
+		
 		// 获取省份城市
 		$provinceList = D('Province')->rList();
 		foreach($provinceList as $id => $item) {
@@ -54,11 +58,16 @@ class AdminAction extends Action {
 			$point_id .= $item.',';
 		}
 		$_POST['point_id'] = $point_id;
-		$point_type_id = '';
+		$point_type_id = ',';
 		foreach($_POST['point_type_id'] as $item) {
 			$point_type_id .= $item.',';
 		}
 		$_POST['point_type_id'] = $point_type_id;
+		$tag_id = ',';
+		foreach($_POST['tag_id'] as $item) {
+			$tag_id .= $item.',';
+		}
+		$_POST['tag_id'] = $tag_id;
 		$to_city_id = ';';
 		foreach($_POST['to_city_id'] as $item) {
 			$to_city_id .= $item;
@@ -221,13 +230,13 @@ class AdminAction extends Action {
 		$point = D('Point')->r($id);
 		$this->assign('point', $point);
 		// 获取景点类型
-		$pointSubjectList = D('PointSubject')->rList();
-		$subjectList = split(',', $point['subject_id']);
-		foreach($subjectList as $item) {
+		$pointTypeList = D('PointType')->rList();
+		$typeList = split(',', $point['subject_id']);
+		foreach($typeList as $item) {
 			if (empty($item)) continue;
-			$pointSubjectList[$item-1]['selected'] = 1;
+			$pointTypeList[$item-1]['selected'] = 1;
 		}
-		$this->assign('pointSubjectList', $pointSubjectList);
+		$this->assign('pointTypeList', $pointTypeList);
 		// 获取省份城市
 		$provinceList = D('Province')->rList();
 		foreach($provinceList as $id => $item) {

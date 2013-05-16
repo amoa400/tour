@@ -61,7 +61,7 @@
 					<div class="content">
 						<ul>
 							<?php foreach($provinceZB as $item) { ?>
-							<li><a href="<?php echo U('Line/search?t=6&line_type=1&province='.$item['id']) ?>" target="_blank"><{$item.name}>旅游</a></li>
+							<li><a href="<?php echo U('Line/search?t=6&line_type=1&province='.$item['id']) ?>" target="_blank"><{$item.name}></a></li>
 							<?php } ?>
 						</ul>
 					</div>
@@ -74,7 +74,7 @@
 					<div class="content">
 						<ul>
 							<?php foreach($provinceGN as $item) { ?>
-							<li><a href="<?php echo U('Line/search?t=6&line_type=1&province='.$item['id']) ?>" target="_blank"><{$item.name}>旅游</a></li>
+							<li><a href="<?php echo U('Line/search?t=6&line_type=1&province='.$item['id']) ?>" target="_blank"><{$item.name}></a></li>
 							<?php } ?>
 						</ul>
 					</div>
@@ -122,7 +122,10 @@
 				</div>
 				
 				<!--按类型分-->
-				<?php foreach($pointTypeList as $item) { ?>
+				<?php 
+					foreach($pointTypeList as $item) {
+						if (empty($item['point'])) continue;
+				?>
 				<div class="item">
 					<div class="title"><a href="<?php echo U('Line/search?z=1&t=1&point_type='.$item['id']) ?>" target="_blank"><{$item.name}></a></div>
 					<div class="content">
@@ -162,7 +165,10 @@
 				</div>				
 				
 				<!--按省份分-->
-				<?php foreach($provinceList as $item) { ?>
+				<?php 
+					foreach($provinceList as $item) { 
+						if (empty($item['point'])) continue;
+				?>
 				<div class="item">
 					<div class="title"><a href="<?php echo U('Line/search?province='.$item['id']) ?>" target="_blank"><{$item.name}>旅游</a></div>
 					<div class="content">

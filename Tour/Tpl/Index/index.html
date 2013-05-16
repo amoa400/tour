@@ -68,7 +68,7 @@
 							<div class="tt"><a href="javascript:void(0)">按特色分</a></div>
 							<ul>
 								<?php foreach($banji['tagList'] as $item) { ?>
-								<li><a href="<?php echo U('Line/search?t=7&line_type=1&point_type='.$item['id']) ?>" target="_blank"><{$item.name}></a></li>
+								<li><a href="<?php echo U('Line/search?t=7&line_type=1&tag='.$item['id']) ?>" target="_blank"><{$item.name}></a></li>
 								<?php } ?>
 							</ul>
 							<div class="clear"></div>
@@ -144,6 +144,7 @@
 						<?php 
 							foreach($zhoubian['pointTypeList'] as $item) { 
 								if (!isIn($item['id'], array(1,2,3,4,5,7,9))) continue;
+								if (empty($item['point'])) continue;
 						?>
 						<div class="item2">
 							<div class="tt"><a href="<?php echo U('Line/search?z=1&t=1&point_type='.$item['id']) ?>" target="_blank"><{$item.name}></a></div>
@@ -161,7 +162,7 @@
 							<ul>
 								<?php 
 									foreach($zhoubian['pointTypeList'] as $item) { 
-										if (isIn($item['id'], array(1,2,3,4,5,7,9))) continue;
+										if (isIn($item['id'], array(1,2,3,4,5,7,9)) && !empty($item['point'])) continue;
 								?>
 								<li><a href="<?php echo U('Line/search?z=1&t=1&point_type='.$item['id']) ?>" target="_blank"><{$item.name}></a></li>
 								<?php } ?>
@@ -208,7 +209,11 @@
 							<div class="clear"></div>
 						</div>
 						<!--按省份分-->
-						<?php foreach($guonei['provinceList'] as $item) { ?>
+						<?php 
+							foreach($guonei['provinceList'] as $item) {
+								if (!isIn($item['id'], array(5,7,8,9,10,11,12))) continue;
+								if (empty($item['point'])) continue;
+						?>
 						<div class="item2">
 							<div class="tt"><a href="<?php echo U('Line/search?province='.$item['id']) ?>" target="_blank"><{$item.name}></a></div>
 							<ul>
@@ -219,6 +224,19 @@
 							<div class="clear"></div>
 						</div>
 						<?php } ?>
+						<!--其他地区-->
+						<div class="item2">
+							<div class="tt"><a href="javascript:void(0)">其他地区</a></div>
+							<ul>
+								<?php 
+									foreach($guonei['provinceList'] as $item) {
+										if (isIn($item['id'], array(5,7,8,9,10,11,12)) && !empty($item['point'])) continue;
+								?>
+								<li><a href="<?php echo U('Line/search?province='.$item['id']) ?>" target="_blank"><{$item.name}></a></li>
+								<?php } ?>
+							</ul>
+							<div class="clear"></div>
+						</div>
 					</div>
 					</div>
 					</div>
@@ -259,7 +277,10 @@
 							<div class="clear"></div>
 						</div>
 						<!--按省份分-->
-						<?php foreach($chujing['provinceList'] as $item) { ?>
+						<?php 
+							foreach($chujing['provinceList'] as $item) { 
+								if (empty($item['point'])) continue;
+						?>
 						<div class="item2">
 							<div class="tt"><a href="<?php echo U('Line/search?province='.$item['id']) ?>" target="_blank"><{$item.name}></a></div>
 							<ul>
@@ -306,7 +327,10 @@
 							</ul>
 							<div class="clear"></div>
 						</div>
-						<?php foreach($menpiao['provinceZB'] as $item) { ?>
+						<?php 
+							foreach($menpiao['provinceZB'] as $item) {
+								if (empty($item['point'])) continue;
+						?>
 						<div class="item2">
 							<div class="tt"><a href="<?php echo U('Ticket/search?province='.$item['id']) ?>" target="_blank"><{$item.name}>景点</a></div>
 							<ul>

@@ -29,11 +29,18 @@
 		</li>
 		<li>
 			<span class="title">主题：</span>
-			<select name="subject[]" multiple="multiple">
-				<?php foreach($pointSubjectList as $item) { ?>
-				<option value="<{$item.id}>" <?php if ($item['selected'] == 1) { ?>selected="selected"<?php } ?>><{$item.name}></option>
-				<?php } ?>
-			</select>
+			<span class="text">
+			<?php
+				$cnt = 0;
+				foreach($pointTypeList as $item) { 
+					$cnt++;
+			?>
+			<input name="subject[]" type="checkbox" value="<{$item.id}>" <?php if ($item['selected']) echo 'checked="checked"'; ?>> <{$item.name}>
+			<?php 
+					if ($cnt%6==0) echo '<br>';
+				} 
+			?>
+			</span>
 		</li>
 		<li>
 			<span class="title">地址：</span>

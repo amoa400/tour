@@ -146,7 +146,7 @@ class LineModel extends Model {
 			case '4': $order = '`satisfaction` DESC';  break;
 			case '5': $order = '`price` ASC'; break;
 			case '6': $order = '`price` DESC'; break;
-			case '7': $order = '`recommend` DESC'; break;
+			case '7': $order = '`recommend` DESC, `id` DESC'; break;
 			default: $order = '`recommend` DESC, `id` DESC'; break;
 		}
 

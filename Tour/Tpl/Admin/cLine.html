@@ -25,9 +25,38 @@
 		</li>
 		<li>
 			<span class="title">线路类型：</span>
-			<?php foreach($pointTypeList as $item) { ?>
-			<input name="point_type_id[]" type="checkbox" value="<{$item.id}>" <?php if (strstr($line['point_type_id'], $item['id'])) echo 'checked="checked"'; ?>> <{$item.name}>游
-			<?php } ?>
+			<span class="text">
+			<?php
+				$cnt = 0;
+				foreach($pointTypeList as $item) { 
+					$cnt++;
+			?>
+			<input name="point_type_id[]" type="checkbox" value="<{$item.id}>" <?php if (strstr($line['point_type_id'], ','.$item['id'].',')) echo 'checked="checked"'; ?>> <{$item.name}>
+			<?php 
+					if ($cnt%6==0) echo '<br>';
+				} 
+			?>
+			</span>
+		</li>
+		<li>
+			<span class="title">线路标签：</span>
+			<span class="text">
+			<?php
+				$cnt = 0;
+				foreach($lineTagList as $item) { 
+					$cnt++;
+			?>
+			<input name="tag_id[]" type="checkbox" value="<{$item.id}>" <?php if (strstr($line['tag_id'], ','.$item['id'].',')) echo 'checked="checked"'; ?>> <{$item.name}>
+			<?php 
+					if ($cnt%6==0) echo '<br>';
+				} 
+			?>
+			</span>
+		</li>
+		<li>
+			<span class="title">推荐度：</span> 
+			<input name="recommend" type="text" value="<{$line.recommend}>">
+			&nbsp;&nbsp;&nbsp;&nbsp;一般情况下写1即可，推荐度越高排位越靠前，最高255
 		</li>
 		<li><span class="title">特点：</span> <input name="character" type="text" value="<{$line.character}>"></li>
 		<li><span class="title">散客价：</span> <input name="price" type="text" value="<{$line.price}>">&nbsp;&nbsp;&nbsp;&nbsp;团队游请填32-41人价</li>
