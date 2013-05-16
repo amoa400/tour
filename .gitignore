@@ -1,0 +1,5 @@
+ThinkPHP
+Public/index.php
+*.psd
+Tour/Runtime
+Tour/Conf/config.php
