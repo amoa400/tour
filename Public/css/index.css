@@ -89,7 +89,7 @@
 #index .info .divide {border-top:1px dotted #cccccc;padding-top:8px;margin-top:8px;}
 #index .info .tot li {float:none;margin-top:3px;}
 #index .info .tot span {color:#ff6600;font-weight:bold;}
-#index .info .realtime {height:52px;}
+#index .info .realtime {height:52px;overflow:hidden;}
 #index .info .realtime .name {color:#0053aa;}
 #index .info .realtime .school {color:#0053aa;}
 #index .info .realtime .pro {color:#4e9700;}
