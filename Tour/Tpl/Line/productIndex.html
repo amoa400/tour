@@ -1,0 +1,324 @@
+<include file="Index:header"/>
+
+<link href="__ROOT__/css/search.css" rel="stylesheet" media="screen">
+<link href="__ROOT__/css/productIndex.css" rel="stylesheet" media="screen">
+
+<div id="index" class="main_container">
+
+	<div class="left_panel">
+	
+		<!--产品分类 班级-->
+		<?php if ($product['type'] == '班级') { ?>
+		<div class="product">
+			<div class="border">
+			<div class="border2">
+			
+				<div class="product_title"><{$product.name}>导航</div>
+				
+				<div class="item">
+					<div class="title"><a href="javascript:void(0);">按天数分</a></div>
+					<div class="content">
+						<ul>
+							<li><a href="<?php echo U('Line/search?t=5&line_type=1&duration=1') ?>" target="_blank">一日游</a></li>
+							<li><a href="<?php echo U('Line/search?t=5&line_type=1&duration=2') ?>" target="_blank">二日游</a></li>
+							<li><a href="<?php echo U('Line/search?t=5&line_type=1&duration=3') ?>" target="_blank">三日游</a></li>
+							<li><a href="<?php echo U('Line/search?t=5&line_type=1&duration=4') ?>" target="_blank">四至六日</a></li>
+							<li><a href="<?php echo U('Line/search?t=5&line_type=1&duration=8') ?>" target="_blank">七日及以上</a></li>
+						</ul>
+					</div>
+					<div class="clear"></div>
+				</div>
+
+				<!--按主题分-->
+				<div class="item">
+					<div class="title"><a href="javascript:void(0);" target="_blank">按主题分</a></div>
+					<div class="content">
+						<ul>
+							<?php foreach($pointTypeList as $item) { ?>
+							<li><a href="<?php echo U('Line/search?t=7&line_type=1&point_type='.$item['id']) ?>" target="_blank"><{$item.name}></a></li>
+							<?php } ?>
+						</ul>
+					</div>
+					<div class="clear"></div>
+				</div>
+	
+				<!--按标签分-->
+				<div class="item">
+					<div class="title"><a href="javascript:void(0);" target="_blank">按特色分</a></div>
+					<div class="content">
+						<ul>
+							<?php foreach($tagList as $item) { ?>
+							<li><a href="<?php echo U('Line/search?t=8&line_type=1&tag='.$item['id']) ?>" target="_blank"><{$item.name}></a></li>
+							<?php } ?>
+						</ul>
+					</div>
+					<div class="clear"></div>
+				</div>
+				
+				<!--周边游-->
+				<div class="item">
+					<div class="title"><a href="<?php echo U('Line/search?t=6&line_type=1&z=1') ?>" target="_blank">周边游</a></div>
+					<div class="content">
+						<ul>
+							<?php foreach($provinceZB as $item) { ?>
+							<li><a href="<?php echo U('Line/search?t=6&line_type=1&province='.$item['id']) ?>" target="_blank"><{$item.name}>旅游</a></li>
+							<?php } ?>
+						</ul>
+					</div>
+					<div class="clear"></div>
+				</div>
+
+				<!--国内游-->
+				<div class="item">
+					<div class="title"><a href="<?php echo U('Line/search?t=6&line_type=1&z=2') ?>" target="_blank">国内游</a></div>
+					<div class="content">
+						<ul>
+							<?php foreach($provinceGN as $item) { ?>
+							<li><a href="<?php echo U('Line/search?t=6&line_type=1&province='.$item['id']) ?>" target="_blank"><{$item.name}>旅游</a></li>
+							<?php } ?>
+						</ul>
+					</div>
+					<div class="clear"></div>
+				</div>
+				
+			</div>
+			</div>
+		</div>
+		<?php } ?>
+		
+		<?php if ($product['type'] == '周边') { ?>
+		<!--产品分类 周边-->
+		<div class="product">
+			<div class="border">
+			<div class="border2">
+			
+				<div class="product_title"><{$product.name}>导航</div>
+
+				<div class="item">
+					<div class="title"><a href="javascript:void(0);">按区域分</a></div>
+					<div class="content">
+						<ul>
+							<li><a href="<?php echo U('Line/search?province=3') ?>" target="_blank">江苏旅游</a></li>
+							<li><a href="<?php echo U('Line/search?province=2') ?>" target="_blank">浙江旅游</a></li>
+							<li><a href="<?php echo U('Line/search?province=1') ?>" target="_blank">上海旅游</a></li>
+							<li><a href="<?php echo U('Line/search?province=4') ?>" target="_blank">安徽旅游</a></li>
+							<li><a href="<?php echo U('Line/search?province=6') ?>" target="_blank">江西旅游</a></li>
+						</ul>
+					</div>
+					<div class="clear"></div>
+				</div>
+				
+				<div class="item">
+					<div class="title"><a href="javascript:void(0);">按天数分</a></div>
+					<div class="content">
+						<ul>
+							<li><a href="<?php echo U('Line/search?z=1&t=4&duration=1') ?>" target="_blank">一日游</a></li>
+							<li><a href="<?php echo U('Line/search?z=1&t=4&duration=2') ?>" target="_blank">二日游</a></li>
+							<li><a href="<?php echo U('Line/search?z=1&t=4&duration=3') ?>" target="_blank">三日游</a></li>
+							<li><a href="<?php echo U('Line/search?z=1&t=4&duration=7') ?>" target="_blank">多日游</a></li>
+						</ul>
+					</div>
+					<div class="clear"></div>
+				</div>
+				
+				<!--按类型分-->
+				<?php foreach($pointTypeList as $item) { ?>
+				<div class="item">
+					<div class="title"><a href="<?php echo U('Line/search?z=1&t=1&point_type='.$item['id']) ?>" target="_blank"><{$item.name}></a></div>
+					<div class="content">
+						<ul>
+							<?php foreach($item['point'] as $item2) { ?>
+							<li><a href="<?php echo U('Line/search?t=2&point='.$item2['id']) ?>" target="_blank"><{$item2.name_abb}></a></li>
+							<?php } ?>
+						</ul>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<?php } ?>
+			</div>
+			</div>
+		</div>
+		<?php } ?>
+		
+		<?php if ($product['type'] == '国内' || $product['type'] == '出境') { ?>
+		<!--产品分类 国内 出境-->
+		<div class="product">
+			<div class="border">
+			<div class="border2">
+			
+				<div class="product_title"><{$product.name}>导航</div>
+				
+				<!--按主题分-->
+				<div class="item">
+					<div class="title"><a href="javascript:void(0);" target="_blank">按主题分</a></div>
+					<div class="content">
+						<ul>
+							<?php foreach($pointTypeList as $item) { ?>
+							<li><a href="<?php echo U('Line/search?z='.$product['z'].'&t=1&point_type='.$item['id']) ?>" target="_blank"><{$item.name}></a></li>
+							<?php } ?>
+						</ul>
+					</div>
+					<div class="clear"></div>
+				</div>				
+				
+				<!--按省份分-->
+				<?php foreach($provinceList as $item) { ?>
+				<div class="item">
+					<div class="title"><a href="<?php echo U('Line/search?province='.$item['id']) ?>" target="_blank"><{$item.name}>旅游</a></div>
+					<div class="content">
+						<ul>
+							<?php foreach($item['point'] as $item2) { ?>
+							<li><a href="<?php echo U('Line/search?t=2&point='.$item2['id']) ?>" target="_blank"><{$item2.name_abb}></a></li>
+							<?php } ?>
+						</ul>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<?php } ?>
+
+			</div>
+			</div>
+		</div>
+		<?php } ?>
+		
+		<div class="hot">
+			<div class="title">热门线路</div>
+			<?php 
+				$rank = 0;
+				foreach($hotList as $item) {
+					$rank++;
+			?>
+			<div class="item">
+				<span class="rank"><{$rank}></span>
+				<span class="ct">
+					<span class="name"><a href="<?php echo U('Line/show?id='.$item['id']) ?>" target="_blank"><<{$item.name}>><{$item.character}></a></span>
+					<span class="price">¥<{$item.price}>起</span>
+					<span class="count">共<{$item.sell_count}>人出游</span>
+				</span>
+			</div>
+			<?php } ?>
+		</div>
+
+		<div class="team">
+			<a href="<?php echo U('Page/team') ?>" target="_blank"><img src="__ROOT__/images/index/team_order.png"/></a>
+		</div>
+	</div>
+
+	<!--幻灯广告-->
+	<div class="ad">
+		<?php  
+			$cnt = 0;
+			foreach($recommendList as $item) {
+				$cnt++;
+		?>
+		<div id="ad<{$cnt}>" class="img"><a href="<?php echo U('Line/show?id='.$item['id']); ?>" target="_blank"><img src="__ROOT__/images/line/productIndex/<{$product.typeAbb}>/ad<{$cnt}>.jpg"/></a></div>
+		<?php } ?>
+		
+		<div class="nav">
+			<ul>
+				<?php  
+					$cnt = 0;
+					foreach($recommendList as $item) {
+						$cnt++;
+				?>
+				<a href="<?php echo U('Line/show?id='.$item['id']); ?>" target="_blank"><li id="adli<{$cnt}>" onmouseover="showAd(<{$cnt}>)"  <?php if ($cnt == 1) { ?>style="border:0;"class="hover"<?php } ?> onmouseout="startAd()"><{$item.name}></li></a>
+				<?php } ?>
+			</ul>
+		</div>
+
+	</div>
+	
+	<!--特价产品-->
+	<div class="special">
+		<div class="special_title"><i class="icon_speical"></i>&nbsp;<{$product.type}>特价旅游&nbsp;&nbsp;<span>超级实惠，全网最低！</span></div>
+		<div class="special_content">
+			<ul>
+				<?php foreach($specialList as $item) { ?>
+				<li>
+					<div class="img"><a href="<?php echo U('Line/show?id='.$item['id']) ?>" target="_blank"><img src="__ROOT__/images/line/photo/<{$item.id}>.jpg"/></a></div>
+					<div class="title"><a href="<?php echo U('Line/show?id='.$item['id']) ?>" target="_blank"><{$item.name}></a></div>
+					<div class="price_cnt"><span><{$item.price}>元</span>起</div>
+					
+				</li>
+				<?php } ?>
+			</ul>
+		</div>
+	</div>
+
+	<!--推荐产品-->
+	<div id="search" class="recommend">
+		<div class="title"><i class="icon_subject"></i>&nbsp;<{$product.type}>游主题推荐&nbsp;&nbsp;<span>吃喝玩乐，一网打尽</span></div>
+		<div class="navi">
+			<ul>
+				<?php
+					$flag = false;
+					foreach($pointTypeList as $item) { 
+				?>
+				<li id="type<{$item.id}>" <?php if (!$flag) { ?>class="selected" style="margin-left:0;"<?php } ?> onclick="getTLine(<{$product.z}>, <{$item.id}>)">
+					<{$item.name}>
+				</li>
+				<?php 
+						$flag = true;
+					} 
+				?>
+			</ul>
+			<div class="clear"></div>
+		</div>
+		<div class="content result">
+		</div>
+	</div>
+
+		
+	<div id="itemTemplate" style="display:none;">
+		<div class="item">
+			<div class="pic"><a href="<?php echo U('Line/show?id='.'@@line.id') ?>" target="_blank"><img class="lazy" src="__ROOT__/images/line/photo/@@line.id.jpg"/></a></div>
+			<div class="info">
+				<ul>
+					<li style="margin-top:0;"><a href="<?php echo U('Line/show?id='.'@@line.id') ?>" target="_blank"><span class="info_name"><@@line.name><span class="info_ad">@@line.character</span></a></li>
+					<li><span class="info_character">主题：@@line.point_type</span></li>
+					<li>
+						<span class="info_item" style="margin-left:0;">编号：@@line.id</span>
+						<span class="info_item">满意度：<span class="info_satisfaction">@@line.satisfaction%</span></span>
+						<span class="info_item info_sell">@@line.sell_count人出游&nbsp;/&nbsp;@@line.comment_count条点评</span>
+					</li>
+					<li class="schedule">团期：@@line.schedule&nbsp;&nbsp;&nbsp;&nbsp;<span><a href="<?php echo U('Line/show?id='.'@@line.id'.'&calendar=1') ?>" target="_blank">更多团期</a></span>
+					</li>
+				</ul>
+			</div>
+				
+			<div class="price">
+				<div class="top">网订优惠</div>
+				<div class="price_num"><span>@@line.price</span>元起</div>
+				<div class="privilege"><i class="icon icon_di"></i><span class="droptip" data-placement="bottom" title="网上预订即享5元抵扣券优惠">@@line.di_price元</span>&nbsp;&nbsp;<i class="icon icon_song"></i><span class="droptip" data-placement="bottom" title="网上预订即送20元抵扣券">@@line.song_price元</span></div>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div>
+	
+</div>
+
+<script>
+	var getTLinePostUrl = '<?php echo U('Line/getTypeLineList') ?>';
+	var typeUrl = new Array();
+	<?php
+		foreach($pointTypeList as $item) { 
+			if ($product['z'] != 4) {
+	?>
+				typeUrl[<{$item.id}>] = '__ROOT__<?php echo U('Line/search?z='.$product['z'].'&t=1&point_type='.$item['id']) ?>';
+	<?php 
+			} else {
+	?>
+				typeUrl[<{$item.id}>] = '__ROOT__<?php echo U('Line/search?t=7&line_type=1&point_type='.$item['id']) ?>';
+	<?php	
+			}
+		}
+	?>
+</script>
+<script type="text/javascript" src="__ROOT__/js/index.js" charset="utf-8"></script>
+<script>
+$(document).ready(function(){
+	getTLine(<{$product.z}>, 1);
+});
+</script>
+
+<include file="Index:footer"/>

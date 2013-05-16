@@ -1,0 +1,27 @@
+<include file="Admin:header"/>
+
+<link href="__ROOT__/css/admin/line.css" rel="stylesheet" media="screen">
+
+
+<div id="line">
+	<ul>
+		<form method="post" action="<?php echo U('Admin/cLine4Do') ?>" enctype="multipart/form-data">
+		
+		<li><span class="title" style="font-weight:bold;">订单基本信息</span></li>
+		<li><span class="title">编号：</span><{$line.id}></li>
+		<li><span class="title">名称：</span><{$line.name}></li>
+		<input name="line_id" value="<{$line.id}>" style="display:none;">
+		<li>&nbsp;</li>
+		<li><span class="title" style="font-weight:bold;">上车地点</span></li>
+		<li><span class="title">上车时间：</span><input name="departure_time" type="text" value="07:00"/></li>
+		<li><span class="title">上车地点：</span><input name="departure_location" type="text" value="南京西路128号国际饭店门口（人民广场地铁站，8号口出来对面）"/></li>
+		<li><span class="title">返程地点：</span><input name="return_location" type="text" value="回程视情况下车"/></li>
+		<li><span class="title">备注情况：</span><input name="remark" type="text" value="准时发车，过时不候"/></li>
+		<li><span class="title"><a href="<?php echo U('Admin/cLine3?id='.$line['id']) ?>">上一步</a>&nbsp;&nbsp;&nbsp;&nbsp;</span><input type="submit" class="btn btn-inverse" value="下一步"></li>
+		</form>
+
+	<div class="clear"></div>
+	
+</div>
+
+<include file="Admin:footer"/>

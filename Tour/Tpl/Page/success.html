@@ -1,0 +1,31 @@
+<include file="Index:header_top"/>
+</div>
+
+<div style="margin:0 auto;width:1000px;text-align:center;margin-top:200px;font-size:14px;">
+
+	<div>
+	</div>
+	<?php if (!empty($message)) { ?>
+		<h1>:)</h1><{$message}>
+	<?php } else { ?>
+		<{$error}>
+	<?php } ?>
+
+</div>
+
+</body>
+
+<script type="text/javascript">
+(function(){
+var wait = document.getElementById('wait'),href = document.getElementById('href').href;
+var interval = setInterval(function(){
+	var time = --wait.innerHTML;
+	if(time == 0) {
+		//location.href = href;
+		clearInterval(interval);
+	};
+}, 1000);
+})();
+</script>
+
+</html>

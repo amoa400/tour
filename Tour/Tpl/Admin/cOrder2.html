@@ -1,0 +1,97 @@
+<include file="Admin:header"/>
+
+<link href="__ROOT__/css/admin/line.css" rel="stylesheet" media="screen">
+
+<div id="line">
+	<ul>
+		<form method="post" action="<?php echo U('Admin/cOrder2Do') ?>" enctype="multipart/form-data">
+		<input name="id" value="<{$order.id}>" style="display:none;">
+		
+		<li><span class="title" style="font-weight:bold;">保险信息</span></li>
+		<?php foreach($insuranceList as $item) { ?>
+		<li>
+			<span class="title">保险：</span>
+			<{$item.name}>
+		</li>
+		<li>
+			<span class="title"></span>
+			<select name="insurance[]">
+			<option value="0">0份</option>
+			<?php for ($i = $order['people_count']; $i > 0; $i--) { ?>
+				<option value="<{$i}>" <?php if ($item['count'] == $i) echo 'selected="selected"'; ?>><{$i}>份</option>
+			<?php } ?>
+			</select>
+		</li>
+		<?php } ?>
+		<li>&nbsp;</li>
+		
+		<?php if ($order['type'] == 1) { ?>
+		<li><span class="title" style="font-weight:bold;">游客信息</span></li>
+		<?php for($i = 1; $i <= $order['people_count']; $i++) { ?>
+		<li>
+			<span class="title">游客<{$i}>姓名：</span>
+			<input name="t_name[]" type="text" value="<?php echo $touristList[$i-1]['name'] ?>">
+		</li>
+		<li>
+			<span class="title">游客<{$i}>联系方式：</span>
+			<input name="t_phone[]" type="text" value="<?php echo $touristList[$i-1]['phone'] ?>">
+		</li>
+		<li>
+			<span class="title">游客<{$i}>证件号：</span>
+			<input name="t_card[]" type="text" value="<?php echo $touristList[$i-1]['card'] ?>">
+		</li>
+		<?php } ?>
+		<?php } ?>
+
+		<li><span class="title">&nbsp;</span><input type="submit" class="btn btn-inverse" value="下一步"></li>
+		</form>
+		
+	<div class="clear"></div>
+	
+</div>
+
+<!--
+☆为了您的安全，建议游客购买旅游人身意外保险,费用为10元/人；
+☆此线路价格为打包特惠价，所有证件无效均不退款；
+☆此线路为散客拼团，先来先坐，请游客准时上车否则过时不候，产生的座位费不退，请保持通讯畅通，以便导游出团前通知有关事宜；
+☆如遇国家政策性调价，人力不可抗拒因素或游客自身因素，造成的损失和增加的费用由游客自理；
+☆请游客在旅途中注意人身及财物安全（请特别注意儿童的安全）；
+☆在不变动景点与住宿条件的情况下，我公司可根据实际情况对行程作适当调整
+☆车型根据最终报名人数决定，保证每人一正座。
+-->
+
+<script charset="utf-8" src="__ROOT__/editor/kindeditor.js"></script>
+<script charset="utf-8" src="__ROOT__/editor/lang/zh_CN.js"></script>
+<script>
+        KindEditor.ready(function(K) {
+            window.editor = K.create('#introduction', {
+				minWidth : '400px',
+			});
+        });
+</script>
+
+<script>
+var province = Array();
+<?php for($i = 0; $i < count($provinceList); $i++) { ?>
+province[<{$i}>] = Array();
+province[<{$i}>]['tot'] = <?php echo count($provinceList[$i]['cityList']) ?>;
+province[<{$i}>]['city'] = Array(); 
+<?php for($j = 0; $j < count($provinceList[$i]['cityList']); $j++) { ?>
+	province[<{$i}>]['city'][<{$j}>] = Array();
+	province[<{$i}>]['city'][<{$j}>]['id'] = '<{$provinceList.$i.cityList.$j.id}>';
+	province[<{$i}>]['city'][<{$j}>]['name'] = '<{$provinceList.$i.cityList.$j.name}>';
+<?php } ?>
+<?php } ?>
+changeProvince(1);
+
+function changeProvince() {
+	var id = $('#province').find("option:selected").val();
+	var city = $('#city');
+	city.html('');
+	for (var i = 0; i < province[id-1]['tot']; i++)
+		city.append('<option value="'+(i+1)+'">'+province[id-1]['city'][i]['name']+'</option>');
+}
+
+</script>
+
+<include file="Admin:footer"/>

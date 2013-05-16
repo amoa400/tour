@@ -1,0 +1,43 @@
+<include file="Index:header"/>
+
+<link href="__ROOT__/css/page/page.css" rel="stylesheet" media="screen">
+
+<div id="team" class="main_container wallpaper2" style="height:350px;">
+	
+	<div style="margin:0 auto;width:500px;margin-top:70px;">
+		<div style="float:left;height:150px;">
+			<?php if (!empty($message)) { ?>
+			<img src="__ROOT__/images/success.png">
+			<?php } else { ?>
+			<img src="__ROOT__/images/error.png">
+			<?php } ?>
+		</div>
+		<div style="float:left;font-size:20px;padding-top:50px;margin-left:20px;">
+			<?php if (!empty($message)) { ?>
+			<span style="font-weight:bold;"><{$message}></span><br>
+			<?php } else { ?>
+			<span style="font-weight:bold;"><{$error}></span><br>
+			<?php } ?>
+			<span style="font-weight:bold;"><a id="href" href="<?php echo($jumpUrl); ?>">页面自动将在<b id="wait"><?php echo($waitSecond); ?></b>秒后跳转</a></span>
+		</div>
+	</div>
+	
+</div>
+
+</div>
+</body>
+
+<script type="text/javascript">
+(function(){
+var wait = document.getElementById('wait'),href = document.getElementById('href').href;
+var interval = setInterval(function(){
+	var time = --wait.innerHTML;
+	if(time == 0) {
+		location.href = href;
+		clearInterval(interval);
+	};
+}, 1000);
+})();
+</script>
+
+</html>

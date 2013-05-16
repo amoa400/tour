@@ -1,0 +1,66 @@
+<include file="Fenxiao:left_area"/>
+	
+	<!--右方区域-->
+	<div class="right_area">
+		
+		<!--个人信息-->
+		<div class="info2" style="margin:0;">
+			<div class="title">详细信息</div>
+			<div class="content">
+				<form action="<?php echo U('Fenxiao/agentCreateDo') ?>" method="post" enctype="multipart/form-data">
+				<ul>
+					<?php if ($agent2['info']['group_id'] != 3) { ?>
+					<li>
+						<span class="tt"><strong>验证状态：</strong></span>
+						尚未验证，验证地址：__ROOT__<?php echo U('Fenxiao/agentVerify?id='.$agent2['user_id'].'&fid='.$agent2['father_id']); ?>
+					</li>
+					<?php } ?>
+					<li>
+						<span class="tt">用户邮箱：</span>
+						<{$agent2.info.email}>
+					</li>
+					<li>
+						<span class="tt">真实姓名：</span>
+						<{$agent2.name}>
+					</li>
+					<li>
+						<span class="tt">联系方式：</span>
+						<{$agent2.phone}>
+					</li>
+					<li>
+						<span class="tt">所在学校：</span>
+						<{$agent2.school}>
+					</li>
+					<li>
+						<span class="tt">入学年份：</span>
+						<{$agent2.grade}>年
+					</li>
+					<li>
+						<span class="tt">优惠代码：</span>
+						<{$agent2.code}>
+					</li>
+					<li>
+						<span class="tt">加入时间：</span>
+						<{$agent2.time}>
+					</li>
+					<li>
+						<span class="tt">证件照片：</span>
+						<img src="__ROOT__/images/agent/photo/<{$agent2.user_id}>.jpg" width="500px">
+					</li>
+					<li></li>
+				</ul>
+				</form>
+			</div>
+		</div>
+		
+		<div class="clear"></div>
+	</div>
+	
+	<div class="clear"></div>
+	
+</div>
+
+<script type="text/javascript" src="__ROOT__/js/user.js" charset="utf-8"></script>
+
+
+<include file="Index:footer"/>

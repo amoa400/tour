@@ -1,0 +1,21 @@
+body {background:url('../images/user/login_bg.png');height:600px;}
+#login {}
+
+#login .head {width:1000px;margin:0 auto;margin-top:30px;}
+
+#login .bg {margin-top:10px;height:350px;background:url('../images/user/login_bg.jpg') no-repeat center top;}
+
+#login .content {width:1000px;margin:0 auto;margin-top:-300px;height:360px;}
+#login .form {color:#666666;float:right;width:400px;height:350px;background:#ffffff;border:1px solid #dbdcdc;}
+#login .form .title {height:38px;background:url('../images/user/login_title_bg.png');line-height:37px;font-size:14px;font-weight:bold;padding-left:15px;border-bottom:1px solid #dbdcdc;}
+#login .form ul {margin-left:40px;margin-top:20px;}
+#login .form li {margin-top:10px;}
+#login .form li span {display:inline-block;text-align:right;width:60px;margin-right:10px;}
+#login .form li input {margin:0;padding:0;padding:5px;}
+#login .form li .submit {width:218px;height:32px;background:url('../images/user/login_btn.png');border:none;}
+#login .form li .submit:hover {background:url('../images/user/login_btn_hover.png');}
+#login .form .api_login {margin-top:20px;border-top:1px solid #eaeaea;margin-left:20px;margin-right:20px;}
+#login .form .api_login span {margin-top:10px;color:#999999;margin-top:20px;display:inline-block;}
+#login .form .api_login .login_btn {margin-top:10px;}
+
+#login .foot {width:1000px;margin:0 auto;margin-top:30px;text-align:center;}

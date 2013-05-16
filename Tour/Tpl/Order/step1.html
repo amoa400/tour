@@ -1,0 +1,173 @@
+<include file="Order:header"/>
+	
+<div class="detail" style="width:740px;float:left;">
+	<form id="form" action="<?php echo U('Order/step1Do') ?>" method="post">
+	<input type="text" name="id" value="<?php echo $_GET['id'] ?>" style="display:none;">
+	<input type="text" id="input_tot_price" name="price" value="0" style="display:none;">
+	<!--线路信息-->
+	<div class="item line" style="margin:0;">
+		<div class="title"><i class="icon-edit"></i>&nbsp;线路信息</div>
+		<div class="content">
+			<ul>
+				<li style="margin:0;"><span>产品名称：</span><a href="<?php echo U('Line/show?id='.$order['line_id']) ?>" target="_blank"><{$order.line_name}></a></li>
+				<li><span>出发城市：</span><{$order.from_city}></li>
+				<li><span>出发日期：</span><{$order.departure_date}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>归来日期：</span><{$order.return_date}></li>
+				<li><span>人数：</span><font id="s_people_count"><{$order.people_count}></font></li>
+			</ul>
+		</div>
+	</div>
+		
+	<!--上车地点-->
+	<div class="item">
+		<div class="title"><i class="icon-edit"></i>&nbsp;上车地点</div>
+		<div class="content">
+			<table>
+				<tr class="first">
+					<td width="30px" class="chose">选择</td>
+					<td width="50px">发车时间</td>
+					<td width="220px">发车地点</td>
+					<td width="150px">返回地点</td>
+					<td width="180px">备注</td>
+				</tr>
+				<?php foreach($order['busList'] as $item) {?>
+				<tr>
+					<td class="chose"><input name="bus_id" type="radio" value="<{$item.id}>" <?php if ($order['bus_id'] == $item['id']) { ?><?php } ?> checked="checked"></td>
+					<td><{$item.departure_time}></td>
+					<td><{$item.departure_location}></td>
+					<td><{$item.return_location}></td>
+					<td><{$item.remark}></td>
+				</tr>
+				<?php } ?>
+				<tr>
+					<td class="chose"></td>
+					<td></td>
+					<td colspan=3>本线路按预订先后顺序安排座位，不保证座位靠窗、靠前，暂无上门接车服务，敬请谅解。</td>
+				</tr>
+				
+			</table>
+			<div class="special">
+				<span class="tt">特色服务</span>
+				<span class="ct"><input name="surrounding_departrue" type="checkbox" <?php if ($order['surrounding_departrue'] == 1) { ?>checked="checked"<?php } ?>>&nbsp;&nbsp;&nbsp;学校周边上车（当您所在学校及周边学校报名人数足够时，您可以选择在您的学校附近地区上车）</span>
+			</div>
+		</div>
+	</div>
+		
+	<!--保险方案-->
+	<div class="item">
+		<div class="title"><i class="icon-edit"></i>&nbsp;保险方案</div>
+		<div class="content">
+			<table>
+				<tr class="first">
+					<td width="250px">保险名称</td>
+					<td width="230px">说明</td>
+					<td width="50px" class="center">单价</td>
+					<td width="80px" class="center">份数</td>
+				</tr>
+				<?php foreach($order['insurance'] as $item) {?>
+				<tr>
+					<td>▼&nbsp;<span id="insurance_name_<{$item.id}>"><{$item.name}></span></td>
+					<td><{$item.intro}></td>
+					<td class="center price">¥<span id="insurance_unit_price_<{$item.id}>"><{$item.price}></span></td>
+					<td class="center">
+						<select id="insurance_count_<{$item.id}>" name="insurance_<{$item.id}>" onchange="calculate()" style="width:50px;">
+							<option>0</option>
+							<?php for ($i = $order['people_count']; $i > 0; $i--) { ?>
+							<option <?php if ($item['count'] == $i) { ?>selected="selected"<?php } ?>><{$i}></option>
+							<?php } ?>
+						</select>
+					</td>
+				</tr>
+				<?php } ?>
+			</table>
+		</div>
+	</div>
+		
+	<!--优惠方案-->
+	<div class="item">
+		<div class="title"><i class="icon-edit"></i>&nbsp;优惠方案</div>
+		<div class="content">
+			<table>
+				<tr class="first">
+					<td width="250px">优惠活动</td>
+					<td width="230px">说明</td>
+					<td width="50px" class="center">单价</td>
+					<td width="80px" class="center">使用</td>
+				</tr>
+				<tr>
+					<td>▼&nbsp;抵用券</td>
+					<td>使用__NAME2__抵用券</td>
+					<td class="center price">-&nbsp;¥<span id="privilege_price"><{$order.line.di_price}></span></td>
+					<td class="center"><input id="s_privilege" name="privilege_di" onchange="calculate()" type="checkbox" <?php if ($order['privilege_di'] == 1) { ?>checked="checked"<?php } ?>></td>
+				</tr>
+			</table>
+			<div class="special">
+				<span class="tt">优惠代码</span>
+				<span class="ct"><input id="code" name="coupon" class="coupon" value="<{$order.coupon}>" onchange="check_coupon(<{$order.line_id}>, '<?php echo U('Coupon/getInfo') ?>'
+				)" type="text">（在此填写通过活动获得的优惠券代码）</span>
+				<span id="coupon_tip" class="tip"></span>
+			</div>
+		</div>
+	</div>
+		
+	<div class="item next" style="text-align:center;">
+		<span><a href="<?php echo U('Line/show?id='.$order['line_id']) ?>">返回上一步</a></span>&nbsp;&nbsp;&nbsp;&nbsp;<span><a href="javascript:void(0)" onclick="submit_form()"><img src="__ROOT__/images/order/next_bg.png"/></a></span>
+	</div>
+		
+	</form>
+</div>
+	
+<div id="bill" class="bill corner">
+	<div class="title"><i class="icon icon_cart"></i>&nbsp;&nbsp;预订清单</div>
+	<div class="item first">
+		<div class="tt1">旅游团费</div>
+		<div class="content"><span id="bill_line_price" class="ct">0成人&nbsp;&nbsp;×&nbsp;&nbsp;¥0</span><span id="bill_line_price2" class="price">¥0</span></div>
+	</div>
+	<div id="bill_insurance_content" class="item">
+		<!--
+		<div class="tt1">保险费用</div>
+		<div class="tt2">平安国内旅游保险(经济型3日游)</div>
+		<div class="content"><span class="ct">2份&nbsp;&nbsp;×&nbsp;&nbsp;¥12</span><span class="price">¥24</span></div>
+		<div class="tt2">【新】永诚国内旅游保险扩展计划二（3天）</div>
+		<div class="content"><span class="ct">2份&nbsp;&nbsp;×&nbsp;&nbsp;¥10</span><span class="price">¥20</span></div>
+		-->
+	</div>
+	<div id="bill_privilege_content" class="item">
+		<!--
+		<div class="tt1">优惠费用</div>
+		<div class="content"><span class="ct" style="width:124px;">抵用券</span><span class="price">-&nbsp;¥10</span></div>
+		-->
+	</div>
+	<div class="tot_price">应付总额：<span>¥</span><span id="tot_price">0</span></div>
+	<div class="next_btn"><a href="javascript:void(0)" onclick="submit_form()"><img src="__ROOT__/images/order/next_bg.png"/></a></div>
+</div>
+	
+<script>
+$(window).scroll(function() { 
+		var top = $(window).scrollTop();
+		
+		if (top > 162) {
+			$("#bill").css('position', 'fixed');
+			$("#bill").css('top', '0');
+			$("#bill").css('margin-left', '800px');
+			$("#bill").css('margin-top', '3px');
+		}
+		else {
+			$("#bill").css('position', 'static');
+			$("#bill").css('margin-left', '10px');
+			$("#bill").css('margin-top', '10px');
+		}
+	}); 
+</script>
+<script>
+	lineUnitPrice = <{$order.line_price}>;
+	<?php foreach($order['insurance'] as $item) {?>
+	insuranceId[insuranceTot] = <{$item.id}>;
+	insuranceTot++;
+	<?php } ?>
+	calculate();
+	<?php if (!empty($order['coupon'])) { ?>
+	check_coupon(<{$order.line_id}>, '<?php echo U('Coupon/getInfo') ?>');
+	<?php } ?>
+</script>
+
+<include file="Order:footer"/>

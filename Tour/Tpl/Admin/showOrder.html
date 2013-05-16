@@ -1,0 +1,63 @@
+<include file="Admin:header"/>
+
+<link href="__ROOT__/css/admin/line.css" rel="stylesheet" media="screen">
+
+<style>
+	td {padding:5px;}
+</style>
+
+<div id="line" >
+
+	<table>
+	<tr style="font-weight:bold;">
+		<td width="7%">编号</td>
+		<td width="40%">产品信息</td>
+		<td width="10%">订单金额</td>
+		<td width="8%">状态</td>
+		<td width="18%">下单时间</td>
+		<td width="10%">用户编号</td>
+		<td width="7%">操作</td>
+	<tr>
+	<?php foreach ($orderList as $item) { ?>
+	<tr>
+		<td><{$item.id}></td>
+		<td><a href="<?php echo U('Order/show?id='.$item['id']) ?>" target="_blank"><{$item.line_name}>&nbsp;×&nbsp;<{$item.people_count}>人</a></td>
+		<td>¥<{$item.price}></td>
+		<td><{$item.status_name}></td>
+		<td><{$item.submit_time}></td>
+		<td><{$item.user_id}></td>
+		<td><a href="<?php echo U('Admin/cOrder?id='.$item['id']) ?>" target="_blank">修改</a></td>
+	<tr>
+	<?php } ?>
+	
+	</table>
+		<div class="pagination">
+		<span>共有<{$orderCount}>份订单&nbsp;&nbsp;&nbsp;&nbsp;</span>
+		<ul>
+			<?php if ($cntPage >= 5) { ?>
+			<li><a href="<?php echo U('Admin/showOrder?page=1') ?>">1</a></li>
+			<?php } ?>
+			<?php if ($cntPage > 5) { ?>
+			<li class="disable"><a>...</a></li>
+			<?php } ?>
+			<?php for($i = $cntPage-3; $i < $cntPage; $i++) { if ($i <= 0) continue; ?>
+			<li><a href="<?php echo U('Admin/showOrder?page='.$i) ?>"><{$i}></a></li>
+			<?php } ?>
+			<li class="active"><a href="#")"><{$cntPage}></a></li>
+			<?php for($i = $cntPage+1; $i <= $cntPage+3; $i++) { if ($i > $totPage) break; ?>
+			<li><a href="<?php echo U('Admin/showOrder?page='.$i) ?>"><{$i}></a></li>
+			<?php } ?>
+			<?php if ($cntPage < $totPage-4) { ?>
+			<li class="disable"><a>...</a></li>
+			<?php } ?>
+			<?php if ($cntPage <= $totPage-4) { ?>
+			<li><a href="<?php echo U('Admin/showOrder?page='.$totPage) ?>"><{$totPage}></a></li>
+			<?php } ?>
+		</ul>
+	</div>
+	
+	<div class="clear"></div>
+	
+</div>
+
+<include file="Admin:footer"/>

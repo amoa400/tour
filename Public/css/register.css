@@ -1,0 +1,27 @@
+#register {}
+
+#register .left_area{float:left;width:580px;padding-left:20px;padding-top:20px;}
+
+#register .left_area .head {font-size:28px;font-family:'微软雅黑','黑体';}
+#register .left_area .head span {font-size:12px;font-family:'宋体';}
+#register .left_area .form {margin-top:15px;}
+#register .left_area .form li {float:none;height:50px;margin-top:15px;}
+#register .left_area .form .title {float:left;width:90px;}
+#register .left_area .form .title li {font-size:14px;text-align:right;line-height:30px;}
+#register .left_area .form .title span {color:#ff0000;font-size:14px;font-family: \5B8B\4F53, sans-serif;}
+#register .left_area .form .content {float:left;width:270px;}
+#register .left_area .form .content input {margin:0;padding:5px;width:250px;}
+#register .left_area .form .content select {margin:0;height:32px;width:262px;}
+#register .left_area .form .content span {margin-top:3px;display:block;color:#999999;}
+#register .left_area .form .content .submit {height:38px;width:220px;border:none;background:url("../images/user/register.png");}
+#register .left_area .form .content .submit:hover {background:url("../images/user/register_hover.png");}
+#register .left_area .form .tip {float:left;margin-left:5px;width:215px}
+#register .left_area .form .tip li {font-size:14px;line-height:30px;}
+#register .left_area .form .tip span {font-size:12px;color:#ff6600;}
+#register .left_area .form .tip .icon_right {width:14px;height:14px;background:url('../images/user/icon_right.png') no-repeat;}
+#register .left_area .form .tip .icon_error {width:14px;height:14px;background:url('../images/user/icon_error.png') no-repeat;}
+#register .left_area .form textarea {font-size:12px;padding:20px;width:530px;height:100px;margin-bottom:10px;}
+
+#register .right_area{float:left;width:340px;margin-left:15px;margin-top:85px;padding-left:20px;border-left:1px dotted #d5d5d5;height:600px;}
+#register .right_area .head {margin-top:8px;font-size:14px;}
+#register .right_area .pic {margin-top:20px;}

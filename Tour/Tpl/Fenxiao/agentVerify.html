@@ -1,0 +1,37 @@
+<include file="User:left_area"/>
+	
+	<!--右方区域-->
+	<div class="right_area">
+		
+		<!--个人信息-->
+		<div class="info2" style="margin:0;">
+			<div class="title">确认代理</div>
+			<div class="content">
+				<form action="<?php echo U('Fenxiao/agentVerifyDo') ?>" method="post">
+				<ul>
+					<li>
+						亲爱的<strong><{$agent.name}></strong>您好，<strong>__NAME2__</strong>和<strong><{$father.name}></strong>诚挚的邀请您成为__NAME2__的代理商。<br>
+						成为代理商后，您将可以以低价获得产品，还可以生成优惠码，并从中赚取一定的利润。
+					</li>
+					<li>
+						<input name="user_id" value="<?php echo $_GET['id']; ?>" style="display:none;">
+						<input name="father_id" value="<?php echo $_GET['fid']; ?>" style="display:none;">
+						<input class="btn btn-inverse" type="submit" value="确认成为代理"/>
+					</li>
+					<li></li>
+				</ul>
+				</form>
+			</div>
+		</div>
+		
+		<div class="clear"></div>
+	</div>
+	
+	<div class="clear"></div>
+	
+</div>
+
+<script type="text/javascript" src="__ROOT__/js/user.js" charset="utf-8"></script>
+
+
+<include file="Index:footer"/>

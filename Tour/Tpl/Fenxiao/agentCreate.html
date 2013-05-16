@@ -1,0 +1,68 @@
+<include file="Fenxiao:left_area"/>
+	
+	<!--右方区域-->
+	<div class="right_area">
+		
+		<!--个人信息-->
+		<div class="info2" style="margin:0;">
+			<div class="title">新增代理</div>
+			<div class="content">
+				<form action="<?php echo U('Fenxiao/agentCreateDo') ?>" method="post" enctype="multipart/form-data">
+				<ul>
+					<li>
+						<span class="tt">用户邮箱：</span>
+						<input name="email" type="text">
+						<span style="font-size:12px;">&nbsp;&nbsp;若该用户尚未在本网站注册，请先通知其注册</span>
+					</li>
+					<li>
+						<span class="tt">真实姓名：</span>
+						<input name="name" type="text">
+					</li>
+					<li>
+						<span class="tt">联系方式：</span>
+						<input name="phone" type="text">
+					</li>
+					<li>
+						<span class="tt">所在学校：</span>
+						<select name="school_id">
+							<option value="0">请选择所在学校</option>
+							<?php foreach($schoolList as $school) { ?>
+							<option value="<{$school.id}>"><{$school.name}></option>
+							<?php } ?>
+						</select>
+					</li>
+					<li>
+						<span class="tt">入学年份：</span>
+						<select name="grade">
+							<option value="0">请选择入学年份</option>
+							<?php for ($i = 2014; $i > 2008; $i--) { ?>
+							<option value="<{$i}>"><{$i}>年</option>
+							<?php } ?>
+						</select>
+					</li>
+					<li>
+						<span class="tt">证件上传：</span>
+						<input name="card" type="file">
+						<span style="font-size:12px;">&nbsp;&nbsp;学生证、身份证均可（小于2M，jpg格式）</span>
+					</li>
+					<li>
+						<span class="tt"></span>
+						<input class="btn btn-inverse" type="submit" value="确认资料无误，新增代理"/>
+					</li>
+					<li></li>
+				</ul>
+				</form>
+			</div>
+		</div>
+		
+		<div class="clear"></div>
+	</div>
+	
+	<div class="clear"></div>
+	
+</div>
+
+<script type="text/javascript" src="__ROOT__/js/user.js" charset="utf-8"></script>
+
+
+<include file="Index:footer"/>

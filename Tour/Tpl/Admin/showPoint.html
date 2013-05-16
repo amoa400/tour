@@ -1,0 +1,28 @@
+<include file="Admin:header"/>
+
+<link href="__ROOT__/css/admin/line.css" rel="stylesheet" media="screen">
+
+<style>
+	td {padding:5px;}
+</style>
+
+<div id="line" >
+	<table>
+	<tr style="font-weight:bold;">
+		<td>编号</td>
+		<td>名称</td>
+		<td>操作</td>
+	<tr>
+	<?php foreach ($pointList as $item) { ?>
+	<tr>
+		<td><{$item.id}></td>
+		<td><a href="<?php echo U('Point/show?id='.$item['id']) ?>" target="_blank"><{$item.name}></a></td>
+		<td><a href="<?php echo U('Admin/cPoint?id='.$item['id']) ?>" target="_blank">修改</a></td>
+	<tr>
+	<?php } ?>
+	</table>
+	<div class="clear"></div>
+	
+</div>
+
+<include file="Admin:footer"/>

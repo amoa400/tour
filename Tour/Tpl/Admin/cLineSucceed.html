@@ -1,0 +1,24 @@
+<include file="Admin:header"/>
+
+<link href="__ROOT__/css/admin/line.css" rel="stylesheet" media="screen">
+
+<div id="line">
+	<ul>
+		<form method="post" action="<?php echo U('Admin/cLine3Do') ?>" enctype="multipart/form-data">
+		
+		<li><span class="title" style="font-weight:bold;">订单基本信息</span></li>
+		<li><span class="title">编号：</span><{$line.id}></li>
+		<li><span class="title">名称：</span><{$line.name}></li>
+		<input name="line_id" value="<{$line.id}>" style="display:none;">
+		<li>&nbsp;</li>
+		
+		<li style="font-size:20px;font-weight:bold;"><span class="title"></span>创建成功！</li>
+		<li>&nbsp;</li>
+		<li><span class="title"></span><a href="<?php echo U('Line/show?id='.$line['id']) ?>" target="_blank">查看此线路</a></li>
+		<li><span class="title"></span><a href="<?php echo U('Admin/cLine') ?>">创建新线路</a></li>
+	<div class="clear"></div>
+	
+</div>
+
+
+<include file="Admin:footer"/>

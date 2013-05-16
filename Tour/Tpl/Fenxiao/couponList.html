@@ -1,0 +1,120 @@
+<include file="Fenxiao:left_area"/>
+	
+	<!--右方区域-->
+	<div class="right_area">
+		
+		<!--近期订单-->
+		<div class="order" style="margin:0;">
+			<div class="title">
+				优惠券列表
+				<!--<div class="count">共有<{$orderCount}>份订单</div>-->
+			</div>
+			<table>
+				<tr style="background:#e9e9e9;font-weight:bold;">
+					<td width="20%">优惠券类型</td>
+					<td width="20%">产品编号</td>
+					<td width="10%">优惠金额</td>
+					<td width="10%">总数</td>
+					<td width="20%">生成时间</td>
+					<td width="20%">操作</td>
+				</tr>
+				<?php if (empty($couponList)) { ?>
+				<tr>
+					<td colspan="6">暂无优惠券，赶紧去生成吧！</td>
+				</tr>
+				<?php } else { ?>
+				<?php 
+					$tot = 0;
+					foreach($couponList AS $item) {
+						$tot++;
+				?>
+				<tr>
+					<td><{$item.type}></td>
+					<td><{$item.line_id}></td>
+					<td><span class="price">¥<{$item.price}></span></td>
+					<td><{$item.count}></td>
+					<td><{$item.time}></td>
+					<td><a id="button<{$tot}>" href="javascript:void(0)" onclick="inverseDetail(<{$tot}>, <{$item.type_id}>, <{$item.line_id}>, <{$item.price}>, '<{$item.generate_time}>')">查看详情</a></td>
+				</tr>
+				<tr id="detail<{$tot}>" style="display:none;">
+					<td colspan="6">123</td>
+				</tr>
+				<?php } ?>
+				<?php } ?>
+			</table>
+			
+			<div class="pagination">
+				<span>共有<{$couponCount}>种优惠券&nbsp;&nbsp;&nbsp;&nbsp;</span>
+				<ul>
+					<?php if ($cntPage >= 5) { ?>
+					<li><a href="<?php echo U('Fenxiao/couponList?page=1') ?>">1</a></li>
+					<?php } ?>
+					<?php if ($cntPage > 5) { ?>
+					<li class="disable"><a>...</a></li>
+					<?php } ?>
+					<?php for($i = $cntPage-3; $i < $cntPage; $i++) { if ($i <= 0) continue; ?>
+					<li><a href="<?php echo U('Fenxiao/couponList?page='.$i) ?>"><{$i}></a></li>
+					<?php } ?>
+					<li class="active"><a href="#")"><{$cntPage}></a></li>
+					<?php for($i = $cntPage+1; $i <= $cntPage+3; $i++) { if ($i > $totPage) break; ?>
+					<li><a href="<?php echo U('Fenxiao/couponList?page='.$i) ?>"><{$i}></a></li>
+					<?php } ?>
+					<?php if ($cntPage < $totPage-4) { ?>
+					<li class="disable"><a>...</a></li>
+					<?php } ?>
+					<?php if ($cntPage <= $totPage-4) { ?>
+					<li><a href="<?php echo U('Fenxiao/couponList?page='.$totPage) ?>"><{$totPage}></a></li>
+					<?php } ?>
+				</ul>
+			</div>
+		</div>
+		
+		<div class="clear"></div>
+	</div>
+	
+	<div class="clear"></div>
+	
+</div>
+
+<script type="text/javascript" src="__ROOT__/js/user.js" charset="utf-8"></script>
+
+<script>
+function inverseDetail(id, type_id, line_id, price, generate_time) {
+	if ($('#detail'+id).css('display') == 'none') {
+		$('#detail'+id).html('<td colspan="6">数据加载中……</td>');
+		$.post(
+			'<?php echo U('Coupon/getList') ?>',
+			{type_id:type_id, line_id:line_id, price:price, generate_time:generate_time},
+			function (obj) {
+				var s = '<td colspan="6">';
+				
+				for (var i = 0; i < obj.length; i++) {
+					s += obj[i].code;
+					if (obj[i].used == 0) 
+						s += ' (未使用)';
+					if (obj[i].used == 1) 
+						s += ' (已锁定)';
+					if (obj[i].used == 2) 
+						s += ' (已使用)';
+					if (obj[i].used != 0) {
+						s += ' (使用者编号：'+obj[i].user_id+')';
+						s += ' (使用时间：'+obj[i].used_time+')';
+					}
+					s += '<br>';
+				}
+				s += '</td>';
+				$('#detail'+id).html(s);
+			}
+		);
+		$('#button'+id).html('隐藏详情');
+		$('#detail'+id).show('fast');
+	}
+	else {
+		$('#button'+id).html('查看详情');
+		$('#detail'+id).hide('fast');
+	}
+}
+</script>
+
+
+<include file="Index:footer"/>

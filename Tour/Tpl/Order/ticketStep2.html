@@ -1,0 +1,64 @@
+<include file="Order:header"/>
+
+<style>
+	#order .navi {background:url('__ROOT__/images/order/navi_step2.png');}
+</style>
+	
+<div class="detail step2">
+	<form id="form" action="<?php echo U('Order/ticketStep2Do') ?>" method="post">
+	<div class="item">
+		<div class="title"><i class="icon-edit"></i>&nbsp;联系人信息</div>
+		<div class="content">
+			<ul>
+				<li><span><font>*</font>联系人：</span><input id="contact_name" name="contact_name" type="text" onblur="s2_check_contact_name()" value="<{$order.contact_name}>"/><strong id="t_contact_name"></strong></li>
+				<li><span><font>*</font>手机/电话：</span><input id="contact_phone" name="contact_phone" type="text" onblur="s2_check_contact_phone()" value="<{$order.contact_phone}>"/><strong id="t_contact_phone"></strong></li>
+				<li><span>备用电话：</span><input id="contact_phone2" name="contact_phone2" type="text" onblur="s2_check_contact_phone2()" value="<{$order.contact_phone2}>"/><strong id="t_contact_phone2"></strong></li>
+				<li><span><font>*</font>电子邮箱：</span><input id="contact_email" name="contact_email" type="text" onblur="s2_check_contact_email()" value="<{$order.contact_email}>"/><strong id="t_contact_email"></strong></li>
+			</ul>
+		</div>
+	</div>
+	
+	<?php if (!empty($otList['tourist'])) { ?>
+	<div class="item">
+		<div class="title"><i class="icon-edit"></i>&nbsp;游客信息</div>
+		<div>以下门票需要填写游客身份信息，请务必正确填写。</div>
+		<div class="content">
+			<ul>
+				<?php foreach($otList['tourist'] as $key => $item) { ?>
+				<li class="tt" style="margin-top:5px;color:red;"><{$otList.name.$key}></li>
+					<?php for ($i = 0; $i < $otList['count'][$key]; $i++) { ?>
+					<li class="tt" style="margin-top:5px;">第<?php echo $i+1; ?>位游客</li>
+					<li><span><font>*</font>中文姓名：</span><input id="tourist_name_<{$otList.ticket_id.$key}>_<{$i}>" name="tourist_name_<{$otList.ticket_id.$key}>[]" type="text" onblur="s2_check_tourist_name('<{$otList.ticket_id.$key}>_<{$i}>')" value="<?php echo $otList['tourist'][$otList['ticket_id'][$key]][$i]['name']; ?>"/><strong id="t_tourist_name_<{$otList.ticket_id.$key}>_<{$i}>"></strong></li>
+					<li><span><font>*</font>身份证：</span><input id="tourist_card_<{$otList.ticket_id.$key}>_<{$i}>" name="tourist_card_<{$otList.ticket_id.$key}>[]" type="text" onblur="s2_check_tourist_card('<{$otList.ticket_id.$key}>_<{$i}>', 1)" value="<?php echo $otList['tourist'][$otList['ticket_id'][$key]][$i]['card'] ?>"/><strong id="t_tourist_card_<{$otList.ticket_id.$key}>_<{$i}>"></strong></li>
+					<li><span>手机：</span><input id="tourist_phone_<{$otList.ticket_id.$key}>_<{$i}>" name="tourist_phone_<{$otList.ticket_id.$key}>[]" type="text" onblur="s2_check_tourist_phone('<{$otList.ticket_id.$key}>_<{$i}>')" value="<?php echo $otList['tourist'][$otList['ticket_id'][$key]][$i]['phone']; ?>"/><strong id="t_tourist_phone_<{$otList.ticket_id.$key}>_<{$i}>"></strong></li>
+					<?php } ?>
+				<?php } ?>
+			</ul>
+		</div>
+	</div>
+	<?php } ?>
+
+	<input name="id" value="<{$order.id}>" style="display:none">
+	<input name="count" value="<{$order.people_count}>" style="display:none">
+	
+	</form>
+	
+	<div class="next" style="text-align:center;">
+		<span><a href="<?php echo U('Order/ticketStep1?id='.$_GET['id']) ?>">返回上一步</a></span>&nbsp;&nbsp;&nbsp;&nbsp;<span><a href="javascript:void(0)" onclick="s2_submit_form_ticket()"><img src="__ROOT__/images/order/next_bg.png"/></a></span>
+	</div>
+</div>
+
+<script>
+	peopleCount = <{$order.people_count}>;
+	
+	var touristIdList = new Array();
+	var touristTot = 0;
+	<?php foreach($otList['tourist'] as $key => $item) { ?>
+		<?php for ($i = 0; $i < $otList['count'][$key]; $i++) { ?>
+			touristIdList[touristTot] = '<{$otList.ticket_id.$key}>_<{$i}>';
+			touristTot++;
+		<?php } ?>
+	<?php } ?>
+</script>
+	
+<include file="Order:footer"/>

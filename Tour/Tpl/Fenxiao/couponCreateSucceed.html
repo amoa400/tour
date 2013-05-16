@@ -1,0 +1,32 @@
+<include file="Fenxiao:left_area"/>
+	
+	<!--右方区域-->
+	<div class="right_area">
+		
+		<!--个人信息-->
+		<div class="info2" style="margin:0;">
+			<div class="title">生成优惠券</div>
+			<div class="content">
+				<ul>
+					<input name="id" value="<{$user.id}>" style="display:none;">
+					<li><strong>生成成功！</strong></li>
+					<li>下面是生成的优惠代码，您也可以在左边的优惠券列表找到他们。</li>
+					<?php foreach($codeList as $item) { ?>
+					<li><{$item}></li>
+					<?php } ?>
+				</ul>
+				</form>
+			</div>
+		</div>
+		
+		<div class="clear"></div>
+	</div>
+	
+	<div class="clear"></div>
+	
+</div>
+
+<script type="text/javascript" src="__ROOT__/js/user.js" charset="utf-8"></script>
+
+
+<include file="Index:footer"/>

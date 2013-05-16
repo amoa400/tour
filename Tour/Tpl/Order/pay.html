@@ -1,0 +1,67 @@
+<include file="Order:header"/>
+
+<style>
+	#order .navi {background:url('__ROOT__/images/order/navi_step4.png');}
+</style>
+	
+<div class="detail pay">
+	<div class="head">
+		您还需要支付<span class="price"><{$order.need_pay}></span>元
+	</div>
+	
+	<div class="item">
+		<form action="<?php echo U('Order/payDo') ?>" method="post">
+		<ul>
+			<li><input id="type1" name="type" type="radio" checked="checked" value="1">&nbsp;<span onclick="radioClick('type1')">上门收款（3日内，高校代理将会上门收款，请保持联系人手机畅通）</span></li>
+			<li><input id="type2" name="type" type="radio" value="2">&nbsp;<span  onclick="radioClick('type2')">旅游归来后付款（需先填写您的证件号码）</span></li>
+			<li class="card">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;证件类型：<select name="card_type"><option value="1">学生证</option><option value="2">身份证</option></select>
+			<li class="card">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;证件号码：<input name="card" type="text"></li>
+			<li></li>
+			<li><input type="radio" disabled="disabled">&nbsp;<span>在线支付（即将开通）</span></li>
+		</ul>
+		<br>
+		<input name="id" value="<?php echo $_GET['id'] ?>" style="display:none;">
+		<input type="submit" class="btn btn-success" value="确认支付">
+		</form>
+		<!--
+		<br><br>
+		<form action="<?php echo U('Pay/pay') ?>" method="post" target="_blank">
+		<input name="order_id" type="text" value="<?php echo $_GET['id'] ?>" style="display:none;">
+		本次支付金额：<input name="money" type="text" style="margin:0;width:50px;" value="<{$order.need_pay}>">&nbsp;元<br><br>
+		　　　　　　　<input type="submit" class="btn btn-success" onclick="pop()" value="确认付款">
+		</form>
+		-->
+	</div>
+	
+	<div id="tip" class="tip">
+		<div class="title"><img src="__ROOT__/images/order/tip.gif">&nbsp;&nbsp;支付提示信息</div>
+		<div class="content">
+			<ul>
+				<li>请在新打开的支付页面进行支付</li>
+				<li><a href="<?php echo U('Order/payDone?id='.$_GET['id']) ?>" class="btn btn-success">已完成支付</a>&nbsp;&nbsp;<a href="<?php echo U('Order/pay?id='.$_GET['id']) ?>">选择其他方式进行支付</a></li>
+				<li>&nbsp;</li>
+				<li style="font-weight:bold;">温馨提醒：</li>
+				<li>1、如果您的付款页面没有打开，建议使用Microsoft IE浏览器。点击IE的菜单“工具”—“Internet选项”—“安全”—将安全中的各项设置恢复到默认级别。</li>
+				<li>2、如果您多次点击产生多个支付页面，请保留一个页面完成支付。如因多次支付造成重复扣款，我们会在确认后给您退款。</li>
+				<li>3、如果您的银行卡或者账户已被扣款，但没有支付成功，这可能是由于网络传输问题造成，我们会尽快为您确认付款，请耐心等待。</li>
+			</ul>
+		</div>
+	</div>
+	
+</div>
+
+<script>
+	function pop() {
+		$('#tip').show('fast');   
+		$("body").append("<div id='grey'></div>");
+	}
+	
+	$('li').click(function() {
+		if ($('#type2').attr('checked'))
+			$('.card').show('fast');
+		else
+			$('.card').hide('fast');
+	});
+</script>
+	
+<include file="Order:footer"/>

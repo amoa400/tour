@@ -1,0 +1,41 @@
+<include file="Admin:header"/>
+
+<link href="__ROOT__/css/admin/line.css" rel="stylesheet" media="screen">
+
+<style>
+	td {padding:5px;}
+</style>
+
+<div id="line">
+
+	<table>
+	<tr style="font-weight:bold;">
+		<td>姓名</td>
+		<td>代理等级</td>
+		<td>优惠代码</td>
+		<td>学校</td>
+		<td>赚取金钱</td>
+		<td>历史赚取</td>
+		<td>反馈金钱</td>
+		<td>加入时间</td>
+		<td>操作</td>
+	<tr>
+	<?php foreach ($agentList as $item) { ?>
+	<tr>
+		<td><{$item.name}></td>
+		<td><{$item.type_id}></td>
+		<td><{$item.code}></td>
+		<td><{$item.school}></td>
+		<td><{$item.earned_money}></td>
+		<td><{$item.father_money}></td>
+		<td><{$item.history_money}></td>
+		<td><{$item.time}></td>
+		<td><a href="<?php echo U('Admin/cAgent?id='.$item['user_id']) ?>">修改</a></td>
+	<tr>
+	<?php } ?>
+	</table>
+	<div class="clear"></div>
+	
+</div>
+
+<include file="Admin:footer"/>

@@ -1,0 +1,7 @@
+#line li {float:none;margin-top:10px;}
+#line input {margin:0;}
+#line select {margin:0;}
+#line textarea {padding:5px;}
+#line .title {display:inline-block;width:100px;text-align:right;vertical-align:top;}
+#line .text {display:inline-block;width:500px;}
+#line .text textarea {width:500px;}

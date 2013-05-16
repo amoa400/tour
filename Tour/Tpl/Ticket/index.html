@@ -1,0 +1,160 @@
+<include file="Index:header"/>
+
+<link href="__ROOT__/css/ticket.css" rel="stylesheet" media="screen">
+
+<div id="ticket" class="main_container">
+	<div class="ad">
+		<!--广告图片-->
+		<?php 
+			$cnt = 0;
+			foreach($ticketAdList as $item) { 
+				$cnt++;
+		?>
+		<a href="<?php echo U('Point/show?id='.$item['id']) ?>" target="_blank"><img id="img<{$cnt}>" class="img" <?php if ($cnt != 1) {?> style="display:none" <?php } ?> src="__ROOT__/images/ticket/indexAd/ad<{$cnt}>.jpg"></a>
+		<?php } ?>
+		
+		<!--搜索框-->
+		<div class="so">
+			<div class="content">
+				<div class="title"><i class="icon icon_title"></i>&nbsp;打折门票</div>
+				<div class="so2">
+					<form action="<?php echo U('Ticket/search') ?>" method="get">
+					<span>城市/景点&nbsp;&nbsp;</span>	
+					<input name="k" type="text">
+					<span>&nbsp;</span>
+					<input type="submit" value="">
+					</form>
+				</div>
+				<div class="rec">
+					<span>重点推荐</span>
+					<div>
+						<a href="#">上海欢乐谷</a>&nbsp;
+						<a href="#">常州中华恐龙园</a>&nbsp;
+						<a href="#">春秋乐园</a>&nbsp;<br>
+						<a href="#">横店影视城</a>&nbsp;
+						<a href="#">溪口风景区</a>&nbsp;
+						<a href="#">西塘</a>&nbsp;
+						<a href="#">周庄</a>&nbsp;
+					</div>
+				</div>
+			</div>
+			<div class="border"></div>
+		</div>
+
+		<!--导航-->
+		<div class="navi">
+			<?php 
+				$cnt = 0;
+				foreach($ticketAdList as $item) { 
+					$cnt++;
+			?>
+			<div class="item" onmouseover="adShow(<{$cnt}>)" onmouseout="startAd()" <?php if ($cnt == 1) { ?> style="margin-top:0;" <?php } ?>>
+				<div id="title<{$cnt}>" class="title <?php if ($cnt == 1) { ?>title_focus<?php } ?>"><{$item.name}></div>
+				<div id="desc<{$cnt}>" class="desc  <?php if ($cnt == 1) { ?>desc_focus<?php } ?>"><{$item.desc}></div>
+				<div id="bg<{$cnt}>" class="bg <?php if ($cnt == 1) { ?>bg_focus<?php } ?>"></div>
+			</div>
+			<?php } ?>
+		</div>
+		
+	</div>
+	
+	<div class="left_panel">
+		<!--主题推荐-->
+		<div class="subject panel">
+			<div class="title">主题推荐</div>
+			<div class="content">
+				<ul>
+					<?php foreach($pointTypeList as $item) { ?>
+					<li><a href="<?php echo U('Ticket/search?subject='.$item['id']) ?>" target="_blank"><{$item.name}></a></li>
+					<?php } ?>
+				</ul>
+				<div class="clear"></div>
+			</div>
+		</div>
+		
+		<!--热卖排行-->
+		<div class="hot panel">
+			<div class="title">热卖排行（TOP10）</div>
+			<div class="content">
+				<?php 
+					$cnt = 0;
+					foreach($hotList as $item) {
+						$cnt++;
+				?>
+				<div class="item">
+					<span class="rank"><{$cnt}></span>
+					<span class="name"><a href="<?php echo U('Point/show?id='.$item['point_id'].'&ticket_id='.$item['id'].'#detail'.$item['id']) ?>" target="_blank"><{$item.name}></a></span>
+					<span class="price">¥<{$item.price}>起</span>
+				</div>
+				<?php } ?>
+				<div class="clear"></div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="right_panel">
+		<!--打折门票精选-->
+		<div class="rec panel">
+			<div class="title">打折门票精选</div>
+			<div class="content">
+				<?php
+					$cnt = 0;
+					foreach($recList as $item) { 
+						$cnt++;
+				?>
+				<div class="item" style="<?php if ($cnt%2==1) { ?>margin-left:0;<?php } ?><?php if ($cnt <= 2) { ?>margin-top:0;<?php } ?>">
+					<div class="pic"><a href="<?php echo U('Point/show?id='.$item['point_id'].'&ticket_id='.$item['id'].'#detail'.$item['id']) ?>" target="_blank"><img src="__ROOT__/images/ticket/photo/<{$item.id}>.jpg"></a></div>
+					<div class="ct">
+						<a href="<?php echo U('Point/show?id='.$item['point_id'].'&ticket_id='.$item['id'].'#detail'.$item['id']) ?>" target="_blank"><{$item.name}></a>
+						<span class="desc"><{$item.ad}></span>
+						<span class="other">点评奖金：<font class="price2">¥<{$item.comment_price}></font></span>
+						<span class="price">¥<{$item.price}>起</span>
+					</div>
+				</div>
+				<?php } ?>
+				<div class="clear"></div>
+				<div class="more">
+					<a href="#">查看更多门票>></a>
+				</div>
+			</div>
+		</div>
+	
+		<!--小广告-->
+		<div class="ad2">
+			<a href="#"><img src="http://s3.lvjs.com.cn/opi/off-0426-tianmuhu-740x80.jpg"></img></a>
+		</div>
+		
+		<!--特色游玩主题-->
+		<div class="rec2 panel">
+			<div class="title">特色游玩主题</div>
+			<div class="content">
+				<?php 
+					$cnt = 0;
+					foreach($pointTypeList as $item) {
+						$cnt++;
+				?>
+				<div class="item" style="<?php if ($cnt%3==1) { ?>margin-left:0;<?php } ?><?php if ($cnt <= 3) { ?>margin-top:0;<?php } ?>">
+					<div class="tt"><{$item.name}></div>
+					<?php foreach($item['ticket'] as $item2) { ?>
+					<div class="it">
+						<span class="name"><a href="<?php echo U('Point/show?id='.$item2['point_id'].'&ticket_id='.$item2['ticket_id'].'#detail'.$item2['ticket_id']) ?>" target="_blank"><{$item2.name}></a></span><span class="price">¥<{$item2.price}>起</span>
+					</div>
+					<?php } ?>
+					<?php for ($i = 0; $i<5-count($item['ticket']); $i++) { ?>				
+					<div class="it">
+						<span class="name">敬请期待</span><span class="price">¥0起</span>
+					</div>
+					<?php } ?>
+				</div>
+				<?php } ?>
+
+				<div class="clear"></div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript" src="__ROOT__/js/ticket.js" charset="utf-8"></script>
+
+<include file="Index:footer"/>

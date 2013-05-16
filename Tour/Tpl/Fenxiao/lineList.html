@@ -1,0 +1,101 @@
+<include file="Fenxiao:left_area"/>
+	
+	<!--右方区域-->
+	<div class="right_area">
+		
+		<!--近期订单-->
+		<div class="order" style="margin:0;">
+			<div class="title">
+				线路列表
+				<!--<div class="count">共有<{$orderCount}>份订单</div>-->
+			</div>
+			<table>
+				<tr style="background:#e9e9e9;font-weight:bold;">
+					<td width="10%">编号</td>
+					<td width="10%">类型</td>
+					<td width="50%">名称</td>
+					<td width="10%">优惠金额</td>
+					<td width="10%"><?php if ($agent['type_id'] != 3) { ?>直接<?php } ?>利润</td>
+					<?php if ($agent['type_id'] != 3) { ?>
+						<td width="10%">代理利润</td>
+					<?php } ?>
+				</tr>
+				<?php if (empty($lineList)) { ?>
+				<tr>
+					<td colspan="6">暂无代理，赶紧去寻找一名代理吧！</td>
+				</tr>
+				<?php } else { ?>
+				<?php
+					$tot = 0;
+					foreach($lineList AS $item) { 
+						$tot++;
+				?>
+				<tr>
+					<td><{$item.id}></td>
+					<td><{$item.type}></td>
+					<td>
+						<a href="<?php echo U('Line/show?id='.$item['id']); ?>" target="_blank"><<{$item.name}>><{$item.character}></a>
+					</td>
+
+					<td>
+						<span class="price">¥<{$item.fenxiao_youhui}></span>
+					</td>
+					<td>
+						<span class="price">¥<?php echo $item['price']-$item['fenxiao_price'.$agent['type_id']]-$item['fenxiao_youhui'] ?></span>
+					</td>
+					<?php if ($agent['type_id'] != 3) { ?>
+					<td>
+						<?php if ($agent['type_id'] == 1) { ?> 
+						<span class="price">¥<?php echo $item['fenxiao_price2']-$item['fenxiao_price1'] ?></span>
+						<?php } ?>
+						<?php if ($agent['type_id'] == 2) { ?> 
+						<span class="price">¥<?php echo $item['fenxiao_price3']-$item['fenxiao_price2'] ?></span>
+						<?php } ?>
+					</td>
+					<?php } ?>
+				</tr>
+				<tr id="detail<{$tot}>" style="display:none;">
+					<td colspan="6">123</td>
+				</tr>
+				<?php } ?>
+				<?php } ?>
+			</table>
+			
+			<div class="pagination">
+				<span>共有<{$lineCount}>条线路&nbsp;&nbsp;&nbsp;&nbsp;</span>
+				<ul>
+					<?php if ($cntPage >= 5) { ?>
+					<li><a href="<?php echo U('Fenxiao/lineList?page=1') ?>">1</a></li>
+					<?php } ?>
+					<?php if ($cntPage > 5) { ?>
+					<li class="disable"><a>...</a></li>
+					<?php } ?>
+					<?php for($i = $cntPage-3; $i < $cntPage; $i++) { if ($i <= 0) continue; ?>
+					<li><a href="<?php echo U('Fenxiao/lineList?page='.$i) ?>"><{$i}></a></li>
+					<?php } ?>
+					<li class="active"><a href="#")"><{$cntPage}></a></li>
+					<?php for($i = $cntPage+1; $i <= $cntPage+3; $i++) { if ($i > $totPage) break; ?>
+					<li><a href="<?php echo U('Fenxiao/lineList?page='.$i) ?>"><{$i}></a></li>
+					<?php } ?>
+					<?php if ($cntPage < $totPage-4) { ?>
+					<li class="disable"><a>...</a></li>
+					<?php } ?>
+					<?php if ($cntPage <= $totPage-4) { ?>
+					<li><a href="<?php echo U('Fenxiao/lineList?page='.$totPage) ?>"><{$totPage}></a></li>
+					<?php } ?>
+				</ul>
+			</div>
+		</div>
+		
+		<div class="clear"></div>
+	</div>
+	
+	<div class="clear"></div>
+	
+</div>
+
+<script type="text/javascript" src="__ROOT__/js/user.js" charset="utf-8"></script>
+
+
+
+<include file="Index:footer"/>

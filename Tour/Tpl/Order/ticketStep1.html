@@ -1,0 +1,142 @@
+<include file="Order:header"/>
+	
+<div class="detail" style="width:740px;float:left;">
+	<form id="form" action="<?php echo U('Order/ticketStep1Do') ?>" method="post">
+	<input type="text" name="id" value="<?php echo $_GET['id'] ?>" style="display:none;">
+	<!--线路信息-->
+	<div class="item" style="margin:0;">
+		<div class="title"><i class="icon-edit"></i>&nbsp;门票信息</div>
+		<div class="content">
+			<table>
+				<tr class="first">
+					<td width="80px">游玩日期</td>
+					<td width="300px">名称</td>
+					<td width="50px" class="center">单价</td>
+					<td width="50px" class="center">数量</td>
+				</tr>
+				<?php foreach($order['ticketList'] as $item) {?>
+				<tr>
+					<td><{$order.departure_date}></td>
+					<td><a href="<?php echo U('Point/show?id='.$order['line_id']) ?>" target="_blank"><{$item.name}></a></td>
+					<td class="center price">¥<{$item.unit_price}></td>
+					<td class="center"><{$item.count}></td>
+				</tr>
+				<?php } ?>
+			</table>
+		</div>
+	</div>
+		
+	<!--保险方案-->
+	<div class="item">
+		<div class="title"><i class="icon-edit"></i>&nbsp;保险方案</div>
+		<div class="content">
+			<table>
+				<tr class="first">
+					<td width="250px">保险名称</td>
+					<td width="230px">说明</td>
+					<td width="50px" class="center">单价</td>
+					<td width="80px" class="center">数量</td>
+				</tr>
+				<?php foreach($order['insurance'] as $item) {?>
+				<tr>
+					<td>▼&nbsp;<span id="insurance_name_<{$item.id}>"><{$item.name}></span></td>
+					<td><{$item.intro}></td>
+					<td class="center price">¥<span id="insurance_unit_price_<{$item.id}>"><{$item.price}></span></td>
+					<td class="center">
+						<?php if (empty($item['count'])) $item['count'] = 0; ?>
+						<input id="insurance_count_<{$item.id}>" name="insurance_<{$item.id}>" onchange="calculateTicket()" type="text" value="<{$item.count}>" style="width:20px;text-align:center;">
+					</td>
+				</tr>
+				<?php } ?>
+			</table>
+		</div>
+	</div>
+	
+	<!--优惠方案-->
+	<!--
+	<div class="item">
+		<div class="title"><i class="icon-edit"></i>&nbsp;优惠方案</div>
+		<div class="content">
+			<div class="special" style="margin:0;">
+				<span class="tt">优惠代码</span>
+				<span class="ct"><input id="code" name="coupon" class="coupon" value="<{$order.coupon}>" onchange="check_coupon(<{$order.line_id}>, '<?php echo U('Coupon/getInfo') ?>'
+				)" type="text">（在此填写通过活动获得的优惠券代码）</span>
+				<span id="coupon_tip" class="tip"></span>
+			</div>
+		</div>
+	</div>
+	-->
+		
+	<div class="item next" style="text-align:center;">
+		<span><a href="<?php echo U('Point/show?id='.$order['line_id']) ?>">返回上一步</a></span>&nbsp;&nbsp;&nbsp;&nbsp;<span><a href="javascript:void(0)" onclick="submit_form_ticket()"><img src="__ROOT__/images/order/next_bg.png"/></a></span>
+	</div>
+		
+	</form>
+</div>
+	
+<div id="bill" class="bill corner">
+	<div class="title"><i class="icon icon_cart"></i>&nbsp;&nbsp;预订清单</div>
+	<div id="bill_ticket_content" class="item first">
+		<!--
+		<div class="tt1">门票费用</div>
+		<div class="content"><span id="bill_line_price" class="ct">0成人&nbsp;&nbsp;×&nbsp;&nbsp;¥0</span><span id="bill_line_price2" class="price">¥0</span></div>
+		-->
+	</div>
+	<div id="bill_insurance_content" class="item">
+		<!--
+		<div class="tt1">保险费用</div>
+		<div class="tt2">平安国内旅游保险(经济型3日游)</div>
+		<div class="content"><span class="ct">2份&nbsp;&nbsp;×&nbsp;&nbsp;¥12</span><span class="price">¥24</span></div>
+		<div class="tt2">【新】永诚国内旅游保险扩展计划二（3天）</div>
+		<div class="content"><span class="ct">2份&nbsp;&nbsp;×&nbsp;&nbsp;¥10</span><span class="price">¥20</span></div>
+		-->
+	</div>
+	<div id="bill_privilege_content" class="item">
+		<!--
+		<div class="tt1">优惠费用</div>
+		<div class="content"><span class="ct" style="width:124px;">抵用券</span><span class="price">-&nbsp;¥10</span></div>
+		-->
+	</div>
+	<div class="tot_price">应付总额：<span>¥</span><span id="tot_price">0</span></div>
+	<div class="next_btn"><a href="javascript:void(0)" onclick="submit_form_ticket()"><img src="__ROOT__/images/order/next_bg.png"/></a></div>
+</div>
+	
+<script>
+$(window).scroll(function() { 
+		var top = $(window).scrollTop();
+		
+		if (top > 162) {
+			$("#bill").css('position', 'fixed');
+			$("#bill").css('top', '0');
+			$("#bill").css('margin-left', '800px');
+			$("#bill").css('margin-top', '3px');
+		}
+		else {
+			$("#bill").css('position', 'static');
+			$("#bill").css('margin-left', '10px');
+			$("#bill").css('margin-top', '10px');
+		}
+	}); 
+</script>
+<script>
+	var ticketList = Array();
+	var ticketTot = 0;
+	<?php foreach($order['ticketList'] as $item) {?>
+	ticketList[ticketTot] = Array();
+	ticketList[ticketTot]['id'] = <{$item.id}>;
+	ticketList[ticketTot]['count'] = <{$item.count}>;
+	ticketList[ticketTot]['price'] = <{$item.unit_price}>;
+	ticketList[ticketTot]['name_abb'] = '<{$item.name_abb}>';
+	ticketTot++;
+	<?php } ?>
+	<?php foreach($order['insurance'] as $item) {?>
+	insuranceId[insuranceTot] = <{$item.id}>;
+	insuranceTot++;
+	<?php } ?>
+	<?php if (!empty($order['coupon'])) { ?>
+	check_coupon(<{$order.line_id}>, '<?php echo U('Coupon/getInfo') ?>');
+	<?php } ?>
+	calculateTicket();
+</script>
+
+<include file="Order:footer"/>

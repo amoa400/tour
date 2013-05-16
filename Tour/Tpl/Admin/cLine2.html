@@ -1,0 +1,69 @@
+<include file="Admin:header"/>
+
+<link href="__ROOT__/css/admin/line.css" rel="stylesheet" media="screen">
+
+<div id="line">
+	<ul>
+		<form method="post" action="<?php echo U('Admin/cLine2Do') ?>" enctype="multipart/form-data">
+		
+		<li><span class="title" style="font-weight:bold;">订单基本信息</span></li>
+		<li><span class="title">编号：</span><{$line.id}></li>
+		<li><span class="title">名称：</span><{$line.name}></li>
+		<input name="count" value="<{$line.duration}>" style="display:none;">
+		<input name="line_id" value="<{$line.id}>" style="display:none;">
+		<li>&nbsp;</li>
+		<li><span class="title" style="font-weight:bold;">订单详细信息</span></li>
+		<?php for($i = 1; $i <= $line['duration']; $i++) { ?>
+		<li><span class="title" style="font-weight:bold;">第<{$i}>天：</span></li>
+		<li><span class="title">简介：</span> <span class="text"><textarea id="editor<{$i}>" name="desc[]"><?php echo $line['day'][$i]['desc']; ?></textarea></span></li>
+		<li><span class="title">途经城市：</span> <input name="city[]" type="text" value="<?php echo $line['day'][$i]['city']; ?>"/></li>
+		<li><span class="title">交通工具：</span> <input name="vehicle[]" type="text" value="<?php echo $line['day'][$i]['vehicle']; ?>"/></li>
+		<li><span class="title">住宿情况：</span> <input name="stay[]" type="text" <?php if (!empty($line['day'][$i]['breakfast'])) {  echo 'value="'.$line['day'][$i]['stay'].'"'; ?><?php } else if ($i != $line['duration']) { ?> value="两星标准间"<?php }else{ ?>value="温馨的家"<?php } ?>/></li>
+		<li><span class="title">早餐：</span> <input name="breakfast[]" type="text" <?php if (empty($line['day'][$i]['breakfast'])) { ?>value="敬请自理"<?php } else echo 'value="'.$line['day'][$i]['breakfast'].'"'; ?>/></li>
+		<li><span class="title">午餐：</span> <input name="lunch[]" type="text" <?php if (empty($line['day'][$i]['lunch'])) { ?>value="敬请自理"<?php } else echo 'value="'.$line['day'][$i]['lunch'].'"'; ?>/></li>
+		<li><span class="title">晚餐：</span> <input name="dinner[]" type="text" <?php if (empty($line['day'][$i]['dinner'])) { ?>value="敬请自理"<?php } else echo 'value="'.$line['day'][$i]['dinner'].'"'; ?>/></li>
+		<?php } ?>
+		<li><span class="title"><a href="<?php echo U('Admin/cLine?id='.$line['id']) ?>">上一步</a>&nbsp;&nbsp;&nbsp;&nbsp;</span><input type="submit" class="btn btn-inverse" value="下一步"></li>
+		</form>
+
+	<div class="clear"></div>
+	
+</div>
+
+<script charset="utf-8" src="__ROOT__/editor/kindeditor.js"></script>
+<script charset="utf-8" src="__ROOT__/editor/lang/zh_CN.js"></script>
+<script>
+        KindEditor.ready(function(K) {
+			<?php for($i = 1; $i <= $line['duration']; $i++) { ?>
+            window.editor = K.create('#editor<{$i}>', {
+				minWidth : '400px',
+			});
+			<?php } ?>
+        });
+</script>
+
+<script>
+var province = Array();
+<?php for($i = 0; $i < count($provinceList); $i++) { ?>
+province[<{$i}>] = Array();
+province[<{$i}>]['tot'] = <?php echo count($provinceList[$i]['cityList']) ?>;
+province[<{$i}>]['city'] = Array(); 
+<?php for($j = 0; $j < count($provinceList[$i]['cityList']); $j++) { ?>
+	province[<{$i}>]['city'][<{$j}>] = Array();
+	province[<{$i}>]['city'][<{$j}>]['id'] = '<{$provinceList.$i.cityList.$j.id}>';
+	province[<{$i}>]['city'][<{$j}>]['name'] = '<{$provinceList.$i.cityList.$j.name}>';
+<?php } ?>
+<?php } ?>
+changeProvince(1);
+
+function changeProvince() {
+	var id = $('#province').find("option:selected").val();
+	var city = $('#city');
+	city.html('');
+	for (var i = 0; i < province[id-1]['tot']; i++)
+		city.append('<option value="'+(i+1)+'">'+province[id-1]['city'][i]['name']+'</option>');
+}
+
+</script>
+
+<include file="Admin:footer"/>

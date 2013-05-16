@@ -1,0 +1,65 @@
+html,body,h1,h2,h3,h4,h5,h6,p,form,ul,ol,li,dt,dl,dd,th,td,label,bottom,input,textarea {margin:0;padding:0;}
+body {color:#555;font-family:arial, "宋体";font-size:12px;line-height:1.5;background:url("../images/icon/drop-down.png.png");}
+ul {margin:0;padding:0;list-style:none;}
+li {float:left;}
+a {color:#555;text-decoration:none;}
+a:hover {color:#f60;text-decoration:none;}
+
+.main_container {width:1000px;margin:0 auto;}
+.corner {-webkit-border-radius: 3px;-moz-border-radius: 3px;border-radius: 3px;}
+.clear {clear:both;padding:0;margin:0;height:0;line-height:0;}
+.strong {font-weight:bold;}
+.droptip {cursor:pointer;}
+
+.icon {display:inline-block;vertical-align:text-bottom;}
+.icon-drop-down {background:url("../images/icon/drop-down.png");}
+.icon-drop-up {background:url("../images/icon/drop-up.png");}
+.icon-suitcase {background:url("../images/icon/suitcase.png");}
+.icon-renren {background:url("../images/icon/renren.png");}
+.icon-weibo {background:url("../images/icon/weibo.png");}
+.icon-weixin {background:url("../images/icon/weixin.png");}
+.icon_user {width:50px;height:17px;background:url('../images/user/icon_user.gif') no-repeat;}
+
+.wallpaper {background:url('../images/wallpaper.jpg') no-repeat center top;overflow:hidden;}
+.wallpaper2 {padding-top:10px;padding-left:10px;padding-right:10px;padding-bottom:10px;border:1px solid #dadada;border-top:0;background:#ffffff;}
+
+.path {margin-bottom:15px;margin-top:5px;}
+
+#header{}
+#header .header_top {background:#f5f5f5;height:30px;border-bottom:1px solid #dcdcdc;}
+#header .header_top .content li {line-height:30px;margin-left:5px;}
+#header .header_top .right {float:right}
+#header .header_top .cart {color:#ff5500;font-weight:bold;}
+#header .header_main {height:90px;overflow:hidden;}
+#header .header_main  .logo {margin-top:8px;float:left;}
+#header .header_main  .city {margin-top:35px;float:left;margin-left:15px;}
+#header .header_main  .change_city{color:#888888;}
+#header .header_main  .ad{float:right;}
+#header .header_nav {position:relative;background:url("../images/header/nav_bg.png");height:43px;}
+#header .header_nav .content {position:relative;}
+#header .header_nav .content a {color:#ffffff;}
+#header .header_nav .content a:hover {color:#f60;text-decoration:none;}
+#header .header_nav .content li {position:relative;display:inline-block;float:left;height:37px;line-height:30px;margin:6px 5px 0 5px;font-size:14px;font-weight:bold;}
+#header .header_nav .content li a span{ padding:0 12px 7px 7px;margin-left:5px;}
+#header .header_nav .content li:hover{background:url('../images/header/nav_on_bg.png');}
+#header .header_nav .content li:hover span{display:inline-block;background:url('../images/header/nav_on_bg.png') no-repeat right -111px;}
+#header .header_nav .content .on{color:#555;height:37px;background:url('../images/header/nav_on_bg.png') no-repeat 0 0;}
+#header .header_nav .content .on a{color:#555;}
+#header .header_nav .content .on span{display:inline-block; padding:0 12px 7px 7px; margin-left:5px; background:url('../images/header/nav_on_bg.png') no-repeat right -37px;}
+#header .header_nav .content .on a:hover{color:#f60;}
+#header .header_nav .bg{position:absolute; bottom:-6px;right:0;width:100%;float:left;height:6px;background:url('../images/header/nav_bg_bottom.png') repeat-x 0 0;z-index:1;}
+#header .header_nav .kefu {float:right;margin-top:11px;}
+#header .header_nav .kefu .icon_kefu {width:20px;height:25px;background:url('../images/header/icon_kefu.png') no-repeat;}
+#header .header_nav .kefu span {display:inline-block;margin-left:2px;color:#ffffff;font-weight:bold;font-size:14px;top:0;}
+
+#footer {}
+#footer .helper {background:#f7f7f7;height:90px;margin-top:10px;border-top:1px solid #e6e6e6;border-bottom:1px solid #e6e6e6;padding:20px;}
+#footer .helper li {width:176px;padding-left:29px;border-left:1px solid #e6e6e6;height:90px;}
+#footer .helper .title {font-weight:bold;font-size:18px;margin-bottom:10px;}
+#footer .helper span {display:block;}
+#footer .helper img {height:90px;margin-left:38px;}
+#footer .link {margin:0 auto;width:490px;margin-top:10px;}
+#footer .link .divide {margin-left:10px;margin-right:10px;}
+#footer .certificate {margin:0 auto;width:650px;margin-top:10px;}
+#footer .certificate li {margin-left:10px;}
+#footer .copyright {margin-top:10px;margin-bottom:20px;text-align:center;}

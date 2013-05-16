@@ -1,0 +1,186 @@
+<include file="Admin:header"/>
+
+<link href="__ROOT__/css/admin/line.css" rel="stylesheet" media="screen">
+
+<div id="line">
+	<ul>
+		<form method="post" action="<?php echo U('Admin/cOrderDo') ?>" enctype="multipart/form-data">
+		<input name="id" value="<{$order.id}>" style="display:none;">
+		<li><span class="title" style="font-weight:bold;">订单基本信息</span></li>
+		<?php if (!empty($order)) { ?>
+		<li>
+			<span class="title">编号：</span>
+			<{$order.id}>
+		</li>
+		<?php } ?>
+		<li>
+			<span class="title">名称：</span>
+			<input name="line_name" type="text" value="<{$order.line_name}>">
+		</li>
+		<li>
+			<span class="title">状态：</span>
+			<select name="status">
+				<option value="1" <?php if ($order['status'] == 1) echo 'selected="selected"'; ?>>待提交</option>
+				<option value="2" <?php if ($order['status'] == 2) echo 'selected="selected"'; ?>>待处理（等待客服处理）</option>
+				<option value="3" <?php if ($order['status'] == 3) echo 'selected="selected"'; ?>>待付款</option>
+				<option value="4" <?php if ($order['status'] == 4) echo 'selected="selected"'; ?>>已付款（预定并付款）</option>
+				<option value="5" <?php if ($order['status'] == 5) echo 'selected="selected"'; ?>>订单取消</option>
+				<option value="6" <?php if ($order['status'] == 6) echo 'selected="selected"'; ?>>已预定（预定未付款）</option>
+				<option value="7" <?php if ($order['status'] == 7) echo 'selected="selected"'; ?>>成功出游</option>
+			</select>
+		</li>
+		<li>
+			<span class="title">类型：</span>
+			<select name="type">
+				<option value="1" <?php if ($order['type'] == 1) echo 'selected="selected"'; ?>>跟团游</option>
+				<option value="2" <?php if ($order['type'] == 2) echo 'selected="selected"'; ?>>团队游</option>
+				<option value="3" <?php if ($order['type'] == 3) echo 'selected="selected"'; ?>>自助游</option>
+				<option value="4" <?php if ($order['type'] == 4) echo 'selected="selected"'; ?>>门票</option>
+			</select>
+		</li>
+		<li>
+			<span class="title">出游人数：</span>
+			<input name="people_count" type="text" value="<{$order.people_count}>">
+		</li>
+		<li>
+			<span class="title">线路价格：</span>
+			<input name="line_price" type="text" value="<{$order.line_price}>">
+			&nbsp;&nbsp;修改此处后，务必修改下面的总价格
+		</li>
+		<li>
+			<span class="title">总价格：</span>
+			<input name="price" type="text" value="<{$order.price}>">
+			&nbsp;&nbsp;若此处填写0，提交后将自动计算
+		</li>
+		<li>
+			<span class="title">已支付金额：</span>
+			<input name="payed_money" type="text" value="<{$order.payed_money}>">
+			&nbsp;&nbsp;无论线上线下付款，须等支付金额到帐后方可更改
+		</li>
+		<li>
+			<span class="title">用户需求：</span>
+			<textarea name="requirement"><{$order.requirement}></textarea>
+		</li>
+		<li>
+			<span class="title">备注：</span>
+			<textarea name="remark"><{$order.remark}></textarea>
+		</li>
+
+		<li>&nbsp;</li>
+		
+		<li>
+			<span class="title">用户编号：</span>
+			<input name="user_id" type="text" value="<{$order.user_id}>">
+		</li>
+		<li>
+			<span class="title">所在学校：</span> 	
+			<select name="school_id">
+				<?php foreach($schoolList as $item) { ?>
+					<option value="<{$item.id}>" <?php if ($order['school_id'] == $item['id']) echo 'selected="selected"'; ?>><{$item.name}></option>
+				<?php } ?>
+			</select>
+		</li>
+		<li>
+			<span class="title">出发日期：</span>
+			<input name="departure_date" type="text" value="<{$order.departure_date}>">
+		</li>
+		<li>
+			<span class="title">返回日期：</span>
+			<input name="return_date" type="text" value="<{$order.return_date}>">
+		</li>
+		<li>
+			<span class="title">联系人姓名：</span>
+			<input name="contact_name" type="text" value="<{$order.contact_name}>">
+		</li>
+		<li>
+			<span class="title">联系人电话：</span>
+			<input name="contact_phone" type="text" value="<{$order.contact_phone}>">
+		</li>
+		<li>
+			<span class="title">联系人电话2：</span>
+			<input name="contact_phone2" type="text" value="<{$order.contact_phone2}>">
+		</li>
+		<li>
+			<span class="title">联系人邮箱：</span>
+			<input name="contact_email" type="text" value="<{$order.contact_email}>">
+		</li>
+		<?php if ($order['type'] == 1) { ?>
+		<li>
+			<span class="title">线路编号：</span>
+			<input name="line_id" type="text" value="<{$order.line_id}>">
+		</li>
+		<li>
+			<span class="title">班车信息：</span>
+			<div style="display:inline-block;">
+				<?php foreach($busList as $item) { ?>
+					<input name="bus_id" type="radio" value="<{$item.id}>" <?php if ($order['bus_id'] == $item['id']) { ?>checked="checked"<?php } ?>> <{$item.departure_location}><br>
+				<?php } ?>
+			</div>
+		</li>
+		<?php } ?>
+		<li>
+			<span class="title">使用优惠券：</span>
+			<input name="privilege_di" type="checkbox" <?php if ($order['privilege_di'] == 1) { ?>checked="checked"<?php } ?>>
+		</li>
+		<li>
+			<span class="title">学校周边发车：</span>
+			<input name="surrounding_departrue" type="checkbox" <?php if ($order['surrounding_departrue'] == 1) { ?>checked="checked"<?php } ?>>
+		</li>
+		<li>
+			<span class="title">优惠代码：</span>
+			<input name="coupon" type="text" value="<{$order.coupon}>">
+		</li>
+		
+
+		<li><span class="title">&nbsp;</span><input type="submit" class="btn btn-inverse" value="下一步"></li>
+		</form>
+		
+	<div class="clear"></div>
+	
+</div>
+
+<!--
+☆为了您的安全，建议游客购买旅游人身意外保险,费用为10元/人；
+☆此线路价格为打包特惠价，所有证件无效均不退款；
+☆此线路为散客拼团，先来先坐，请游客准时上车否则过时不候，产生的座位费不退，请保持通讯畅通，以便导游出团前通知有关事宜；
+☆如遇国家政策性调价，人力不可抗拒因素或游客自身因素，造成的损失和增加的费用由游客自理；
+☆请游客在旅途中注意人身及财物安全（请特别注意儿童的安全）；
+☆在不变动景点与住宿条件的情况下，我公司可根据实际情况对行程作适当调整
+☆车型根据最终报名人数决定，保证每人一正座。
+-->
+
+<script charset="utf-8" src="__ROOT__/editor/kindeditor.js"></script>
+<script charset="utf-8" src="__ROOT__/editor/lang/zh_CN.js"></script>
+<script>
+        KindEditor.ready(function(K) {
+            window.editor = K.create('#introduction', {
+				minWidth : '400px',
+			});
+        });
+</script>
+
+<script>
+var province = Array();
+<?php for($i = 0; $i < count($provinceList); $i++) { ?>
+province[<{$i}>] = Array();
+province[<{$i}>]['tot'] = <?php echo count($provinceList[$i]['cityList']) ?>;
+province[<{$i}>]['city'] = Array(); 
+<?php for($j = 0; $j < count($provinceList[$i]['cityList']); $j++) { ?>
+	province[<{$i}>]['city'][<{$j}>] = Array();
+	province[<{$i}>]['city'][<{$j}>]['id'] = '<{$provinceList.$i.cityList.$j.id}>';
+	province[<{$i}>]['city'][<{$j}>]['name'] = '<{$provinceList.$i.cityList.$j.name}>';
+<?php } ?>
+<?php } ?>
+changeProvince(1);
+
+function changeProvince() {
+	var id = $('#province').find("option:selected").val();
+	var city = $('#city');
+	city.html('');
+	for (var i = 0; i < province[id-1]['tot']; i++)
+		city.append('<option value="'+(i+1)+'">'+province[id-1]['city'][i]['name']+'</option>');
+}
+
+</script>
+
+<include file="Admin:footer"/>

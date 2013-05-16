@@ -1,0 +1,85 @@
+<include file="Fenxiao:left_area"/>
+	
+	<!--右方区域-->
+	<div class="right_area">
+		
+		<!--近期订单-->
+		<div class="order" style="margin:0;">
+			<div class="title">
+				代理列表
+				<!--<div class="count">共有<{$orderCount}>份订单</div>-->
+			</div>
+			<table>
+				<tr style="background:#e9e9e9;font-weight:bold;">
+					<td width="15%">用户编号</td>
+					<td width="20%">用户姓名</td>
+					<td width="20%">反馈金钱</td>
+					<td width="30%">加入时间</td>
+					<td width="15%">操作</td>
+				</tr>
+				<?php if (empty($agentList)) { ?>
+				<tr>
+					<td colspan="6">暂无代理，赶紧去寻找一名代理吧！</td>
+				</tr>
+				<?php } else { ?>
+				<?php foreach($agentList AS $item) { ?>
+				<tr>
+					<td><{$item.user_id}></td>
+					<td>
+						<{$item.name}>
+						<!--<?php if ($item['info']['group_id'] != 3) { ?>
+						(未确认)
+						<?php } ?>
+						-->
+					</td>
+					<td><span class="price">¥<{$item.father_money}></span></td>
+					<td><{$item.time}></td>
+					<td>
+						<a href="<?php echo U('Fenxiao/agentShow?id='.$item['user_id']) ?>">查看详细信息</a>
+					</td>
+				</tr>
+				<tr id="detail<{$tot}>" style="display:none;">
+					<td colspan="6">123</td>
+				</tr>
+				<?php } ?>
+				<?php } ?>
+			</table>
+			
+			<div class="pagination">
+				<span>共有<{$agentCount}>名代理&nbsp;&nbsp;&nbsp;&nbsp;</span>
+				<ul>
+					<?php if ($cntPage >= 5) { ?>
+					<li><a href="<?php echo U('Fenxiao/agentList?page=1') ?>">1</a></li>
+					<?php } ?>
+					<?php if ($cntPage > 5) { ?>
+					<li class="disable"><a>...</a></li>
+					<?php } ?>
+					<?php for($i = $cntPage-3; $i < $cntPage; $i++) { if ($i <= 0) continue; ?>
+					<li><a href="<?php echo U('Fenxiao/agentList?page='.$i) ?>"><{$i}></a></li>
+					<?php } ?>
+					<li class="active"><a href="#")"><{$cntPage}></a></li>
+					<?php for($i = $cntPage+1; $i <= $cntPage+3; $i++) { if ($i > $totPage) break; ?>
+					<li><a href="<?php echo U('Fenxiao/agentList?page='.$i) ?>"><{$i}></a></li>
+					<?php } ?>
+					<?php if ($cntPage < $totPage-4) { ?>
+					<li class="disable"><a>...</a></li>
+					<?php } ?>
+					<?php if ($cntPage <= $totPage-4) { ?>
+					<li><a href="<?php echo U('Fenxiao/agentList?page='.$totPage) ?>"><{$totPage}></a></li>
+					<?php } ?>
+				</ul>
+			</div>
+		</div>
+		
+		<div class="clear"></div>
+	</div>
+	
+	<div class="clear"></div>
+	
+</div>
+
+<script type="text/javascript" src="__ROOT__/js/user.js" charset="utf-8"></script>
+
+
+
+<include file="Index:footer"/>

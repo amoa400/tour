@@ -1,0 +1,394 @@
+<include file="Index:header"/>
+
+<link href="__ROOT__/css/search.css" rel="stylesheet" media="screen">
+<link href="__ROOT__/css/jquery-ui-1.10.2.datepicker.min.css" rel="stylesheet" media="screen">
+
+<div id="search" class="main_container wallpaper2">
+
+	<div class="path">
+		&nbsp;&nbsp;<a href="<?php echo U('Index/index') ?>">__NAME__</a>&nbsp;
+
+		<?php if (empty($_GET['t'])) { ?>
+		<?php if (empty($form['province'])) { ?>
+		>&nbsp;&nbsp;<a href="#">线路搜索</a>
+		<?php } ?>
+		<?php if (!empty($form['province'])) { ?>
+		>&nbsp;&nbsp;<a href="<?php echo U('Line/search?province='.$form['province']) ?>"><{$cntProvince}>旅游</a>&nbsp;
+		<?php } ?>
+		<?php if (!empty($form['province']) && !empty($form['city'])) { ?>
+		>&nbsp;&nbsp;<a href="<?php echo U('Line/search?province='.$form['province'].'&city='.$form['city']) ?>"><{$cntCity}>旅游</a>
+		<?php } ?>
+		<?php } ?>
+		
+		<?php if ($_GET['t'] == 1) { ?>
+		>&nbsp;&nbsp;<a href="<?php echo U('Line/search?t=1&point_type='.$_GET['point_type']) ?>"><?php echo $pointTypeList[$form['point_type']-1]['name'] ?>游</a>
+		<?php } ?>
+		
+		<?php if ($_GET['t'] == 2) { ?>
+		>&nbsp;&nbsp;<a href="<?php echo U('Line/search?t=2&point='.$_GET['point']) ?>"><{$point.name}></a>
+		<?php } ?>
+		
+		<?php if ($_GET['t'] == 3 || $_GET['t'] == 5) { ?>
+		>&nbsp;&nbsp;<a href="<?php echo U('Line/search?t=3&line_type=1') ?>">班级游</a>
+		<?php } ?>
+
+	</div>
+
+	<!--左面板-->
+	<div class="left_area">
+		<!--同城旅游产品推荐-->
+		<!--
+		<div class="panel" style="margin-top:0;">
+			<div class="title">搜索结果分类</div>
+			<div class="content point_list">
+				<ul>
+					<?php foreach($line['point_in_city'] as $point) { ?>
+					<li><a href="#" title="<{$point['name_abb']}>(<{$point['count']}>)"><{$point['name_display']}>(<{$point['count']}>)</a></li>
+					<?php } ?>
+				</ul>
+				<div class="clear"></div>
+			</div>
+		</div>
+		-->
+		
+		<!--游记攻略-->
+		<div class="panel" style="margin-top:0;">
+			<div class="title"><{$cntCity}>游记攻略</div>
+			<div class="content note_list">
+				<!--<ul>
+					<?php foreach($line['point_in_city'] as $point) { ?>
+					<li><a href="#" title="<{$point['name_abb']}>(<{$point['count']}>)"><{$point['name_display']}>(<{$point['count']}>)</a></li>
+					<?php } ?>
+				</ul>-->
+				暂无
+				<div class="clear"></div>
+			</div>
+		</div>
+		
+		<!--同城旅游产品推荐-->
+		<div class="panel">
+			<div class="title">相关产品推荐</div>
+			<div class="content note_list">
+				<!--<ul>
+					<?php foreach($line['point_in_city'] as $point) { ?>
+					<li><a href="#" title="<{$point['name_abb']}>(<{$point['count']}>)"><{$point['name_display']}>(<{$point['count']}>)</a></li>
+					<?php } ?>
+				</ul>-->
+				暂无
+				<div class="clear"></div>
+			</div>
+		</div>
+	</div>
+		
+	<!--右面板-->
+	<div class="right_area">
+
+		<?php if ($_GET['t'] == 3) { ?>
+		<!--团队头-->
+		<div class="team">
+			<img src="__ROOT__/images/page/team/flow.png">&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn" target="_blank" href="<?php echo U('Order/order') ?>">&nbsp;</a>
+		</div>
+		<?php } ?>
+
+		<!--搜索条件-->
+		<div class="filter">
+			<div class="head">
+				<?php $flag = false; ?>
+				<?php if (empty($_GET['t'])) { ?>
+				<span>
+					上海<?php if (empty($cntCity)) {?>出发<?php } else { ?>到<{$cntCity}>旅游<?php } ?>
+				</span>
+				<?php $flag =true; } ?>
+				<?php if ($_GET['t'] == 1) { ?>
+				<span>
+					上海出发<?php echo $pointTypeList[$form['point_type']-1]['name'] ?>游
+				</span>
+				<?php $flag =true; } ?>
+				<?php if ($_GET['t'] == 2) { ?>
+				<span>
+					上海到<{$point.name}>旅游
+				</span>
+				<?php $flag =true; } ?>
+				<?php if ($_GET['t'] == 3) { ?>
+				<span>
+					班级游
+				</span>
+				<?php $flag =true; } ?>
+				<?php if (!$flag) { ?>
+				<span><{$headTitle}></span>
+				<?php } ?>
+			</div>
+			
+			<div class="filter_border">
+			
+			<div class="title">
+				<ul>
+					<?php if ($filter['showType']) { ?><li>产品类型：</li><?php } ?>
+					<?php if ($filter['showTime']) { ?><li>出游时间：</li><?php } ?>
+					<?php if ($filter['showDuration']) { ?><li>行程天数：</li><?php } ?>
+					<?php if ($filter['showProvince']) { ?><li>目的省份：</li><?php } ?>
+					<?php if ($filter['showCity']) { ?><li>目的城市：</li><?php } ?>
+					<?php if ($filter['showPointType']) { ?><li>主题推荐：</li><?php } ?>
+					<?php if ($filter['showHotPoint']) { ?><li>热门景点：</li><?php } ?>
+					<li></li>
+				</ul>
+			</div>
+			
+			<div  class="itemList">
+				
+				<!--产品类型-->
+				<?php if ($filter['showType']) { ?>
+				<div class="item">
+					<ul>
+						<li id="line_type_0" class="c_line_type selected" onclick="line_type_change(0)">跟团游</li>
+						<li id="line_type_1" class="c_line_type" onclick="line_type_change(1)">团队游</li>
+						<!--<li id="line_type_2" class="c_line_type" onclick="line_type_change(2)">自助游</li>-->
+					</ul>
+					<div class="clear"></div>
+				</div>
+				<?php } ?>
+				
+				<!--出游时间-->
+				<?php if ($filter['showTime']) { ?>
+				<div class="item date">
+					<ul>
+						<li>
+							<input id="begin_date" value="yyyy-mm-dd">
+							<div class="date_icon" onclick="$('#begin_date').focus()"><i class="icon icon_date"></i></div>
+						</li>
+						<li>—</li>
+						<li>
+							<input id="end_date" value="yyyy-mm-dd">
+							<div class="date_icon" onclick="$('#end_date').focus()"><i class="icon icon_date"></i></div>
+						</li>
+					</ul>
+					<div class="clear"></div>
+				</div>
+				<?php } ?>
+
+				<!--行程天数-->
+				<?php if ($filter['showDuration']) { ?>
+				<div class="item">
+					<ul>
+						<li id="duration_0" class="c_duration selected" onclick="duration_change(0)">不限</li>
+						<li id="duration_1" class="c_duration" onclick="duration_change(1)">1天</li>
+						<li id="duration_2" class="c_duration" onclick="duration_change(2)">2天</li>
+						<li id="duration_3" class="c_duration" onclick="duration_change(3)">3天</li>
+						<li id="duration_4" class="c_duration" onclick="duration_change(4)">4-6天</li>
+						<li id="duration_5" class="c_duration" onclick="duration_change(5)">7-9天</li>
+						<li id="duration_6" class="c_duration" onclick="duration_change(6)">10天及以上</li>
+					</ul>
+					<div class="clear"></div>
+				</div>
+				<?php } ?>
+
+				<!--目的省份-->
+				<?php if ($filter['showProvince']) { ?>
+				<div class="item">
+					<ul>
+						<li id="province_0" class="c_province selected" onclick="province_change(0)">不限</li>
+						<?php foreach($provinceList as $province) { ?>
+								<li id="province_<{$province.id}>" class="c_province" onclick="province_change(<?php echo (int)$province['id'] ?>)"><{$province.name}></li>
+						<?php } ?>
+					</ul>
+					<div class="clear"></div>
+				</div>
+				<?php } ?>
+				
+				<!--目的城市-->
+				<?php if ($filter['showCity']) { ?>
+				<div class="item">
+					<ul>
+						<li id="destination_<?php echo (int)$form['province'] ?>_0" class="c_destnation selected" onclick="destination_change(<?php echo (int)$form['province'] ?>, 0)">不限</li>
+						<?php foreach($cityList as $city) { 
+								//if ($city['count'] == 0) break;
+						?>
+								<li id="destination_<{$city.province_id}>_<{$city.id}>" class="c_destnation" onclick="destination_change(<{$city.province_id}>, <{$city.id}>)"><{$city.name}></li>
+						<?php } ?>
+					</ul>
+					<div class="clear"></div>
+				</div>
+				<?php } ?>
+				
+				<!--景点类型-->
+				<?php if ($filter['showPointType']) { ?>
+				<div class="item">
+					<ul>
+						<li id="point_type_0" class="c_point_type selected" onclick="point_type_change(0)">不限</li>
+						<?php foreach($pointTypeList as $pointType) {?>
+							<li id="point_type_<{$pointType.id}>" class="c_point_type" onclick="point_type_change(<{$pointType.id}>)"><{$pointType.name}></li>
+						<?php } ?>
+					</ul>
+					<div class="clear"></div>
+				</div>
+				<?php } ?>
+				
+				<!--热门景点-->
+				<?php if ($filter['showHotPoint']) { ?>
+				<div class="item">
+					<ul>
+						<li id="point_0" class="c_point selected" onclick="point_change(0)">不限</li>
+						<?php foreach($pointList as $point) { ?>
+								<li id="point_<{$point.id}>" class="c_point" onclick="point_change(<{$point.id}>)"><{$point['name']}></li>
+						<?php } ?>
+					</ul>
+				</div>
+				<?php } ?>
+	
+			</div>
+			
+			<div class="clear"></div>
+			
+			<div class="foot">
+				<ul>
+					<li id="sort_0" class="selected" onclick="sort_change(0)" style="margin:0;">推荐</li>
+					<!--<li id="sort_1" onclick="sort_change(1)">特价</li>-->
+					<li id="sort_2" onclick="sort_change(2)">销量&nbsp;<i id="sort_icon_2" class="icon icon_arrow_down"></i></li>
+					<li id="sort_3" onclick="sort_change(3)">点评&nbsp;<i id="sort_icon_3" class="icon icon_arrow_down"></i></li>
+					<li id="sort_4" onclick="sort_change(4)">满意&nbsp;<i id="sort_icon_4" class="icon icon_arrow_down"></i></li>
+					<li id="sort_5" onclick="sort_change(5)">价格&nbsp;<i id="sort_icon_5" class="icon icon_arrow_top_down"></i></li>
+					<li class="price_between"><input id="begin_price" onclick="show_price_submit()"/>&nbsp;-&nbsp;<input id="end_price" onclick="show_price_submit()"/>&nbsp;&nbsp;<a href="#" id="price_between_submit" class="hidden" onclick="price_between_change()">确定</a></li>
+				</ul>
+				<div class="clear"></div>
+			</div>
+			
+			<div class="clear"></div>
+			</div>
+			
+			<!--隐藏表单-->
+			<div class="hidden">
+				<form id="s_form" action="<?php echo U('Line/search'); ?>" method="get">
+					<input id="s_line_type" name="line_type">
+					<input id="s_duration" name="duration">
+					<input id="s_province" name="province">
+					<input id="s_city" name="city">
+					<input id="s_point_type" name="point_type">
+					<input id="s_point" name="point">
+					<input id="s_sort" name="sort">
+					<input id="s_begin_date" name="begin_date">
+					<input id="s_end_date" name="end_date">
+					<input id="s_begin_price" name="begin_price">
+					<input id="s_end_price" name="end_price">
+					<input id="s_page" name="page">
+					<input id="s_t" name="t">
+					<input id="s_z" name="z">
+					<input id="s_tag" name="tag">
+				</form>
+			</div>
+			
+		</div>
+		
+		<!--搜索结果-->
+		<div class="result">
+			<?php foreach($lineList as $line) { ?>
+			<div class="item">
+				<div class="pic"><a href="<?php echo U('Line/show?id='.$line['id']) ?>" target="_blank"><img class="lazy" src="__ROOT__/images/line/photo/<{$line.id}>.jpg"/></a></div>
+				<div class="info">
+					<ul>
+						<li style="margin-top:0;"><a href="<?php echo U('Line/show?id='.$line['id']) ?>" target="_blank"><span class="info_name"><<{$line.name}>><span class="info_ad"><{$line.character}></span></a></li>
+						<?php if ($_GET['t'] != 9999) { ?>
+						<li><span class="info_character">主题：<?php $flag = false; foreach($line['point_type'] as $type) { if ($flag) echo '、'; ?><{$type.name}><?php $flag = true; } ?></span></li>
+						<?php } else { ?>
+						<li>
+							<span class="info_item info_tag" style="margin-left:0;">
+								<i>
+									<?php $flag = false; foreach($line['point_type'] as $type) { if ($flag) echo '、'; ?><{$type.name}><?php $flag = true; } ?>
+								</i>
+							</span>
+						</li>
+						<?php } ?>
+						<li>
+							<!--
+							<span class="info_item info_tag" style="margin-left:0;">
+								<i>
+									<?php $flag = false; foreach($line['point_type'] as $type) { if ($flag) echo '、'; ?><{$type.name}>游<?php $flag = true; } ?>
+								</i>
+							</span>
+							-->
+							<span class="info_item" style="margin-left:0;">编号：<{$line.id}></span>
+							<span class="info_item">满意度：<span class="info_satisfaction"><{$line.satisfaction}>%</span></span>
+							<span class="info_item info_sell"><{$line.sell_count}>人出游&nbsp;/&nbsp;<{$line.comment_count}>条点评</span>
+						</li>
+						<?php if ($_GET['line_type'] == 0) { ?>
+						<li class="schedule">团期：<?php $flag = false; foreach($line['schedule'] as $schedule) { if ($flag) echo '、'; ?><span><{$schedule.date2}></span><?php $flag = true; } ?>&nbsp;&nbsp;&nbsp;&nbsp;<span><a href="<?php echo U('Line/show?id='.$line['id'].'&calendar=1') ?>" target="_blank">更多团期</a></span>
+						</li>
+						<?php } else { ?>
+						<li class="schedule">团期：根据您的定制，每天均可发团，接受线路调整，路线定制&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						</li>
+						<?php } ?>
+					</ul>
+				</div>
+				
+				<div class="price">
+					<div class="top">网订优惠</div>
+					<div class="price_num"><span><{$line.price}></span>元起</div>
+					<div class="privilege"><i class="icon icon_di"></i><span class="droptip" data-placement="bottom" title="网上预订即享5元抵扣券优惠"><{$line.di_price}>元</span>&nbsp;&nbsp;<i class="icon icon_song"></i><span  class="droptip" data-placement="bottom" title="网上预订即送20元抵扣券"><?php echo $line['di_price']*4 ?>元</span></div>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<?php } ?>
+			<!--无结果时-->
+			<?php if (empty($lineList)) { ?>
+			<div class="item" style="text-align:center;font-size:14px;line-height:100px;">
+				暂无相应路线，请重新设定搜索条件
+			</div>
+			<?php } ?>
+			<!--分页-->
+			<div class="pagination">
+				<span>共有<{$lineCount}>条线路&nbsp;&nbsp;&nbsp;&nbsp;</span>
+				<ul>
+					<?php if (empty($form['page'])) $form['page'] = 1; ?>
+					<?php if ($form['page'] >= 5) { ?>
+					<li onclick="goto_page('1')"><a href="#">1</a></li>
+					<?php } ?>
+					<?php if ($form['page'] > 5) { ?>
+					<li class="disable"><a>...</a></li>
+					<?php } ?>
+					<?php for($i = $form['page']-3; $i < $form['page']; $i++) { if ($i <= 0) continue; ?>
+					<li onclick="goto_page('<{$i}>')"><a href="#"><{$i}></a></li>
+					<?php } ?>
+					<li class="active"><a href="#")"><{$form.page}></a></li>
+					<?php for($i = $form['page']+1; $i <= $form['page']+3; $i++) { if ($i > $linePage) break; ?>
+					<li onclick="goto_page('<{$i}>')"><a href="#"><{$i}></a></li>
+					<?php } ?>
+					<?php if ($form['page'] < $linePage-4) { ?>
+					<li class="disable"><a>...</a></li>
+					<?php } ?>
+					<?php if ($form['page'] <= $linePage-4) { ?>
+					<li onclick="goto_page('<{$linePage}>')"><a href="#"><{$linePage}></a></li>
+					<?php } ?>
+				</ul>
+			</div>
+		</div>
+		
+			
+	</div>
+	<div class="clear"></div>
+	
+</div>
+
+
+
+<script type="text/javascript" src="__ROOT__/js/search.js" charset="utf-8"></script>
+<script type="text/javascript" src="__ROOT__/js/jquery-ui-1.10.2.datepicker.min.js" charset="utf-8"></script>
+
+<!--表单赋值-->
+<script>
+	<?php 
+		foreach($form as $id => $item) {
+			if (empty($item)) continue;
+	?>
+			form['<{$id}>'] = '<{$item}>';
+	<?php 
+		} 
+	?>
+	<?php if (!empty($_GET['t'])) { ?>
+		form['t'] = <?php echo $_GET['t'] ?>;
+	<?php } ?>
+	<?php if (!empty($_GET['z'])) { ?>
+		form['z'] = <?php echo $_GET['z'] ?>;
+	<?php } ?>
+	reset();
+</script>
+
+<include file="Index:footer"/>

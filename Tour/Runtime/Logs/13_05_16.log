@@ -1,0 +1,56 @@
+[ 2013-05-16T00:00:23+08:00 ] ERR: (ThinkException) Access denied for user 'sqltourtour'@'114.93.120.66' (using password: YES)
+[ 2013-05-16T00:00:32+08:00 ] ERR: (ThinkException) mysqlnd cannot connect to MySQL 4.1+ using the old insecure authentication. Please use an administration tool to reset your password with the command SET PASSWORD = PASSWORD('your_existing_password'). This will store a new, and more secure, hash value in mysql.user. If this user is used in other scripts executed by PHP 5.2 or earlier you might need to remove the old-passwords flag from your my.cnf file
+[ 2013-05-16T00:00:39+08:00 ] ERR: (ThinkException) mysqlnd cannot connect to MySQL 4.1+ using the old insecure authentication. Please use an administration tool to reset your password with the command SET PASSWORD = PASSWORD('your_existing_password'). This will store a new, and more secure, hash value in mysql.user. If this user is used in other scripts executed by PHP 5.2 or earlier you might need to remove the old-passwords flag from your my.cnf file
+[ 2013-05-16T00:04:47+08:00 ] ERR: (ThinkException) 鏃犳硶鍔犺浇妯″潡:images
+[ 2013-05-16T00:04:52+08:00 ] ERR: (ThinkException) 鏃犳硶鍔犺浇妯″潡:images
+[ 2013-05-16T00:04:55+08:00 ] ERR: (ThinkException) 鏃犳硶鍔犺浇妯″潡:images
+[ 2013-05-16T00:04:57+08:00 ] ERR: (ThinkException) mysqlnd cannot connect to MySQL 4.1+ using the old insecure authentication. Please use an administration tool to reset your password with the command SET PASSWORD = PASSWORD('your_existing_password'). This will store a new, and more secure, hash value in mysql.user. If this user is used in other scripts executed by PHP 5.2 or earlier you might need to remove the old-passwords flag from your my.cnf file
+[ 2013-05-16T00:04:59+08:00 ] ERR: (ThinkException) 鏃犳硶鍔犺浇妯″潡:images
+[ 2013-05-16T00:05:01+08:00 ] ERR: (ThinkException) 鏃犳硶鍔犺浇妯″潡:images
+[ 2013-05-16T00:05:03+08:00 ] ERR: (ThinkException) mysqlnd cannot connect to MySQL 4.1+ using the old insecure authentication. Please use an administration tool to reset your password with the command SET PASSWORD = PASSWORD('your_existing_password'). This will store a new, and more secure, hash value in mysql.user. If this user is used in other scripts executed by PHP 5.2 or earlier you might need to remove the old-passwords flag from your my.cnf file
+[ 2013-05-16T00:05:44+08:00 ] ERR: (ThinkException) mysqlnd cannot connect to MySQL 4.1+ using the old insecure authentication. Please use an administration tool to reset your password with the command SET PASSWORD = PASSWORD('your_existing_password'). This will store a new, and more secure, hash value in mysql.user. If this user is used in other scripts executed by PHP 5.2 or earlier you might need to remove the old-passwords flag from your my.cnf file
+[ 2013-05-16T00:05:45+08:00 ] ERR: (ThinkException) 鏃犳硶鍔犺浇妯″潡:images
+[ 2013-05-16T00:05:47+08:00 ] ERR: (ThinkException) mysqlnd cannot connect to MySQL 4.1+ using the old insecure authentication. Please use an administration tool to reset your password with the command SET PASSWORD = PASSWORD('your_existing_password'). This will store a new, and more secure, hash value in mysql.user. If this user is used in other scripts executed by PHP 5.2 or earlier you might need to remove the old-passwords flag from your my.cnf file
+[ 2013-05-16T00:05:49+08:00 ] ERR: (ThinkException) 鏃犳硶鍔犺浇妯″潡:images
+[ 2013-05-16T00:05:58+08:00 ] ERR: (ThinkException) mysqlnd cannot connect to MySQL 4.1+ using the old insecure authentication. Please use an administration tool to reset your password with the command SET PASSWORD = PASSWORD('your_existing_password'). This will store a new, and more secure, hash value in mysql.user. If this user is used in other scripts executed by PHP 5.2 or earlier you might need to remove the old-passwords flag from your my.cnf file
+[ 2013-05-16T00:07:37+08:00 ] ERR: (ThinkException) mysqlnd cannot connect to MySQL 4.1+ using the old insecure authentication. Please use an administration tool to reset your password with the command SET PASSWORD = PASSWORD('your_existing_password'). This will store a new, and more secure, hash value in mysql.user. If this user is used in other scripts executed by PHP 5.2 or earlier you might need to remove the old-passwords flag from your my.cnf file
+[ 2013-05-16T00:19:45+08:00 ] ERR: (ThinkException) mysqlnd cannot connect to MySQL 4.1+ using the old insecure authentication. Please use an administration tool to reset your password with the command SET PASSWORD = PASSWORD('your_existing_password'). This will store a new, and more secure, hash value in mysql.user. If this user is used in other scripts executed by PHP 5.2 or earlier you might need to remove the old-passwords flag from your my.cnf file
+[ 2013-05-16T00:19:47+08:00 ] ERR: (ThinkException) mysqlnd cannot connect to MySQL 4.1+ using the old insecure authentication. Please use an administration tool to reset your password with the command SET PASSWORD = PASSWORD('your_existing_password'). This will store a new, and more secure, hash value in mysql.user. If this user is used in other scripts executed by PHP 5.2 or earlier you might need to remove the old-passwords flag from your my.cnf file
+[ 2013-05-16T01:35:36+08:00 ] ERR: (ThinkException) mysqlnd cannot connect to MySQL 4.1+ using the old insecure authentication. Please use an administration tool to reset your password with the command SET PASSWORD = PASSWORD('your_existing_password'). This will store a new, and more secure, hash value in mysql.user. If this user is used in other scripts executed by PHP 5.2 or earlier you might need to remove the old-passwords flag from your my.cnf file
+[ 2013-05-16T03:13:10+08:00 ] ERR: (ThinkException) 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+
+[ 2013-05-16T03:15:12+08:00 ] ERR: (ThinkException) 由于目标计算机积极拒绝，无法连接。
+
+[ 2013-05-16T03:15:25+08:00 ] ERR: (ThinkException) 由于目标计算机积极拒绝，无法连接。
+
+[ 2013-05-16T03:15:33+08:00 ] ERR: (ThinkException) 由于目标计算机积极拒绝，无法连接。
+
+[ 2013-05-16T03:15:36+08:00 ] ERR: (ThinkException) 由于目标计算机积极拒绝，无法连接。
+
+[ 2013-05-16T03:15:47+08:00 ] ERR: (ThinkException) 由于目标计算机积极拒绝，无法连接。
+
+[ 2013-05-16T03:17:51+08:00 ] ERR: (ThinkException) 由于目标计算机积极拒绝，无法连接。
+
+[ 2013-05-16T03:21:27+08:00 ] ERR: (ThinkException) 鏃犳硶鍔犺浇妯″潡:images
+[ 2013-05-16T03:21:33+08:00 ] ERR: (ThinkException) 鏃犳硶鍔犺浇妯″潡:images
+[ 2013-05-16T03:21:35+08:00 ] ERR: (ThinkException) 鏃犳硶鍔犺浇妯″潡:images
+[ 2013-05-16T03:21:40+08:00 ] ERR: (ThinkException) 鏃犳硶鍔犺浇妯″潡:images
+[ 2013-05-16T03:21:44+08:00 ] ERR: (ThinkException) 鏃犳硶鍔犺浇妯″潡:images
+[ 2013-05-16T03:29:12+08:00 ] ERR: (ThinkException) 鏃犳硶鍔犺浇妯″潡:images
+[ 2013-05-16T03:29:12+08:00 ] ERR: (ThinkException) 鏃犳硶鍔犺浇妯″潡:images
+[ 2013-05-16T04:33:09+08:00 ] ERR: (ThinkException) 鏃犳硶鍔犺浇妯″潡:images
+[ 2013-05-16T04:33:17+08:00 ] ERR: (ThinkException) 鏃犳硶鍔犺浇妯″潡:images
+[ 2013-05-16T04:33:20+08:00 ] ERR: (ThinkException) 鏃犳硶鍔犺浇妯″潡:images
+[ 2013-05-16T04:33:22+08:00 ] ERR: (ThinkException) 鏃犳硶鍔犺浇妯″潡:images
+[ 2013-05-16T04:34:54+08:00 ] ERR: (ThinkException) 鏃犳硶鍔犺浇妯″潡:images
+[ 2013-05-16T04:40:15+08:00 ] ERR: (ThinkException) 鏃犳硶鍔犺浇妯″潡:images
+[ 2013-05-16T04:40:16+08:00 ] ERR: (ThinkException) 鏃犳硶鍔犺浇妯″潡:images
+[ 2013-05-16T04:40:21+08:00 ] ERR: (ThinkException) 鏃犳硶鍔犺浇妯″潡:images
+[ 2013-05-16T04:40:28+08:00 ] ERR: (ThinkException) 鏃犳硶鍔犺浇妯″潡:images
+[ 2013-05-16T04:40:34+08:00 ] ERR: (ThinkException) 鏃犳硶鍔犺浇妯″潡:images
+[ 2013-05-16T04:40:35+08:00 ] ERR: (ThinkException) 鏃犳硶鍔犺浇妯″潡:images
+[ 2013-05-16T04:42:25+08:00 ] ERR: (ThinkException) 鏃犳硶鍔犺浇妯″潡:images
+[ 2013-05-16T04:42:28+08:00 ] ERR: (ThinkException) 鏃犳硶鍔犺浇妯″潡:images
+[ 2013-05-16T04:42:31+08:00 ] ERR: (ThinkException) 鏃犳硶鍔犺浇妯″潡:images
+[ 2013-05-16T04:42:31+08:00 ] ERR: (ThinkException) 鏃犳硶鍔犺浇妯″潡:images
+[ 2013-05-16T15:02:02+08:00 ] ERR: (ThinkException) 鏃犳硶鍔犺浇妯″潡:images

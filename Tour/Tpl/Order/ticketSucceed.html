@@ -1,0 +1,74 @@
+<include file="Order:header"/>
+
+<style>
+	#order .navi {background:url('__ROOT__/images/order/navi_step5.png');}
+</style>
+	
+<div class="detail succeed">
+	<div class="head">
+		<div class="pic"><img src="__ROOT__/images/order/succeed.png"></div>
+		<div class="text"><span>您的预定已成功，我们将给您发送确认短信。</span><br>24小时内若联系人手机还没有收到确认短信，请及时致电021-51602963 ，我们将竭诚为您服务。</div>
+		<div class="clear"></div>
+	</div>
+
+	<div class="content">
+	
+		<ul>
+			<li>
+				旅游产品：
+				<a href="<?php echo U('Line/show?id='.$order['line_id']) ?>" target="_blank"><{$order.line_name}></a>
+			</li>
+			<li>
+				门票信息：
+				<?php 
+					$flag = false;
+					foreach($order['ticketList'] as $item) {
+						if ($flag) echo '　　　　　';
+				?>
+				<{$item.name}>　<{$item.count}> 张<br>
+				
+				<?php 
+						$flag = true;
+					} 
+				?>
+			</li>
+			<li>
+				游玩日期：
+				<{$order.departure_date}>
+			</li>
+		</ul>
+		
+	</div>
+	
+	<div class="foot">
+		<i class="icon-list-alt"></i>&nbsp;<a href="<?php echo U('User/order') ?>">我的订单中心</a>（可查看订单详情）<br><br>
+		<i class="icon-list-alt"></i>&nbsp;<a href="__ROOT__">返回首页</a><br><br>
+		<!--分享-->
+		<div class="jiathis_style">
+			<span class="jiathis_txt">告诉大家我要去玩咯：</span>
+			<a class="jiathis_button_renren">人人网</a>
+			<a class="jiathis_button_tsina">新浪微博</a>
+			<a class="jiathis_button_qzone">QQ空间</a>
+			<a class="jiathis_button_tqq">腾讯微博</a>
+			<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+		</div>
+	</div>
+	
+	<script>
+		var jiathis_config = {
+			url:"__ROOT__<?php echo U('Line/show?id='.$order['line_id']); ?>",
+			title:"我要去这里玩咯...<{$order.line_name}>",
+			summary:"<{$order.line_name}>...__NAME___大学生专属旅游网站",
+			pic:"__ROOT__/images/line/photo/<{$order.line_id}>.jpg",
+		}
+	</script>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1356957111629175" charset="utf-8"></script>
+
+	<div class="clear"></div>
+</div>
+
+<script>
+
+</script>
+	
+<include file="Order:footer"/>

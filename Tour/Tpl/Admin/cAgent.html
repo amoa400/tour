@@ -1,0 +1,73 @@
+<include file="Admin:header"/>
+
+<link href="__ROOT__/css/admin/line.css" rel="stylesheet" media="screen">
+
+<div id="line">
+	<ul>
+		<form method="post" action="<?php echo U('Admin/cAgentDo') ?>" enctype="multipart/form-data">
+		<input name="id" type="text" value="<{$user.id}>" style="display:none;">
+		<li><span class="title" style="font-weight:bold;">代理基本信息</span></li>
+		<li>
+			<span class="title">用户邮箱：</span>
+			<input name="email" type="text" value="<{$user.email}>">
+			<span style="font-size:12px;">&nbsp;&nbsp;若该用户尚未在本网站注册，请先通知其注册</span>
+		</li>
+		<li>
+			<span class="title">代理等级：</span>
+			<select name="type_id">
+				<option value="1" <?php if ($agent['type_id'] == 1) { ?>selected="selected"<?php } ?>>一级代理</option>
+				<option value="2" <?php if ($agent['type_id'] == 2) { ?>selected="selected"<?php } ?>>二级代理</option>
+				<option value="3" <?php if ($agent['type_id'] == 3) { ?>selected="selected"<?php } ?>>三级代理</option>
+			</select>
+		</li>
+		<li>
+			<span class="title">上级邮箱：</span>
+			<input name="father_email" type="text" value="<{$father.email}>">
+			<span style="font-size:12px;">&nbsp;&nbsp;若该用户不为一级代理，请填写上级代理邮箱</span>
+		</li>
+		<li>
+			<span class="title">真实姓名：</span>
+			<input name="name" type="text" value="<{$agent.name}>">
+		</li>
+		<li>
+			<span class="title">联系方式：</span>
+			<input name="phone" type="text" value="<{$agent.phone}>">
+		</li>
+		<li>
+			<span class="title">所在学校：</span>
+			<select name="school_id">
+				<option value="0">请选择所在学校</option>
+				<?php foreach($schoolList as $school) { ?>
+				<option value="<{$school.id}>" <?php if ($agent['school_id'] == $school['id']) { ?>selected="selected"<?php } ?>><{$school.name}></option>
+				<?php } ?>
+			</select>
+		</li>
+		<li>
+			<span class="title">入学年份：</span>
+			<select name="grade">
+				<option value="0">请选择入学年份</option>
+				<?php for ($i = 2014; $i > 2008; $i--) { ?>
+				<option value="<{$i}>" <?php if ($agent['grade'] == $i) { ?>selected="selected"<?php } ?>><{$i}>年</option>
+				<?php } ?>
+			</select>
+		</li>
+		<li>
+			<span class="title">证件上传：</span>
+			<input name="card" type="file">
+			<span style="font-size:12px;">&nbsp;&nbsp;学生证、身份证均可（小于2M，jpg格式）</span>
+		</li>
+		<?php if (!empty($user['id'])) { ?>
+		<li>
+			<span class="title"></span>
+			<a href="__ROOT__/images/agent/photo/<{$user.id}>.jpg" target="_blank"><img src="__ROOT__/images/agent/photo/<{$user.id}>.jpg" style="width:400px;"></a>
+		</li>
+		<?php } ?>
+		<li><span class="title">&nbsp;</span><input type="submit" class="btn btn-inverse" value="创建代理"></li>
+		</form>
+		
+		
+	<div class="clear"></div>
+	
+</div>
+
+<include file="Admin:footer"/>

@@ -1,0 +1,26 @@
+<include file="Index:header"/>
+
+<link href="__ROOT__/css/user.css" rel="stylesheet" media="screen">
+
+<div id="user" class="main_container wallpaper2">
+
+	<!--左方区域-->
+	<div class="left_area">
+		<div class="head"><a href="<?php echo U('Fenxiao/home') ?>"><i class="icon icon_home"></i>&nbsp;分销平台</a></div>
+		<ul>
+			<li class="title">产品管理</li>
+			<li><a href="<?php echo U('Fenxiao/lineList') ?>">线路列表</a></li>
+			<!--
+			<li class="title">优惠券管理</li>
+			<li><a href="<?php echo U('Fenxiao/couponList') ?>">优惠券列表</a></li>
+			<li><a href="<?php echo U('Fenxiao/couponCreate') ?>">生成优惠券</a></li>
+			-->
+			<?php if ($agent['type_id'] == 1 || $agent['type_id'] == 2) { ?>
+			<li class="title">代理管理</li>
+			<li><a href="<?php echo U('Fenxiao/agentList') ?>">代理列表</a></li>
+			<li><a href="<?php echo U('Fenxiao/agentCreate') ?>">新增代理</a></li>
+			<?php } ?>
+		</ul>
+		<div class="clear"></div>
+	</div>
+	

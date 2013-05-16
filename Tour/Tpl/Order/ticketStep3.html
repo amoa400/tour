@@ -1,0 +1,83 @@
+<include file="Order:header"/>
+
+<style>
+	#order .navi {background:url('__ROOT__/images/order/navi_step3.png');}
+</style>
+	
+<div class="detail step3">
+	<div class="item">
+		<div class="title"><i class="icon-edit"></i>&nbsp;订单信息</div>
+		<div class="content">
+			<ul>
+				<li>
+					<span>产品名称：</span>
+					<a href="<?php echo U('Point/show?id='.$order['line_id']) ?>" target="_blank"><{$order.line_name}></a>
+				</li>
+				<li>
+					<span>门票信息：</span>
+					<?php 
+						$flag = false;
+						foreach($order['ticketList'] as $item) {
+							if ($flag) echo '<span>&nbsp;</span>';
+					?>
+					<{$item.name}>　<{$item.count}> 张<br>
+					<?php 
+							$flag = true;
+						} 
+					?>
+				</li>
+				<li><span>游玩日期：</span><{$order.departure_date}></li>
+				<li><span>联系人：</span><{$order.contact_name}>，<{$order.contact_phone}>，<?php if (!empty($order['contact_phone2'])) { ?><{$order.contact_phone2}>，<?php }?><{$order.contact_email}></li>
+				<li>&nbsp;</li>
+				<?php 
+					$flag = false;
+					foreach($order['ticketList'] AS $item) { 
+				?>
+				<li>
+					<?php 
+						if ($flag) echo '<span>&nbsp;</span>';
+						else echo '<span>结算信息：</span>';
+					?>
+					<font class="tt"><{$item.name}></font>
+					<font class="ct1"><{$item.count}>&nbsp;×&nbsp;¥<{$item.unit_price}></font>
+					<font class="ct2 price">¥<?php echo $item['count']*$item['unit_price']; ?></font>
+				</li>
+				<?php 
+						$flag = true;
+					} 
+				?>
+				<?php foreach($order['insurance'] AS $item) { 
+					if (empty($item['count'])) continue;
+				?>
+				<li>
+					<span></span>
+					<font class="tt"><{$item.name}></font>
+					<font class="ct1"><{$item.count}>&nbsp;×&nbsp;¥<{$item.price}></font>
+					<font class="ct2 price">¥<?php echo $item['count']*$item['price']; ?></font>
+				</li>
+				<?php } ?>
+				<?php if (!empty($order['coupon'])) { ?>
+				<li>
+					<span></span>
+					<font class="tt">优惠券</font>
+					<font class="ct1"><{$order.people_count}>&nbsp;×&nbsp;-&nbsp;¥<{$order.coupon.price}></font>
+					<font class="ct2 price">-&nbsp;¥<?php echo $order['people_count']*$order['coupon']['price']; ?></font>
+				</li>
+				<?php } ?>
+				<li>
+					<span></span>
+					<strong>总计：<font class="price">¥<{$order.price}></font></strong>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="next" style="text-align:center;">
+		<span><a href="<?php echo U('Order/ticketStep2?id='.$_GET['id']) ?>">返回上一步</a></span>&nbsp;&nbsp;&nbsp;&nbsp;<span><a href="<?php echo U('Order/ticketStep3Do?id='.$_GET['id']) ?>"><img src="__ROOT__/images/order/next_bg2.png"/></a></span>
+	</div>
+</div>
+
+<script>
+
+</script>
+	
+<include file="Order:footer"/>

@@ -1,0 +1,50 @@
+<include file="Order:header"/>
+
+<style>
+	#order .navi {background:url('__ROOT__/images/order/navi_step2.png');}
+</style>
+	
+<div class="detail step2">
+	<form id="form" action="<?php echo U('Order/step2Do') ?>" method="post">
+	<div class="item">
+		<div class="title"><i class="icon-edit"></i>&nbsp;联系人信息</div>
+		<div class="content">
+			<ul>
+				<li><span><font>*</font>联系人：</span><input id="contact_name" name="contact_name" type="text" onblur="s2_check_contact_name()" value="<{$order.contact_name}>"/><strong id="t_contact_name"></strong></li>
+				<li><span><font>*</font>手机/电话：</span><input id="contact_phone" name="contact_phone" type="text" onblur="s2_check_contact_phone()" value="<{$order.contact_phone}>"/><strong id="t_contact_phone"></strong></li>
+				<li><span>备用电话：</span><input id="contact_phone2" name="contact_phone2" type="text" onblur="s2_check_contact_phone2()" value="<{$order.contact_phone2}>"/><strong id="t_contact_phone2"></strong></li>
+				<li><span><font>*</font>电子邮箱：</span><input id="contact_email" name="contact_email" type="text" onblur="s2_check_contact_email()" value="<{$order.contact_email}>"/><strong id="t_contact_email"></strong></li>
+			</ul>
+		</div>
+	</div>
+	
+	<div class="item">
+		<div class="title"><i class="icon-edit"></i>&nbsp;游客信息</div>
+		<div>为了保障您的合法权益，请准确、完整的填写游客证件信息，出游人信息不完整会延误你的正常出游；因填写信息不完整、不准确造成的保险拒赔等问题，我司不承担相应责任。</div>
+		<div class="content">
+			<ul>
+				<?php for($i = 1; $i <= $order['people_count']; $i++) { ?>
+				<li class="tt" style="margin-top:5px;">第<{$i}>位游客</li>
+				<li><span><font>*</font>中文姓名：</span><input id="tourist_name_<{$i}>" name="tourist_name[]" type="text" onblur="s2_check_tourist_name(<{$i}>)" value="<?php echo $otList[$i-1]['name']; ?>"/><strong id="t_tourist_name_<{$i}>"></strong></li>
+				<li><span>身份证：</span><input id="tourist_card_<{$i}>" name="tourist_card[]" type="text" onblur="s2_check_tourist_card(<{$i}>)" value="<?php echo $otList[$i-1]['card']; ?>"/><strong id="t_tourist_card_<{$i}>"></strong></li>
+				<li><span>手机：</span><input id="tourist_phone_<{$i}>" name="tourist_phone[]" type="text" onblur="s2_check_tourist_phone(<{$i}>)" value="<?php echo $otList[$i-1]['phone']; ?>"/><strong id="t_tourist_phone_<{$i}>"></strong></li>
+				<?php } ?>
+			</ul>
+		</div>
+	</div>
+	
+	<input name="id" value="<{$order.id}>" style="display:none">
+	<input name="count" value="<{$order.people_count}>" style="display:none">
+	
+	</form>
+	
+	<div class="next" style="text-align:center;">
+		<span><a href="<?php echo U('Order/step1?id='.$_GET['id']) ?>">返回上一步</a></span>&nbsp;&nbsp;&nbsp;&nbsp;<span><a href="javascript:void(0)" onclick="s2_submit_form()"><img src="__ROOT__/images/order/next_bg.png"/></a></span>
+	</div>
+</div>
+
+<script>
+	peopleCount = <{$order.people_count}>;
+</script>
+	
+<include file="Order:footer"/>

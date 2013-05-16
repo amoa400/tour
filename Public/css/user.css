@@ -1,0 +1,38 @@
+#user {}
+
+#user .left_area{margin-top:10px;margin-left:10px;float:left;width:150px;}
+
+#user .left_area .head {border:1px solid #e0e0e0;padding:5px;font-weight:bold;text-align:center;}
+#user .left_area .icon_home {width:14px;height:13px;background:url('../images/user/icon_home.png') no-repeat}
+#user .left_area ul {margin-top:10px;border-bottom:1px solid #e0e0e0;}
+#user .left_area li {float:none;border-left:1px solid #e0e0e0;border-right:1px solid #e0e0e0;text-align:center;padding:5px;}
+#user .left_area .title {border:1px solid #e0e0e0;font-weight:bold;background:#f6f6f6;}
+
+#user .right_area{float:left;margin-top:10px;margin-left:10px;width:820px;}
+
+#user .info {border:1px solid #e0e0e0;padding:15px;}
+#user .info .photo {text-align:center;width:120px;float:left;}
+#user .info .photo img {width:110px;height:110px;border:1px solid #e0e0e0;padding:1px;}
+#user .info .photo span {margin-top:5px;display:block;}
+#user .info .other {float:left;margin-left:20px;}
+#user .info .other .item {margin-top:13px;}
+
+#user .order {margin-top:10px;}
+#user .order .title {height:30px;width:104px;line-height:30px;color:#ffffff;font-size:14px;font-weight:bold;text-align:center;background:url('../images/user/home_item_bg.png');position:relative;}
+#user .order .title .count {position:absolute;top:1px;margin-left:116px;width:200px;text-align:left;font-size:12px;color:#999999;}
+#user .order table {width:100%;border-top:2px solid #fb9021;}
+#user .order tr {border:1px solid #e0e0e0;}
+#user .order td {padding:5px;padding-top:10px;padding-bottom:10px;text-align:center;}
+#user .order .price {font-weight:bold;color:#ff6600;}
+#user .order .time {color:#999999;}
+#user .order .pagination {float:right;}
+#user .order .pagination span {float:left;margin-top:8px;}
+
+#user .info2 {font-size:14px;}
+#user .info2 .title {height:30px;width:104px;line-height:30px;color:#ffffff;font-size:14px;font-weight:bold;text-align:center;background:url('../images/user/home_item_bg.png');position:relative;}
+#user .info2 .content {border:1px solid #e0e0e0;border-top:2px solid #fb9021;padding:15px;}
+#user .info2 li {float:none;margin-top:10px;}
+#user .info2 input {margin:0;}
+#user .info2 input[type="file"] {width:220px;}
+#user .info2 select {margin:0;}
+#user .info2 .tt {display:inline-block;width:80px;text-align:right;vertical-align:top;}

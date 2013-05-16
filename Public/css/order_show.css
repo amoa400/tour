@@ -1,0 +1,24 @@
+#order {}
+
+#order .left_area {padding:10px;width:710px;float:left;}
+
+#order .head {}
+#order .head .title {font-size:26px;font-family:Microsoft YaHei;}
+#order .head .content {margin-top:5px;}
+#order .head span {display:inline-block;margin-left:20px;}
+#order .head strong {font-size:18px;color:#ff6600;}
+
+#order .item {margin-top:20px;}
+#order .item .title {font-weight:bold;font-size:14px;}
+#order .item .content {margin-top:5px;}
+#order .item table {width:100%;text-align:center;border:1px solid #e0e0e0;}
+#order .item td {padding:8px;}
+#order .item .tt {background:#e9e9e9;font-weight:bold;}
+#order .item .price {color:#ff6600;font-weight:bold;}
+
+#order .right_area {float:left;padding:10px;margin-left:3px;}
+#order .right_area .item2 {border:1px solid #e0e0e0;width:215px;padding:15px;margin-top:20px;}
+#order .right_area .item2 .title {font-size:14px;font-weight:bold;}
+#order .right_area .item2 .content {margin-top:10px;} 
+#order .right_area .item2 li {float:none;margin-top:3px;}
+#order .right_area .item2 li .tt {color:#666666;}

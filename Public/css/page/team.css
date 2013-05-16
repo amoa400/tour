@@ -1,0 +1,11 @@
+#team {}
+
+#team .head {padding:20px;}
+#team .head a {margin:0;padding:0;border:none;width:150px;height:45px;background:url('../../images/page/team/submit.png');}
+#team .head a:hover {background:url('../../images/page/team/submit_hover.png');}
+
+#team .succeed {padding:20px;padding-top:10px;}
+#team .succeed .content {border:1px solid #cccccc;border-top:2px solid #339900;padding:20px;}
+#team .succeed .item {float:left;margin-left:20px;border:1px solid #cccccc;width:270px;padding:10px;margin-top:10px;}
+#team .succeed li {margin-top:5px;margin-left:10px;float:none;}
+#team .succeed li img {width:270px;height:190px;}

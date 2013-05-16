@@ -1,0 +1,255 @@
+<include file="Index:header"/>
+
+<link href="__ROOT__/css/order_show.css" rel="stylesheet" media="screen">
+
+<div id="order" class="main_container wallpaper2">
+
+	<div class="left_area">
+		<div class="head">
+			<div class="title">订单详情</div>
+			<div class="content">
+				<span style="margin:0;">订单编号：<{$order.id}></span>
+				<span>下单时间：<{$order.submit_time}></span>
+				<span>订单状态：<{$order.status_name}></span>
+			</div>
+			<div class="content">
+				订单金额：<strong><?php if ($order['price'] == 0) echo '待定'; else {  ?>¥<{$order.price}><?php } ?></strong>
+			</div>
+		</div>
+		
+		<!--产品信息-->
+		<div class="item">
+			<div class="title">产品信息</div>
+			<div class="content">
+				<?php if ($order['type'] == 4) { ?>
+				<table>
+					<tr class="tt">
+						<td width="15%">产品类型</td>
+						<td width="50%">产品名称</td>
+						<td width="15%">游玩日期</td>
+						<td width="10%">数量</td>
+						<td width="10%">小计</td>
+					</tr>
+					<?php foreach($order['ticketList'] as $item) { ?>
+					<tr>
+						<td><{$order.type_name}></td>
+						<td><a href="<?php echo U('Point/show?id='.$order['line_id']) ?>" target="_blank"><{$item.name}></a></td>
+						<td><{$order.departure_date}></td>
+						<td><{$item.count}>&nbsp;张</td>
+						<td class="price">¥<?php echo $item['count']*$item['unit_price'] ?></td>
+					</tr>
+					<?php } ?>
+				</table>
+				<?php } else { ?>
+				<table>
+					<tr class="tt">
+						<td width="15%">产品类型</td>
+						<td width="50%">产品名称</td>
+						<td width="15%">出发日期</td>
+						<td width="10%">出游人数</td>
+						<td width="10%">小计</td>
+					</tr>
+					<tr>
+						<td><{$order.type_name}></td>
+						<?php if (!empty($order['line_id'])) { ?>
+						<td><a href="<?php echo U('Line/show?id='.$order['line_id']) ?>" target="_blank"><{$order.line_name}></a></td>
+						<?php } else { ?>
+						<td><{$order.line_name}></td>
+						<?php } ?>
+						<td><{$order.departure_date}></td>
+						<td><{$order.people_count}>&nbsp;成人</td>
+						<?php if ($order['type'] == 1) { ?>
+						<td class="price">¥<?php echo $order['people_count']*$order['line_price'] ?></td>
+						<?php } else { ?>
+						<td class="price">
+							<?php if ($order['line_price'] == 0) echo '待定'; else {  ?>
+							¥<{$order.line_price}>
+							<?php } ?>
+						</td>
+						<?php } ?>
+					</tr>
+				</table>
+				<?php } ?>
+			</div>
+		</div>
+		
+		<!--附加项目-->
+		<div class="item">
+			<div class="title">附加项目</div>
+			<div class="content">
+				<table>
+					<tr class="tt">
+						<td width="60%">项目名称</td>
+						<td width="10%">单价</td>
+						<td width="10%">单位</td>
+						<td width="10%">份数</td>
+						<td width="10%">小计</td>
+					</tr>
+					
+					<?php $flag = false; ?>
+					
+					<!--保险-->
+					<?php foreach($order['insurance'] as $item) { 
+						
+						if($item['count'] == 0) continue; 
+						$flag = true; 
+					?>
+					<tr>
+						<td><{$item.name}></td>
+						<td>¥<{$item.price}></td>
+						<td>人</td>
+						<td><{$item.count}></td>
+						<td class="price">¥<?php echo $item['price']*$item['count'] ?></td>
+					</tr>
+					<?php } ?>
+					
+					<!--抵用券-->
+					<?php if ($order['privilege_di']) { 
+						$flag = true;
+					?>
+					<tr>
+						<td>抵用券</td>
+						<td>-&nbsp;¥<{$order.line.di_price}></td>
+						<td>份</td>
+						<td><{$order.people_count}></td>
+						<td class="price">-&nbsp;¥<?php echo $order['people_count']*$order['line']['di_price'] ?></td>
+					</tr>
+					<?php } ?>
+					
+					<!--优惠券-->
+					<?php if (!empty($order['coupon'])) { 
+						$flag = true;
+					?>
+					<tr>
+						<td>优惠券(<{$order.coupon.code}>)</td>
+						<td>-&nbsp;¥<{$order.coupon.price}></td>
+						<td>份</td>
+						<td><{$order.people_count}></td>
+						<td class="price">-&nbsp;¥<?php echo $order['people_count']*$order['coupon']['price'] ?></td>
+					</tr>
+					<?php } ?>
+					
+					<!--无附加项目-->
+					<?php if (!$flag) { ?>
+					<tr>
+						<td colspan="5">暂无附加项目</td>
+					</tr>
+					<?php } ?>
+				</table>
+			</div>
+		</div>
+		
+		<!--上车地点-->
+		<?php if (!empty($order['bus'])) { ?>
+		<div class="item">
+			<div class="title">上车地点</div>
+			<div class="content"><{$order.bus.departure_time}>&nbsp;&nbsp;<{$order.bus.departure_location}>&nbsp;（<{$order.bus.remark}>）<br>
+			返程地点：<{$order.bus.return_location}><br>
+			<?php if ($order['surrounding_departrue'] == 1) { ?>
+				特色服务：学校周边上车（当您所在学校及周边学校报名人数足够时，您可以选择在您的学校附近地区上车）
+			<?php } ?>
+			</div>
+		</div>
+		<?php } ?>
+		
+		<!--游客信息-->
+		<?php if ($order['type'] == 1) { ?>
+		<div class="item">
+			<div class="title">游客信息</div>
+			<div class="content">
+				<table style="width:60%">
+					<tr class="tt">
+						<td width="30%">姓名</td>
+						<td width="40%">身份证</td>
+						<td width="30%">手机</td>
+					</tr>
+					<?php $flag = false; ?>
+					<?php foreach($order['tourist'] as $item) { 
+						$flag = true;
+					?>
+					<tr>
+						<td><{$item.name}></td>
+						<td><?php if (empty($item['card'])) echo '----'; else { ?><{$item.card}><?php } ?></td>
+						<td><?php if (empty($item['phone'])) echo '----'; else { ?><{$item.phone}><?php } ?></td>
+					</tr>
+					<?php } ?>
+					
+					<!--无游客-->
+					<?php if (!$flag) { ?>
+					<tr>
+						<td colspan="5">暂无游客</td>
+					</tr>
+					<?php } ?>
+				</table>
+			</div>
+		</div>
+		<?php } ?>
+	
+		<?php if (!empty($order['tourist']) && $order['type'] == 4) { ?>
+		<div class="item">
+			<div class="title">游客信息</div>
+			<div class="content">
+				<table style="width:90%">
+					<tr class="tt">
+						<td width="20%">姓名</td>
+						<td width="22%">身份证</td>
+						<td width="18%">手机</td>
+						<td width="30%">门票</td>
+					</tr>
+					<?php $flag = false; ?>
+					<?php foreach($order['tourist'] as $item) { 
+						$flag = true;
+					?>
+					<tr>
+						<td><{$item.name}></td>
+						<td><?php if (empty($item['card'])) echo '----'; else { ?><{$item.card}><?php } ?></td>
+						<td><?php if (empty($item['phone'])) echo '----'; else { ?><{$item.phone}><?php } ?></td>
+						<td><{$item.ticket_name}></td>
+					</tr>
+					<?php } ?>
+					
+					<!--无游客-->
+					<?php if (!$flag) { ?>
+					<tr>
+						<td colspan="5">暂无游客</td>
+					</tr>
+					<?php } ?>
+				</table>
+			</div>
+		</div>
+		<?php } ?>
+		
+	</div>
+	
+	<div class="right_area">
+		<div class="item2">
+			<div class="title">联系人信息</div>
+			<div class="content">
+				<ul>
+					<li><span class="tt">姓名：</span><{$order.contact_name}></li>
+					<li><span class="tt">电话：</span><{$order.contact_phone}></li>
+					<?php if (!empty($order['contact_phone2'])) { ?>
+					<li><span class="tt">电话：</span><{$order.contact_phone2}></li>
+					<?php } ?>
+					<li><span class="tt">邮箱：</span><{$order.contact_email}></li>
+				</ul>
+			</div>
+		</div>
+		
+		<div class="item2">
+			<div class="title">注意事项</div>
+			<div class="content">
+				<ul>
+					<li><span class="tt">1、</span>请确保联系人和出游人的电话处于正常状态，没有关机、停机等，以便于我们联系您。</li>
+					<li><span class="tt">2、</span>旅游途中有任何问题，可以联系我们的客服，我们将竭诚为您服务。</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	<div class="clear"></div>
+	
+</div>
+
+
+<include file="Index:footer"/>

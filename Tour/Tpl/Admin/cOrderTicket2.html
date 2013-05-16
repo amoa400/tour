@@ -1,0 +1,71 @@
+<include file="Admin:header"/>
+
+<link href="__ROOT__/css/admin/line.css" rel="stylesheet" media="screen">
+
+<div id="line">
+	<ul>
+		<form method="post" action="<?php echo U('Admin/cOrder2Do') ?>" enctype="multipart/form-data">
+		<input name="id" value="<{$order.id}>" style="display:none;">
+		
+		<li><span class="title" style="font-weight:bold;">门票信息</span></li>
+		<?php foreach($ticketList as $item) { ?>
+		<li>
+			<span class="title">名称：</span>
+			<input type="text" value="<{$item.name}>">
+			<input name="ticket_id[]" type="text" value="<{$item.ticket_id}>" style="display:none"> 
+		</li>
+		<li>
+			<span class="title">数量：</span>
+			<input name="count[]" type="text" value="<{$item.count}>">
+		</li>
+		<li>
+			<span class="title">单价：</span>
+			<input name="unit_price[]" type="text" value="<{$item.unit_price}>">
+		</li>
+		<?php } ?>
+		
+		<li>&nbsp;</li>
+		
+		<li><span class="title" style="font-weight:bold;">保险信息</span></li>
+		<?php foreach($insuranceList as $item) { ?>
+		<li>
+			<span class="title">保险：</span>
+			<{$item.name}>
+		</li>
+		<li>
+			<span class="title"></span>
+			<input type="text" name="insurance[]" value="<{$item.count}>">
+		</li>
+		<?php } ?>
+		
+		<?php if (!empty($touristList)) { ?>
+		<li><span class="title" style="font-weight:bold;">游客信息</span></li>
+		<?php foreach ($touristList as $item) { ?>
+		<li>
+			<span class="title">游客姓名：</span>
+			<input name="t_name[]" type="text" value="<?php echo $item['name'] ?>">
+		</li>
+		<li>
+			<span class="title">游客联系方式：</span>
+			<input name="t_phone[]" type="text" value="<?php echo $item['phone'] ?>">
+		</li>
+		<li>
+			<span class="title">游客证件号：</span>
+			<input name="t_card[]" type="text" value="<?php echo $item['card'] ?>">
+		</li>
+		<li>
+			<span class="title">游客门票编号：</span>
+			<input name="t_ticket_id[]" type="text" value="<?php echo $item['ticket_id'] ?>">
+		</li>
+		<li>&nbsp;</li>
+		<?php } ?>
+		<?php } ?>
+
+		<li><span class="title">&nbsp;</span><input type="submit" class="btn btn-inverse" value="下一步"></li>
+		</form>
+		
+	<div class="clear"></div>
+	
+</div>
+
+<include file="Admin:footer"/>

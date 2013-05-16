@@ -1,0 +1,139 @@
+<include file="Admin:header"/>
+
+<link href="__ROOT__/css/admin/line.css" rel="stylesheet" media="screen">
+
+<div id="line">
+	<ul>
+		<form method="post" action="<?php echo U('Admin/cLineDo') ?>" enctype="multipart/form-data">
+		<input name="id" value="<{$line.id}>" style="display:none;">
+		<li><span class="title" style="font-weight:bold;">线路基本信息</span></li>
+		<li><span class="title">名称：</span> <input name="name" type="text" value="<{$line.name}>"></li>
+		<li><span class="title">类型：</span>
+			<select name="type_id">
+				<option value="1" <?php if ($line['type_id'] == 1) echo 'selected="selected"'; ?>>跟团游</option>
+				<option value="2" <?php if ($line['type_id'] == 2) echo 'selected="selected"'; ?>>团队游</option>
+				<option value="3" <?php if ($line['type_id'] == 3) echo 'selected="selected"'; ?>>自助游</option>
+			</select>
+		</li>
+		<li><span class="title">涉及的景点：</span>
+			<select name="point_id[]" multiple="multiple">
+				<?php foreach($pointList as $item) { ?>
+				<option value="<{$item.id}>" <?php if (strstr($line['point_id'], ','.$item['id'].',')) echo 'selected="selected"'; ?>><{$item.name}></option>
+				<?php } ?>
+			</select>
+			&nbsp;&nbsp;&nbsp;&nbsp;<a href="<?php echo U('Admin/cPoint') ?>" target="_blank">添加新景点</a>
+		</li>
+		<li>
+			<span class="title">线路类型：</span>
+			<?php foreach($pointTypeList as $item) { ?>
+			<input name="point_type_id[]" type="checkbox" value="<{$item.id}>" <?php if (strstr($line['point_type_id'], $item['id'])) echo 'checked="checked"'; ?>> <{$item.name}>游
+			<?php } ?>
+		</li>
+		<li><span class="title">特点：</span> <input name="character" type="text" value="<{$line.character}>"></li>
+		<li><span class="title">散客价：</span> <input name="price" type="text" value="<{$line.price}>">&nbsp;&nbsp;&nbsp;&nbsp;团队游请填32-41人价</li>
+		<li><span class="title">原价：</span> <input name="price_origin" type="text" value="<{$line.price_origin}>">&nbsp;&nbsp;&nbsp;&nbsp;团队游请填1人出游价格</li>
+		<li><span class="title">12-21人价：</span> <input name="price_group_1" type="text" value="<{$line.price_group_1}>"></li>
+		<li><span class="title">22-31人价：</span> <input name="price_group_2" type="text" value="<{$line.price_group_2}>"></li>
+		<li><span class="title">32-41人价：</span> <input name="price_group_3" type="text" value="<{$line.price_group_3}>"></li>
+		<li><span class="title">一级代理价：</span> <input name="fenxiao_price1" type="text" value="<{$line.fenxiao_price1}>"></li>
+		<li><span class="title">二级代理价：</span> <input name="fenxiao_price2" type="text" value="<{$line.fenxiao_price2}>"></li>
+		<li><span class="title">三级代理价：</span> <input name="fenxiao_price3" type="text" value="<{$line.fenxiao_price3}>"></li>
+		<li><span class="title">优惠券金额：</span> <input name="fenxiao_youhui" type="text" value="<{$line.fenxiao_youhui}>"></li>
+		<li><span class="title">出发城市：</span>
+			<select name="from_province_id"><option value="1">上海</option></select>&nbsp;&nbsp;&nbsp;&nbsp;
+			<select name="from_city_id"><option value="1">上海</option></select>
+		</li>
+		<li><span class="title">到达城市：</span>
+			<!--
+			<select name="to_province_id" id="province" onchange="changeProvince()">
+				<?php foreach($provinceList as $item) { ?>
+				<option value="<{$item.id}>"><{$item.name}></option>
+				<?php } ?>
+			</select>&nbsp;&nbsp;&nbsp;&nbsp;
+			<select name="to_city_id" id="city">
+				
+			</select>
+			-->
+			<select name="to_city_id[]" multiple="multiple">
+				<?php
+					foreach($provinceList as $province) {
+						foreach($province['cityList'] as $city) {
+				?>
+					<option value="<{$province.id}>,<{$city.id}>;" <?php if (strstr($line['to_city_id'], ';'.$province['id'].','.$city['id'].';')) echo 'selected="selected"'; ?>><{$province.name}>-<{$city.name}></option>
+				<?php }} ?>
+			</select>
+		</li>
+		<li><span class="title">行程天数：</span> <input name="duration" type="text" value="<{$line.duration}>"></li>
+		<li><span class="title">提前预定天数：</span> <input name="day_ahead" type="text" <?php if (empty($line['day_ahead'])) { ?>value="2"<?php } else { ?>value="<{$line.day_ahead}>"<?php } ?>></li>
+		<li><span class="title">可抵用金额：</span> <input name="di_price" type="text" <?php if (empty($line['di_price'])) { ?>value="5"<?php } else { ?>value="<{$line.di_price}>"<?php } ?>></li>
+
+		<li><span class="title">简介：</span> <span class="text"><textarea id="introduction" name="introduction" type="text"><{$line.introduction}></textarea></span></li>
+		<li><span class="title">费用包含：</span> <textarea name="price_include" type="text"><?php if (empty($line['price_include'])) { ?>1、车费
+2、导游
+3、责任险
+4、大门票<?php } else { ?><{$line.price_include}><?php } ?></textarea></li>
+		<li><span class="title">费用不包含：</span> <textarea name="price_not_include" type="text"><?php if (empty($line['price_not_include'])) { ?>1、餐费<?php } else { ?><{$line.price_not_include}><?php } ?></textarea></li>
+		<li><span class="title">友情提示：</span> <textarea name="precaution" type="text"><?php if (empty($line['precaution'])) { ?>☆ 接受线路调整，路线定制，所有需求可在预订时写明或与客服沟通；
+☆ 此线路价格为打包特惠价，所有证件无效均不退款；
+☆ 如遇国家政策性调价，人力不可抗拒因素或游客自身因素，造成的损失和增加的费用由游客自理；
+☆ 请游客在旅途中注意人身及财物安全；<?php } else { ?><{$line.precaution}><?php } ?></textarea></li>
+		<li><span class="title">购物信息：</span> <textarea name="shopping" type="text"><{$line.shopping}></textarea></li>
+		<li><span class="title">可选保险：</span> 
+			<select name="insurance_id[]" multiple="multiple">
+				<option value="1" <?php if (strstr($line['insurance_id'], '1')) echo 'selected="selected"'; ?>>旅游人身意外保险</option>
+			</select>
+			&nbsp;&nbsp;&nbsp;&nbsp;团队游可忽略
+		</li>
+		<li><span class="title">照片：</span> <input name="photo" type="file"/></li>
+		<li><span class="title">&nbsp;</span><input type="submit" class="btn btn-inverse" value="下一步"></li>
+		</form>
+		
+	<div class="clear"></div>
+	
+</div>
+
+<!--
+☆为了您的安全，建议游客购买旅游人身意外保险,费用为10元/人；
+☆此线路价格为打包特惠价，所有证件无效均不退款；
+☆此线路为散客拼团，先来先坐，请游客准时上车否则过时不候，产生的座位费不退，请保持通讯畅通，以便导游出团前通知有关事宜；
+☆如遇国家政策性调价，人力不可抗拒因素或游客自身因素，造成的损失和增加的费用由游客自理；
+☆请游客在旅途中注意人身及财物安全（请特别注意儿童的安全）；
+☆在不变动景点与住宿条件的情况下，我公司可根据实际情况对行程作适当调整
+☆车型根据最终报名人数决定，保证每人一正座。
+-->
+
+<script charset="utf-8" src="__ROOT__/editor/kindeditor.js"></script>
+<script charset="utf-8" src="__ROOT__/editor/lang/zh_CN.js"></script>
+<script>
+        KindEditor.ready(function(K) {
+            window.editor = K.create('#introduction', {
+				minWidth : '400px',
+			});
+        });
+</script>
+
+<script>
+var province = Array();
+<?php for($i = 0; $i < count($provinceList); $i++) { ?>
+province[<{$i}>] = Array();
+province[<{$i}>]['tot'] = <?php echo count($provinceList[$i]['cityList']) ?>;
+province[<{$i}>]['city'] = Array(); 
+<?php for($j = 0; $j < count($provinceList[$i]['cityList']); $j++) { ?>
+	province[<{$i}>]['city'][<{$j}>] = Array();
+	province[<{$i}>]['city'][<{$j}>]['id'] = '<{$provinceList.$i.cityList.$j.id}>';
+	province[<{$i}>]['city'][<{$j}>]['name'] = '<{$provinceList.$i.cityList.$j.name}>';
+<?php } ?>
+<?php } ?>
+changeProvince(1);
+
+function changeProvince() {
+	var id = $('#province').find("option:selected").val();
+	var city = $('#city');
+	city.html('');
+	for (var i = 0; i < province[id-1]['tot']; i++)
+		city.append('<option value="'+(i+1)+'">'+province[id-1]['city'][i]['name']+'</option>');
+}
+
+</script>
+
+<include file="Admin:footer"/>

@@ -1,0 +1,65 @@
+<include file="Fenxiao:left_area"/>
+	
+	<!--右方区域-->
+	<div class="right_area">
+		<!--会员信息-->
+		<div class="info">
+			<div class="photo">
+				<img src="__ROOT__/images/user/photo.jpg"/>
+				<span><a href="<?php echo U('User/info') ?>">编辑个人资料</a></span>
+			</div>
+			<div class="other">
+				<div class="item">
+					<span style="font-size:14px"><{$agent.name}></span>，<span style="color:#999999">欢迎您！</span>
+				</div>
+				<div class="item">优惠代码：<strong><{$agent.code}></strong>&nbsp;&nbsp;（请在卖出产品时让用户填写此优惠码，用以记录您的业绩）</div>
+				<div class="item">收益余额：¥<{$agent.earned_money}></div>
+				<div class="item">历史收益：¥<{$agent.history_money}></div>
+			</div>
+			<div class="clear"></div>
+		</div>
+		
+	
+		<!--近期收益-->
+		<div class="order">
+			<div class="title">近期收益</div>
+			<table>
+				<tr style="background:#e9e9e9;font-weight:bold;">
+					<td width="15%">状态</td>
+					<td width="15%">类型</td>
+					<td width="10%">金额</td>
+					<td width="20%">代理姓名</td>
+					<td width="20%">订单编号</td>
+					<td width="30%">时间</td>
+				</tr>
+				<?php if (empty($incomeList)) { ?>
+				<tr>
+					<td colspan="6">暂无收益，赶紧去赚钱吧！</td>
+				</tr>
+				<?php } else { ?>
+				<?php foreach($incomeList AS $item) { ?>
+				<tr>
+					<td><{$item.status}></td>
+					<td><{$item.type}></td>
+					<td><span class="price">¥<{$item.income}></span></td>
+					<td><{$item.author.name}></td>
+					<td><{$item.order_id}></td>
+					<td><{$item.time}></td>
+				</tr>
+				<?php } ?>
+				<?php } ?>
+			</table>
+			<br>
+		</div>
+		
+		<div class="clear"></div>
+	</div>
+	
+	<div class="clear"></div>
+	
+</div>
+
+<script type="text/javascript" src="__ROOT__/js/user.js" charset="utf-8"></script>
+
+
+<include file="Index:footer"/>

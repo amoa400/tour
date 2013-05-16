@@ -1,0 +1,69 @@
+#ticket {padding-top:10px;}
+
+#ticket .ad {height:273px;position:relative;}
+#ticket .img {width:1000px;height:273px;position:absolute;top:0;left:0;}
+
+#ticket .so {position:absolute;top:10px;left:10px;width:270px;height:255px;}
+#ticket .so .border {position:absolute;top:0;left:0;width:260px;height:245px;border:5px solid #ffffff;filter:alpha(Opacity=50);-moz-opacity:0.5;opacity:0.5;}
+#ticket .so .content {position:relative;margin-top:5px;margin-left:5px;width:258px;height:243px;padding:1px;background:#ffffff;z-index:999;}
+#ticket .so .title {background:url('../images/ticket/title_bg.png');height:27px;border:1px solid #e0e0e0;font-size:14px;font-weight:bold;color:#339900;line-height:27px;padding-left:15px;}
+#ticket .so .icon_title {height:15px;width:19px;background:url('../images/ticket/icon_title.png') no-repeat;}
+#ticket .so .so2 {margin-left:15px;margin-top:20px;}
+#ticket .so .so2 span {display:inline-block;height:25px;font-weight:bold;width:65px;}
+#ticket .so .so2 input[type="text"] {width:150px;margin:0;padding:3px;padding-left:5px;height:22px;font-size:12px;display:inline-block;}
+#ticket .so .so2 input[type="submit"] {width:90px;height:32px;border:none;display:inline-block;background:url('../images/ticket/search.png');margin-top:10px;}
+#ticket .so .so2 input[type="submit"]:hover {background:url('../images/ticket/search_hover.png');}
+#ticket .so .rec {margin-left:15px;margin-top:20px;}
+#ticket .so .rec span {font-weight:bold;display:block;}
+#ticket .so .rec div {margin-top:5px;line-height:22px;}
+
+#ticket .navi {position:absolute;top:0;right:0;width:160px;height:273px;z-index:99;}
+#ticket .navi .item {position:relative;height:53px;cursor:pointer;margin-top:2px;}
+#ticket .navi .title {position:relative;z-index:1;text-align:center;font-size:14px;font-weight:bold;padding-top:6px;}
+#ticket .navi .desc {position:relative;z-index:1;text-align:center;margin-top:1px;}
+#ticket .navi .bg {position:absolute;top:0;left:0;width:160px;height:53px;background:#ffffff;filter:alpha(Opacity=80);-moz-opacity:0.8;opacity:0.8;z-index:0;}
+#ticket .navi .title_focus {color:#ffffff;}
+#ticket .navi .desc_focus {color:#ffffff;}
+#ticket .navi .bg_focus {background:#339900;filter:alpha(Opacity=100);-moz-opacity:1;opacity:1;}
+
+#ticket .left_panel {float:left;width:230px;}
+
+#ticket .left_panel .panel {margin-top:10px;background:#ffffff;border:1px solid #69c520;}
+#ticket .left_panel .panel .title {border-bottom:1px solid #69c520;padding:5px;padding-left:10px;font-size:14px;font-weight:bold;background:#f1fde6;}
+#ticket .left_panel .panel .content {padding:5px;padding-top:0;}
+#ticket .left_panel .panel li {width:65px;margin-left:5px;margin-top:5px;}
+
+#ticket .hot {padding-bottom:5px;}
+#ticket .hot .item {margin-top:10px;}
+#ticket .hot .item .rank {display:inline-block;font-size:18px;color:#999999;font-weight:bold;width:22px;text-align:right;vertical-align:top;}
+#ticket .hot .item .name {display:inline-block;margin-left:10px;width:110px;vertical-align:top;padding-top:4px;overflow:hidden;}
+#ticket .hot .item .price {display:inline-block;margin-left:10px;font-size:14px;color:#f60;font-weight:bold;width:50px;vertical-align:top;}
+
+#ticket .right_panel {float:left;margin-left:10px;width:760px;}
+
+#ticket  .right_panel a {color:#0066cc;}
+#ticket .right_panel a:hover {color:#f60;}
+
+#ticket .right_panel .panel {margin-top:10px;background:#ffffff;}
+#ticket .right_panel .panel .title {border-bottom:2px solid #69c520;padding:5px;padding-left:0px;font-size:14px;font-weight:bold;}
+#ticket .right_panel .panel .content {border:1px solid #dddddd;padding:10px;}
+
+#ticket .rec .item {width:365px;float:left;margin-left:8px;margin-top:15px;}
+#ticket .rec .item .pic {float:left;width:120px;}
+#ticket .rec .item .pic img {width:120px;height:60px;}
+#ticket .rec .item .ct {float:left;margin-left:10px;width:235px;position:relative;}
+#ticket .rec .item .ct span {display:block;margin-top:4px;}
+#ticket .rec .item .ct a {white-space:nowrap;display:block;width:228px;overflow:hidden;}
+#ticket .rec .item .ct .desc {color:#888888;white-space:nowrap;width:228px;overflow:hidden;}
+#ticket .rec .item .ct .price {position:absolute;right:6px;bottom:0;font-size:14px;color:#f60;font-weight:bold;}
+#ticket .rec .item .ct .price2 {color:#f60;}
+#ticket .rec .more {margin-top:15px;text-align:right;}
+
+#ticket .ad2 {margin-top:10px;}
+#ticket .ad2 img {width:760px;}
+
+#ticket .rec2 .item {width:240px;float:left;margin-left:9px;margin-top:10px;}
+#ticket .rec2 .item  .tt {font-weight:bold;border-bottom:1px solid #999999;padding-bottom:5px;}
+#ticket .rec2 .item  .it {margin-top:5px;border-bottom:1px solid #dddddd;padding-bottom:5px;}
+#ticket .rec2 .item  .name {width:180px;display:inline-block;white-space:nowrap;overflow:hidden;}
+#ticket .rec2 .item  .price {width:60px;text-align:right;display:inline-block;font-size:14px;color:#f60;font-weight:bold;white-space:nowrap;overflow:hidden;}

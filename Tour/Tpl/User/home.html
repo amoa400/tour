@@ -1,0 +1,91 @@
+<include file="User:left_area"/>
+	
+	<!--右方区域-->
+	<div class="right_area">
+		<!--会员信息-->
+		<div class="info">
+			<div class="photo">
+				<img src="__ROOT__/images/user/photo.jpg"/>
+				<span><a href="<?php echo U('User/info') ?>">编辑个人资料</a></span>
+			</div>
+			<div class="other">
+				<div class="item">
+					<span style="font-size:14px"><?php echo $_SESSION['name'] ?></span>，<span style="color:#999999">欢迎您！</span>&nbsp;&nbsp;&nbsp;&nbsp;<i class="icon icon_user"></i>
+				</div>
+				<div class="item">所在学校：<?php if ($user['school_id'] == 0) { ?>其他<?php } else { ?><{$user.school}><?php } ?></div>
+				<div class="item">抵用券余额：¥<{$user.gold}></div>
+				<div class="item">会员积分：<{$user.point}></div>
+			</div>
+			<div class="clear"></div>
+		</div>
+		
+		<!--近期订单-->
+		<div class="order">
+			<div class="title">近期订单</div>
+			<table>
+				<tr style="background:#e9e9e9;font-weight:bold;">
+					<td width="10%">订单编号</td>
+					<td width="40%">产品信息</td>
+					<td width="10%">订单金额</td>
+					<td width="10%">订单状态</td>
+					<td width="10%">下单时间</td>
+					<td width="20%">操作</td>
+				</tr>
+				<?php if (empty($orderList)) { ?>
+				<tr>
+					<td colspan="6">暂无订单，赶紧去预定吧！</td>
+				</tr>
+				<?php } else { ?>
+				<?php foreach($orderList AS $order) { ?>
+				<tr>
+					<td><a href="<?php echo U('Order/show?id='.$order['id']) ?>" target="_blank"><{$order.id}></a></td>
+					<?php if (!empty($order['line_id'])) { ?>
+					<?php if ($order['type'] == 4) { ?>
+					<td><a href="<?php echo U('Point/show?id='.$order['line_id']); ?>" target="_blank"><{$order.line_name}>&nbsp;×&nbsp;<{$order.people_count}>人</a></td>
+					<?php } else { ?>
+					<td><a href="<?php echo U('Line/show?id='.$order['line_id']); ?>" target="_blank"><{$order.line_name}>&nbsp;×&nbsp;<{$order.people_count}>人</a></td>
+					<?php } ?>
+					<?php } else { ?>
+					<td><a href="javascript:void(0)"><{$order.line_name}>&nbsp;×&nbsp;<{$order.people_count}>人</a></td>
+					<?php } ?>
+					<?php if ($order['price'] != 0) { ?>
+					<td class="price">¥<{$order.price}></td>
+					<?php } else { ?>
+					<td class="price">待定</td>
+					<?php } ?>
+					<td><{$order.status_name}></td>
+					<td class="time"><{$order.submit_time}></td>
+					<td>
+						<?php if ($order['status'] == 3) { ?>
+							<a href="<?php echo U('Order/pay?id='.$order['id']) ?>" target="_blank"><strong>立即付款</strong></a><br>
+						<?php } ?>
+						<?php if ($order['status'] == 1) { ?>
+							<?php if ($order['type'] == 1) { ?>
+							<a href="<?php echo U('Order/step1?id='.$order['id']) ?>" target="_blank">修改订单</a><br>
+							<?php } else { ?>
+							<a href="<?php echo U('Order/teamStep1?id='.$order['id']) ?>" target="_blank">修改订单</a><br>
+							<?php } ?>
+						<?php } ?>
+						<a href="<?php echo U('Order/show?id='.$order['id']); ?>" target="_blank">查看详情</a><br>
+						<?php if ($order['status'] == 2 || $order['status'] == 3) { ?>
+							<a href="javascript:void(0)" onclick="confirmDel('<?php echo U('Order/remove?id='.$order['id']) ?>', '<{$order.id}>', '<{$order.line_name}>')">取消订单</a><br>
+						<?php } ?>
+					</td>
+				</tr>
+				<?php } ?>
+				<?php } ?>
+			</table>
+			<br>
+		</div>
+		
+		<div class="clear"></div>
+	</div>
+	
+	<div class="clear"></div>
+	
+</div>
+
+<script type="text/javascript" src="__ROOT__/js/user.js" charset="utf-8"></script>
+
+
+<include file="Index:footer"/>

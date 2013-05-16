@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>会员登录____NAME____大学生专属旅游网站</title>
+	<link href="__ROOT__/css/bootstrap.css" rel="stylesheet" type="text/css">
+	<link href="__ROOT__/css/bootstrap-responsive.css" rel="stylesheet" type="text/css">
+	<link href="__ROOT__/css/global.css" rel="stylesheet" type="text/css">
+	<link href="__ROOT__/css/login.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+	<div id="login">
+		<div class="head"><a href="<?php echo U('Index/index'); ?>"><img src="__ROOT__/images/logo.png"></a></div>
+		<div class="bg"></div>
+		<div class="content">
+			<div class="form">
+				<div class="title">会员登录</div>
+				<ul>
+					<form action="<?php echo U('User/loginDo') ?>" method="post">
+					<li><span>电子邮箱</span><input name="email" type="text"></li>
+					<li><span>密码</span><input name="password" type="password" placeholder=""></li>
+					<li><span></span><input type="submit" class="submit" value=""></li>
+					<li><span></span><input name="keep" type="checkbox" checked="checked">&nbsp;保存登录信息两周内免登录</li><li><span></span><a href="#">找回密码</a>&nbsp;|&nbsp;<a href="<?php echo U('User/register') ?>">免费注册</a></li>
+					</form>
+				</ul>
+				<div class="clear"></div>
+				<div class="api_login">
+					<!--
+					<span>使用合作网站帐号登录</span>
+					<div class="login_btn"><i class="icon-renren"></i>&nbsp;人人网&nbsp;&nbsp;|&nbsp;&nbsp;<i class="icon-weibo"></i>&nbsp;新浪微博&nbsp;&nbsp;|&nbsp;&nbsp;<i class="icon-weixin"></i>&nbsp;微信&nbsp;&nbsp;</div>
+					-->
+				</div>
+			</div>
+		</div>
+		<div class="foot">
+			<div style="margin-top:5px;">Copyright&nbsp;2013&nbsp;&nbsp;&nbsp;&nbsp;__NAME__&nbsp;&nbsp;&nbsp;&nbsp;tx758.com&nbsp;&nbsp;&nbsp;&nbsp;沪ICP备12038216号</div>
+		</div>
+	</div>
+
+</body>
+
+
+</html>
+

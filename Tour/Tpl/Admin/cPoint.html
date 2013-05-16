@@ -1,0 +1,106 @@
+<include file="Admin:header"/>
+
+<link href="__ROOT__/css/admin/line.css" rel="stylesheet" media="screen">	
+
+<div id="line">
+	<ul>
+		<form method="post" action="<?php echo U('Admin/cPointDo') ?>" enctype="multipart/form-data">
+		<input name="id" value="<{$point.id}>" style="display:none;">
+		<li><span class="title" style="font-weight:bold;">景点基本信息</span></li>
+		<li><span class="title">名称：</span> <input name="name" type="text" value="<{$point.name}>"></li>
+		<li><span class="title">缩写：</span> <input name="name_abb" type="text" value="<{$point.name_abb}>"></li>
+		<li><span class="title">所在城市：</span>
+			<select name="province_id" id="province" onchange="changeProvince()">
+				<?php foreach($provinceList as $item) { ?>
+				<option value="<{$item.id}>" <?php if ($point['province_id'] == $item['id']) { ?>selected="selected"<?php } ?>><{$item.name}></option>
+				<?php } ?>
+			</select>&nbsp;&nbsp;&nbsp;&nbsp;
+			<select name="city_id" id="city">
+				
+			</select>
+		</li>
+		<li>
+			<span class="title">简介：</span>
+			<span class="text"><textarea class="desc" name="desc"><{$point.desc}></textarea></span>
+		</li>
+		<li>
+			<span class="title">详细描述：</span>
+			<span class="text"><textarea class="desc" name="desc2"><{$point.desc2}></textarea></span>
+		</li>
+		<li>
+			<span class="title">主题：</span>
+			<select name="subject[]" multiple="multiple">
+				<?php foreach($pointSubjectList as $item) { ?>
+				<option value="<{$item.id}>" <?php if ($item['selected'] == 1) { ?>selected="selected"<?php } ?>><{$item.name}></option>
+				<?php } ?>
+			</select>
+		</li>
+		<li>
+			<span class="title">地址：</span>
+			<input name="address" type="text" value="<{$point.address}>">
+		</li>
+		<li>
+			<span class="title">电话：</span>
+			<input name="phone" type="text" value="<{$point.phone}>">
+		</li>
+		<li>
+			<span class="title">营业时间：</span>
+			<input name="time" type="text" value="<{$point.time}>">
+		</li>
+		<li>
+			<span class="title">门票最低价格：</span>
+			<input name="price" type="text" value="<{$point.price}>">
+			&nbsp;&nbsp;暂无门票请填0
+		</li>
+		<li><span class="title">图片1：</span> <input name="photo[]" type="file"></li>
+		<li><span class="title">图片1简介：</span> <input name="photo_desc[]" type="text"></li>
+		<li><span class="title">图片2：</span> <input name="photo[]" type="file"></li>
+		<li><span class="title">图片2简介：</span> <input name="photo_desc[]" type="text"></li>
+		<li><span class="title">&nbsp;</span><input type="submit" class="btn btn-inverse" value="创建此景点"></li>
+		</form>
+		
+	<div class="clear"></div>
+	
+</div>
+
+<script charset="utf-8" src="__ROOT__/editor/kindeditor.js"></script>
+<script charset="utf-8" src="__ROOT__/editor/lang/zh_CN.js"></script>
+<script>
+        KindEditor.ready(function(K) {
+            window.editor = K.create('.desc', {
+				minWidth : '400px',
+			});
+        });
+</script>
+
+<script>
+var province = Array();
+<?php for($i = 0; $i < count($provinceList); $i++) { ?>
+province[<{$i}>] = Array();
+province[<{$i}>]['tot'] = <?php echo count($provinceList[$i]['cityList']) ?>;
+province[<{$i}>]['city'] = Array(); 
+<?php for($j = 0; $j < count($provinceList[$i]['cityList']); $j++) { ?>
+	province[<{$i}>]['city'][<{$j}>] = Array();
+	province[<{$i}>]['city'][<{$j}>]['id'] = '<{$provinceList.$i.cityList.$j.id}>';
+	province[<{$i}>]['city'][<{$j}>]['name'] = '<{$provinceList.$i.cityList.$j.name}>';
+<?php } ?>
+<?php } ?>
+changeProvince(1);
+
+function changeProvince() {
+	var id = $('#province').find("option:selected").val();
+	var city = $('#city');
+	city.html('');
+	for (var i = 0; i < province[id-1]['tot']; i++)
+		city.append('<option value="'+(province[id-1]['city'][i]['id'])+'">'+province[id-1]['city'][i]['name']+'</option>');
+}
+
+function selectCity(city_id) {
+	changeProvince();
+	$("#city").val(city_id);
+}
+selectCity(<{$point.city_id}>);
+
+</script>
+
+<include file="Admin:footer"/>

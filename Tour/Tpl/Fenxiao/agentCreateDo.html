@@ -1,0 +1,33 @@
+<include file="Fenxiao:left_area"/>
+	
+	<!--右方区域-->
+	<div class="right_area">
+		
+		<!--个人信息-->
+		<div class="info2" style="margin:0;">
+			<div class="title">新增代理</div>
+			<div class="content">
+				<ul>
+					<input name="id" value="<{$user.id}>" style="display:none;">
+					<li><strong>还差一步就完成了！</strong></li>
+					<li>请将下列地址发送给您新增的代理，让其登陆并验证：</li>
+					<li>__ROOT__<{$url}></li>
+					<?php foreach($codeList as $item) { ?>
+					<li><{$item}></li>
+					<?php } ?>
+				</ul>
+				</form>
+			</div>
+		</div>
+		
+		<div class="clear"></div>
+	</div>
+	
+	<div class="clear"></div>
+	
+</div>
+
+<script type="text/javascript" src="__ROOT__/js/user.js" charset="utf-8"></script>
+
+
+<include file="Index:footer"/>

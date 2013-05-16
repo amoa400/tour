@@ -1,0 +1,106 @@
+#order {color:#000000;}
+
+#order .order_header {margin-top:10px;}
+#order .order_header .logo {float:left;}
+#order .order_header .contact {margin-top:22px;height:25px;width:140px;padding-top:13px;padding-left:14px;float:right;background:url('../images/order/contact.png') no-repeat;font-weight:bold;font-size:20px;color:#ff6600;}
+
+#order .navi {margin-top:10px;height:33px;width:1000px;background:url('../images/order/navi_step1.png');}
+#order .navi li {width:197px;text-align:center;font-size:14px;line-height:33px;}
+
+#order .detail {border:5px solid #daf1c6;padding:20px;margin-top:10px;}
+#order .detail .item {margin-top:10px;}
+#order .detail .item .title {font-size:14px;font-weight:bold;}
+#order .detail .item .content {font-size:14px;padding:10px;}
+#order .detail .item li {float:none;margin-top:8px;}
+#order .detail .item table {border:1px solid #eeeeee; width:720px;}
+#order .detail .item table .first {background:#eeeeee;}
+#order .detail .item td {font-size:12px;padding:5px;border-bottom:1px solid #eeeeee;}
+#order .detail .item input[type="radio"] {margin-bottom:5px;}
+#order .detail .item select {margin:0;}
+#order .detail .item .chose {text-align:center;}
+#order .detail .item .price {color:#ff6600;font-weight:bold;}
+#order .detail .item .center {text-align:center;}
+#order .detail .item .special {margin-top:15px;font-size:12px;}
+#order .detail .item .special input {margin:0;padding:0;}
+#order .detail .item .special input[type="text"] {margin:0;padding:2px;padding-left:5px;padding-right:5px;}
+#order .detail .item .special .tt {display:inline-block;margin-left:5px;background:#ff6600;color:#ffffff;padding:2px;padding-left:5px;padding-right:5px;}
+#order .detail .item .special .ct {display:inline-block;margin-left:5px;}
+#order .detail .item .special .tip {display:inline-block;margin-left:5px;font-weight:bold;}
+#order .detail .item .special .coupon {width:125px;}
+
+#order .line span {display:inline-block;width:70px;text-align:right;margin-right:10px;}
+#order .line a {font-weight:bold;color:#4e9700;}
+#order .line a:hover {font-weight:bold;color:#f60;}
+#order .line input {padding-left:2px;padding-right:2px;width:20px;text-align:center;}
+
+#order .next {margin-top:20px;padding-top:20px;border-top:1px solid #daf1c6;}
+
+#order .bill {margin-top:10px;float:left;margin-left:10px;width:178px;padding:10px;border:1px solid #76a944;background:#e2f4d3;color:#555;}
+#order .bill .title {color:#54a20c;}
+#order .bill .icon_cart {width:20px;height:16px;background:url('../images/order/icon_cart.jpg') no-repeat;}
+#order .bill .item {border-top:1px dotted #cccccc;padding-top:10px;margin-top:4px;}
+#order .bill .item .tt1 {font-weight:bold;}
+#order .bill .item .tt2 {margin-top:4px;}
+#order .bill .item .content {margin-top:4px;}
+#order .bill .item .ct {width:130px;display:inline-block;}
+#order .bill .item .price {color:#ff6600;font-weight:bold;display:inline-block;}
+#order .bill .first {border-top:1px solid #90c665;}
+#order .bill .tot_price {border-top:1px solid #90c665;padding-top:10px;margin-top:4px;font-size:14px;font-weight:bold;}
+#order .bill .tot_price span {color:#ff6600;}
+#order .bill .next_btn {text-align:center;margin-top:15px;}
+
+#order .step2 .item .content {font-size:12px;margin-left:200px;}
+#order .step2 .item .tt {font-weight:bold;margin-left:-50px;margin-top:20px;}
+#order .step2 .item span {display:inline-block;width:80px;text-align:right;}
+#order .step2 .item input {margin:0;padding:2px;padding-left:4px;font-size:12px;}
+#order .step2 .item font {font-size:20px;position:absolute;margin-top:6px;margin-left:-10px;color:red;}
+#order .step2 .item strong {margin-left:10px;}
+
+#order .icon_right {width:14px;height:14px;background:url('../images/user/icon_right.png') no-repeat;}
+#order .icon_error {width:14px;height:14px;background:url('../images/user/icon_error.png') no-repeat;}
+
+#order .step3 {}
+#order .step3 .item .content {font-size:12px;width:700px;margin:0 auto;}
+#order .step3 .item span {display:inline-block;width:80px;text-align:right;margin-right:20px;}
+#order .step3  .item a {font-weight:bold;color:#4e9700;}
+#order .step3  .item a:hover {font-weight:bold;color:#f60;}
+#order .step3 .tt {width:350px;display:inline-block;}
+#order .step3 .ct1 {width:100px;display:inline-block;}
+#order .step3 .ct2 {width:50px;display:inline-block;text-align:right;}
+#order .step3 strong {width:506px;text-align:right;display:inline-block;}
+
+#order .succeed .head  {margin-left:20px;margin-top:20px;}
+#order .succeed .head .pic {float:left;}
+#order .succeed .head .text {float:left;margin-left:15px;font-size:14px;color:#ff6600;}
+#order .succeed .head .text span {font-family:Microsoft YaHei;font-size:20px;color:#000000;}
+#order .succeed .content {border-top:1px solid #cccccc;border-bottom:1px solid #cccccc;margin-top:20px;padding:20px;}
+#order .succeed .content li {float:none;margin-top:8px;}
+#order .succeed .content a {font-weight:bold;color:#4e9700;}
+#order .succeed .content a:hover {font-weight:bold;color:#f60;}
+#order .succeed .foot {margin-left:20px;margin-top:20px;}
+
+#order .team  .item .content{}
+#order .team .content a {font-weight:bold;color:#4e9700;}
+#order .team .content a:hover {font-weight:bold;color:#f60;}
+#order .team .item span {display:inline-block;width:80px;text-align:right;}
+#order .team .item .count {background:#f07372;padding:3px;color:#ffffff;font-size:12px;}
+#order .team .item li {position:relative;}
+#order .team .item .date_icon {position:absolute;top:3px;margin-left:180px;cursor:pointer;}
+#order .team .item .icon_date {width:16px;height:13px;background:url('../images/line/icon_date.png') no-repeat;}
+#order .team .item .require {font-size:20px;position:absolute;margin-top:6px;margin-left:-10px;color:red;}
+#order .team .item input {margin:0;padding:2px;padding-left:4px;}
+#order .team .item textarea {margin:0;padding:2px;padding-left:4px;}
+#order .team .item strong {margin-left:10px;font-size:12px;}
+#order .team .item select {margin:0;padding:2px;width:80px;}
+
+#order .pay {position:relative;}
+#order .pay .head {font-size:18px;font-weight:bold;}
+#order .pay .price {color:#ff6600;font-weight:bold;}
+#order .pay .item {margin-top:20px;}
+#order .pay .item span {cursor:pointer;}
+#order .pay .item .card {display:none;}
+#order .pay .tip {border:3px solid #e8e8e8;position:absolute;background:#ffffff;padding:20px;width:470px;top:30px;left:250px;display:none;z-index:200;}
+#order .pay .tip .title {font-size:14px;color:#ff6600;font-weight:bold;}
+#order .pay .tip .content {border-top:1px solid #e0e0e0;margin-top:10px;padding-top:10px;}
+#order .pay .tip li {float:none;margin-top:3px;}
+#grey {background: #000;display: block;z-index:100;width:100%;height:100%;position: absolute;top: 0;left: 0;opacity:0.5;}

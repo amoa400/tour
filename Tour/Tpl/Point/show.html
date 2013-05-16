@@ -1,0 +1,343 @@
+<include file="Index:header"/>
+
+<link href="__ROOT__/css/point.css" rel="stylesheet" media="screen">
+<link href="__ROOT__/css/fullcalendar.css" rel="stylesheet" media="screen">
+<link href="__ROOT__/css/fullcalendar.print.css" rel="stylesheet" media="screen">
+<script>
+	var loadingPic = '__ROOT__/images/point/loading.gif';
+	var postUrl = '__ROOT__/<?php echo U('Ticket/getSchedule') ?>';
+	var postUrl2 = "__ROOT__/<?php echo U('Ticket/getSchedule2') ?>";
+	var point_id = <{$point.id}>;
+</script>
+
+<div id="point" class="main_container wallpaper2">
+
+	<div class="path">
+		&nbsp;&nbsp;<a href="<?php echo U('Index/index') ?>">__NAME__</a>&nbsp;&nbsp;>&nbsp;&nbsp;<a href="<?php echo U('Ticket/index') ?>">景点门票</a>&nbsp;&nbsp;>&nbsp;&nbsp;<a href="<?php echo U('Ticket/search?province='.$point['province_id']) ?>"><{$point.province}></a>&nbsp;&nbsp;>&nbsp;&nbsp;<a href="<?php echo U('Ticket/search?province='.$point['province_id'].'&city='.$point['city_id']) ?>"><{$point.city}></a>&nbsp;&nbsp;>&nbsp;&nbsp;<{$point.name}>
+	</div>
+	
+	<!--景区信息-->
+	<div class="info">
+		<!--轮播广告-->
+		<div id="myCarousel" class="carousel slide pic">
+			<div class="carousel-inner">
+				<?php 
+					$flag = false;
+					foreach ($point['photo'] as $photo) { 
+				?>
+					<div class="item <?php if (!$flag) echo 'active'; ?>">
+						<img src="__ROOT__/images/point/photo/<{$point.province_id}>/<{$point.city_id}>/<{$point.id}>/<{$photo.id}>.jpg">
+						<div class="carousel-caption"><{$photo.desc}></div>
+					</div>
+				<?php 
+						$flag = true;
+					}
+				?>
+            </div>
+			<!--
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+            <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+			-->
+		</div>
+		
+		<!--基本信息-->
+		<div class="content">
+			<div class="name"><{$point.name}></div>
+			<div class="item">
+				<span>所属地区：</span>
+				<{$point.province}>-<{$point.city}>
+			</div>
+			<div class="item">
+				<span>景区地址：</span>
+				<{$point.address}>
+			</div>
+			<!--
+			<div class="item">
+				<span>景区电话：</span>
+				<{$point.phone}>
+			</div>
+			-->
+			<div class="item">
+				<span>开放时间：</span>
+				<{$point.time}>
+			</div>
+			<div class="item">
+				<span>景区主题：</span>
+				<?php foreach($point['subject'] as $item) { ?> 
+				<{$item.name}>&nbsp;
+				<?php } ?>
+			</div>
+			<div class="navi">
+				<span><a href="#desc">景区简介</a></span>
+				<span><a href="#comment">游客点评</a></span>
+				<span><a href="#traffic">交通信息</a></span>
+				<span><a href="#">收藏景点</a></span>
+			</div>
+		</div>
+	</div>
+	
+	<!--左面板-->
+	<div class="left_panel">
+		<!--搜索-->
+		<div class="panel so">
+			<div class="title">景区门票搜索</div>
+			<div class="content">
+				<strong>城市/景点</strong><br>
+				<input class="text"/><br>
+				<input type="submit" value=""/>
+			</div>
+		</div>
+		
+		<!--热门景区-->
+		<div class="panel hot">
+			<div class="title">热门景区推荐</div>
+			<div class="content">
+				<span><a href="#"><strong>·</strong> 上海滨海森林公园</a></span>
+				<span><a href="#"><strong>·</strong> 上海滨海森林公园</a></span>
+				<span><a href="#"><strong>·</strong> 上海滨海森林公园</a></span>
+				<span><a href="#"><strong>·</strong> 上海滨海森林公园</a></span>
+				<span><a href="#"><strong>·</strong> 上海滨海森林公园</a></span>
+				<span><a href="#"><strong>·</strong> 上海滨海森林公园</a></span>
+				<span><a href="#"><strong>·</strong> 上海滨海森林公园</a></span>
+				<span><a href="#"><strong>·</strong> 上海滨海森林公园</a></span>
+				<span><a href="#"><strong>·</strong> 上海滨海森林公园</a></span>
+			</div>
+		</div>
+	</div>
+	
+	<!--右面板-->
+	<div class="right_panel">
+		<!--打折门票-->
+		<div class="panel ticket">
+			<div class="title"><span>打折门票</span></div>
+			<div class="content" style="padding-left:5px;">
+				<table style="width:100%">
+					<tr style="font-weight:bold;">
+						<td width="40%" class="name">门票类型</td>
+						<td width="10%">市场价</td>
+						<td width="10%">优惠价</td>
+						<td width="10%">点评奖金</td>
+						<td width="15%">支付方式</td>
+						<td width="15%"></td>
+					</tr>
+					
+					<?php foreach($ticketList as $ticket) { ?>
+						<tr>
+							
+							<td class="name"><a href="javascript:void(0)" onclick="inverseDetail(<{$ticket.id}>)"><{$ticket.name}></a><a name="detail_<{$ticket.id}>"></a></td>
+							<td class="origin_price">¥<{$ticket.origin_price}></td>
+							<td class="price2">¥<{$ticket.price}></td>
+							<td class="price">¥<{$ticket.comment_price}></td>
+							<td><{$ticket.pay_type}></td>
+							<td><input type="button"  onclick="inverseDetail(<{$ticket.id}>)"></td>
+						</tr>
+
+						<tr id="detail<{$ticket.id}>" style="display:none;">
+							<td colspan="6">
+								<div class="detail">
+									<ul>
+										<li><strong><{$ticket.name}></strong></li>
+										<li>
+											<strong>预定须知：</strong><br>
+											<{$ticket.desc}>
+										</li>
+										<li class="calendarLi">
+											<div id="calendarDiv" class="calendar">
+												<div id="tt<{$ticket.id}>" class="tt">
+													出行价格表
+												</div>
+												<div id='calendar<{$ticket.id}>' style="z-index:999;">
+												</div>
+											</div>
+										</li>
+									</ul>
+								</div>
+							</td>
+						</tr>
+					<?php } ?>
+				</table>
+			</div>
+		</div>
+		
+		<!--景区简介-->
+		<div class="panel desc">
+			<a name="desc"></a>
+			<div class="title"><span>景区简介</span></div>
+			<div class="content">
+				<{$point.desc2}>
+			</div>
+		</div>
+		
+		<!--游客点评-->
+		<div class="panel comment">
+			<a name="comment"></a>
+			<div class="title"><span>游客点评</span></div>
+			<div class="content">
+				暂无
+			</div>
+		</div>
+		
+		<!--交通信息-->
+		<div class="panel traffic">
+			<a name="traffic"></a>
+			<div class="title"><span>交通信息</span></div>
+			<div class="content">
+	
+				<div id="allmap" style="overflow:hidden;zoom:1;position:relative;width:750px;height:300px;">	
+					<div id="map" style="height:100%;-webkit-transition: all 0.5s ease-in-out;transition: all 0.5s ease-in-out;"></div>
+					<div id="showPanelBtn" style="position:absolute;font-size:14px;top:50%;margin-top:-95px;right:0px;width:20px;padding:10px 10px;color:#999;cursor:pointer;text-align:center;height:170px;background:rgba(255,255,255,0.9);-webkit-transition: all 0.5s ease-in-out;transition: all 0.5s ease-in-out;font-family:'微软雅黑';font-weight:bold;">显示详细路线<br/>&lt;</div>
+					<div id="panelWrap" style="width:0px;position:absolute;top:0px;right:0px;height:100%;overflow:auto;-webkit-transition: all 0.5s ease-in-out;transition: all 0.5s ease-in-out;">
+						<div style="width:20px;height:200px;margin:-100px 0 0 -10px;color:#999;position:absolute;opacity:0.5;top:50%;left:50%;">请输入您的出发地点</div>
+						<div id="panel" style="position:absolute;"></div>
+					</div>
+				</div>
+	
+			</div>
+		</div>
+		
+	</div>
+	
+	<!--显示订单-->
+	<div id="orderDiv" class="order">
+		<div class="title">
+			开始预订
+			<i class='icon icon_close' onclick="hideOrder()"></i>
+		</div>
+		<div class="content">
+			<form action="<?php echo U('Order/ticketOrder') ?>" method="post">
+			<input id="date" name="date" value="" style="display:none;">
+			<input name="point_id" value="<{$point.id}>" style="display:none;">
+			<div class="item">
+				<span class="tt">您选择的游玩日期：</span>
+				<span class="ct date">2013-05-14</span>
+			</div>
+			<div id="itemList">
+				<div class="item">
+					<span class="tt">加载中...</span>
+				</div>
+			</div>
+		</div>
+		<div class="next">
+			<input class="submit" type="submit" value="">
+		</div>
+		</form>
+	</div>
+
+	<div class="clear"></div>
+	
+	<div class="to_top" onclick="toTop()">
+	</div>
+</div>
+
+<div id='grey'></div>
+
+<script type="text/javascript" src="__ROOT__/js/point.js" charset="utf-8"></script>
+<script type="text/javascript" src='__ROOT__/js/fullcalendar.min.js'></script>
+<script type="text/javascript" src='__ROOT__/js/bootstrap-carousel.js'></script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1356957111629175" charset="utf-8"></script>
+
+
+<!--广告轮转-->
+<script>
+	$('.carousel').carousel();
+</script>
+
+<!--百度地图-->
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.5&ak=28E1eda9857d3080c348b5b4b2bd6608"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
+<link rel="stylesheet" href="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css" />
+<script>
+    var map = new BMap.Map('map');
+    var poi = new BMap.Point(116.307852,40.057031);
+    map.centerAndZoom(poi, 16);
+    map.enableScrollWheelZoom();
+	// 创建地址解析器实例
+	var myGeo = new BMap.Geocoder();
+	// 将地址解析结果显示在地图上,并调整地图视野
+	myGeo.getPoint("<{$point.name}>", function(point){
+		if (point) {
+			var poi = new BMap.Point(point.lng,point.lat);
+			map.centerAndZoom(poi, 16);
+			map.enableScrollWheelZoom();
+			
+			var content = "<{$point.desc}>";
+
+			//创建检索信息窗口对象
+			var searchInfoWindow = null;
+			searchInfoWindow = new BMapLib.SearchInfoWindow(map, content, {
+					title  : "<{$point.name}>",      //标题
+					width  : 100,             //宽度
+					height : 50,              //高度
+					panel  : "panel",         //检索结果面板
+					enableAutoPan : true,     //自动平移
+					searchTypes   :[
+						BMAPLIB_TAB_TO_HERE,  //到这里去
+						BMAPLIB_TAB_FROM_HERE, //从这里出发
+						BMAPLIB_TAB_SEARCH   //周边检索
+					]
+				});
+			var marker = new BMap.Marker(poi); //创建marker对象
+			marker.enableDragging(); //marker可拖拽
+			marker.addEventListener("click", function(e){
+				searchInfoWindow.open(marker);
+			})
+			map.addOverlay(marker); //在地图中添加marker
+			searchInfoWindow.open(marker); //在marker上打开检索信息串口
+				//map.addOverlay(new BMap.Marker(point));
+		}
+	}, "<{$point.city}>");
+
+    function $$(id){
+     	  return document.getElementById(id);
+    }
+
+    var isPanelShow = false;
+    //显示结果面板动作
+    $$("showPanelBtn").onclick = function(){
+        if (isPanelShow == false) {
+            isPanelShow = true;
+            $$("showPanelBtn").style.right = "200px";
+            $$("panelWrap").style.width = "200px";
+            $$("map").style.marginRight = "200px";
+            $$("showPanelBtn").innerHTML = "隐藏详细路线<br/>>";
+        } else {
+            isPanelShow = false;
+            $$("showPanelBtn").style.right = "0px";
+            $$("panelWrap").style.width = "0px";
+            $$("map").style.marginRight = "0px";
+            $$("showPanelBtn").innerHTML = "显示详细路线<br/><";
+        }
+    }
+</script>
+
+<!--跳到头部-->
+<script>
+	function toTop() {
+		$("html,body").animate({scrollTop:$("body").offset().top},500);
+	}
+
+	$(window).scroll(function() { 
+		var top = $(window).scrollTop();
+		if (top > 10) {
+			$(".to_top").css('display', 'block');
+		}
+		else {
+			$(".to_top").css('display', 'none');
+		}
+	}); 
+	
+	<?php if (!empty($_GET['ticket_id'])) { ?>
+	inverseDetail(<?php echo $_GET['ticket_id']; ?>);
+	<?php } ?>
+</script>
+
+<script>
+	var jiathis_config = {
+		url:"__ROOT__<?php echo U('Line/show?id='.$line['id']); ?>",
+		title:"[<{$line.name}>]<{$line.character}>",
+		summary:"<?php echo str_replace(chr(13).chr(10), '', $line['introduction']); ?>",
+		pic:"__ROOT__/images/line/photo/<{$line.id}>.jpg",
+	}
+</script>
+
+<include file="Index:footer"/>

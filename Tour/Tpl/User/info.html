@@ -1,0 +1,42 @@
+<include file="User:left_area"/>
+	
+	<!--右方区域-->
+	<div class="right_area">
+		
+		<!--个人信息-->
+		<div class="info2" style="margin:0;">
+			<div class="title">个人信息</div>
+			<div class="content">
+				<form action="<?php echo U('User/updateInfo') ?>" method="post">
+				<ul>
+					<input name="id" value="<{$user.id}>" style="display:none;">
+					<li><span class="tt">电子邮箱：</span><{$user.email}></li>
+					<li><span class="tt">用户昵称：</span><input name="nickname" type="text" value="<{$user.nickname}>"></li>
+					<li>
+						<span class="tt">所在学校：</span><select name="school_id">
+							<option value="0">请选择您所在的学校</option>
+							<?php foreach($schoolList as $school) { ?>
+							<option value="<{$school.id}>" <?php if ($user['school_id'] == $school['id']) { ?>selected="selected"<?php } ?>><{$school.name}></option>
+							<?php } ?>
+						</select>
+					</li>
+					<li><span class="tt">手机号码：</span><input name="phone" type="text" value="<{$user.phone}>"></li>
+					<li><span class="tt">真实姓名：</span><input name="name" type="text" value="<{$user.name}>"></li>
+					<li><span class="tt"></span><input class="btn btn-inverse" type="submit" value="更新资料"/></li>
+					<li></li>
+				</ul>
+				</form>
+			</div>
+		</div>
+		
+		<div class="clear"></div>
+	</div>
+	
+	<div class="clear"></div>
+	
+</div>
+
+<script type="text/javascript" src="__ROOT__/js/user.js" charset="utf-8"></script>
+
+
+<include file="Index:footer"/>
