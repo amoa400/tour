@@ -118,6 +118,7 @@ class PointModel extends Model {
 		if ($data['sort'] == 5) $order = '`price` ASC'; 
 		if ($data['sort'] == 6) $order = '`price` DESC'; 
 		$pointList['count'] = $this->field('COUNT(1) AS count')->where($sql)->find();
+		if ($data['only_count']) return $pointList['count']['count'];
 		$pointList['data'] = $this->where($sql)->order($order)->page($page)->limit($limit)->select();
 		return $pointList;
 	}

@@ -47,18 +47,32 @@
 						<div class="item2" style="border:0;">
 							<div class="tt"><a href="javascript:void(0)">按天数分</a></div>
 							<ul>
+								<?php if (A('Line')->searchNum('t=5&line_type=1&duration=1')) { ?>
 								<li><a href="<?php echo U('Line/search?t=5&line_type=1&duration=1') ?>" target="_blank">一日游</a></li>
+								<?php } ?>
+								<?php if (A('Line')->searchNum('t=5&line_type=1&duration=2')) { ?>
 								<li><a href="<?php echo U('Line/search?t=5&line_type=1&duration=2') ?>" target="_blank">二日游</a></li>
-								<li><a href="<?php echo U('Line/search?t=5&line_type=1&duration=3') ?>" target="_blank">三日游</a></li>
+								<?php } ?>
+								<?php if (A('Line')->searchNum('t=5&line_type=1&duration=3')) { ?>
+								<li><a href="<?php echo U('Line/search?t=5&line_type=1&duration=3') ?>" target="_blank">
+								三日游</a></li>
+								<?php } ?>
+								<?php if (A('Line')->searchNum('t=5&line_type=1&duration=4')) { ?>
 								<li><a href="<?php echo U('Line/search?t=5&line_type=1&duration=4') ?>" target="_blank">四至六日</a></li>
+								<?php } ?>
+								<?php if (A('Line')->searchNum('t=5&line_type=1&duration=8')) { ?>
 								<li><a href="<?php echo U('Line/search?t=5&line_type=1&duration=8') ?>" target="_blank">七日及以上</a></li>
+								<?php } ?>
 							</ul>
 							<div class="clear"></div>
 						</div>
 						<div class="item2">
 							<div class="tt"><a href="javascript:void(0)">按主题分</a></div>
 							<ul>
-								<?php foreach($banji['pointTypeList'] as $item) { ?>
+								<?php 
+									foreach($banji['pointTypeList'] as $item) {
+										if (!A('Line')->searchNum('search?t=7&line_type=1&point_type='.$item['id'])) continue;
+								?>
 								<li><a href="<?php echo U('Line/search?t=7&line_type=1&point_type='.$item['id']) ?>" target="_blank"><{$item.name}></a></li>
 								<?php } ?>
 							</ul>
@@ -67,7 +81,10 @@
 						<div class="item2">
 							<div class="tt"><a href="javascript:void(0)">按特色分</a></div>
 							<ul>
-								<?php foreach($banji['tagList'] as $item) { ?>
+								<?php 
+									foreach($banji['tagList'] as $item) {
+										if (!A('Line')->searchNum('Line/search?t=8&line_type=1&tag='.$item['id'])) continue;
+								?>
 								<li><a href="<?php echo U('Line/search?t=8&line_type=1&tag='.$item['id']) ?>" target="_blank"><{$item.name}></a></li>
 								<?php } ?>
 							</ul>
@@ -76,7 +93,10 @@
 						<div class="item2">
 							<div class="tt"><a href="<?php echo U('Line/search?t=6&line_type=1&z=1') ?>" target="_blank">周边游</a></div>
 							<ul>
-								<?php foreach($banji['provinceZB'] as $item) { ?>
+								<?php 
+									foreach($banji['provinceZB'] as $item) {
+										if (!A('Line')->searchNum('t=6&line_type=1&province='.$item['id'])) continue;
+								?>
 								<li><a href="<?php echo U('Line/search?t=6&line_type=1&province='.$item['id']) ?>" target="_blank"><{$item.name}></a></li>
 								<?php } ?>
 							</ul>
@@ -85,7 +105,10 @@
 						<div class="item2">
 							<div class="tt"><a href="<?php echo U('Line/search?t=6&line_type=1&z=2') ?>" target="_blank">国内游</a></div>
 							<ul>
-								<?php foreach($banji['provinceGN'] as $item) { ?>
+								<?php 
+									foreach($banji['provinceGN'] as $item) {
+										if (!A('Line')->searchNum('t=6&line_type=1&province='.$item['id'])) continue;
+								?>
 								<li><a href="<?php echo U('Line/search?t=6&line_type=1&province='.$item['id']) ?>" target="_blank"><{$item.name}></a></li>
 								<?php } ?>
 							</ul>
@@ -123,33 +146,55 @@
 						<div class="item2" style="border:0;">
 							<div class="tt"><a href="javascript:void(0)">按区域分</a></div>
 							<ul>
+								<?php if (A('Line')->searchNum('province=3')) { ?>
 								<li><a href="<?php echo U('Line/search?province=3') ?>" target="_blank">江苏</a></li>
+								<?php } ?>
+								<?php if (A('Line')->searchNum('province=2')) { ?>
 								<li><a href="<?php echo U('Line/search?province=2') ?>" target="_blank">浙江</a></li>
+								<?php } ?>
+								<?php if (A('Line')->searchNum('province=1')) { ?>
 								<li><a href="<?php echo U('Line/search?province=1') ?>" target="_blank">上海</a></li>
+								<?php } ?>
+								<?php if (A('Line')->searchNum('province=4')) { ?>
 								<li><a href="<?php echo U('Line/search?province=4') ?>" target="_blank">安徽</a></li>
+								<?php } ?>
+								<?php if (A('Line')->searchNum('province=6')) { ?>
 								<li><a href="<?php echo U('Line/search?province=6') ?>" target="_blank">江西</a></li>
+								<?php } ?>
 							</ul>
 							<div class="clear"></div>
 						</div>
 						<div class="item2">
 							<div class="tt"><a href="javascript:void(0)">按天数分</a></div>
 							<ul>
+								<?php if (A('Line')->searchNum('z=1&t=4&duration=1')) { ?>
 								<li><a href="<?php echo U('Line/search?z=1&t=4&duration=1') ?>" target="_blank">一日游</a></li>
+								<?php } ?>
+								<?php if (A('Line')->searchNum('z=1&t=4&duration=2')) { ?>
 								<li><a href="<?php echo U('Line/search?z=1&t=4&duration=2') ?>" target="_blank">二日游</a></li>
+								<?php } ?>
+								<?php if (A('Line')->searchNum('z=1&t=4&duration=3')) { ?>								
 								<li><a href="<?php echo U('Line/search?z=1&t=4&duration=3') ?>" target="_blank">三日游</a></li>
+								<?php } ?>
+								<?php if (A('Line')->searchNum('z=1&t=4&duration=7')) { ?>
 								<li><a href="<?php echo U('Line/search?z=1&t=4&duration=7') ?>" target="_blank">多日游</a></li>
+								<?php } ?>
 							</ul>
 							<div class="clear"></div>
 						</div>
 						<?php 
 							foreach($zhoubian['pointTypeList'] as $item) { 
-								if (!isIn($item['id'], array(1,2,3,4,5,7,9))) continue;
+								//if (!isIn($item['id'], array(1,2,3,4,5,7,9))) continue;
 								if (empty($item['point'])) continue;
+								if (!A('Line')->searchNum('z=1&t=1&point_type='.$item['id'])) continue;
 						?>
 						<div class="item2">
 							<div class="tt"><a href="<?php echo U('Line/search?z=1&t=1&point_type='.$item['id']) ?>" target="_blank"><{$item.name}></a></div>
 							<ul>
-								<?php foreach($item['point'] as $item2) { ?>
+								<?php 
+									foreach($item['point'] as $item2) {	
+										if (!A('Line')->searchNum('t=2&point='.$item2['id'])) continue;
+								?>
 								<li><a href="<?php echo U('Line/search?t=2&point='.$item2['id']) ?>" target="_blank"><{$item2.name_abb}></a></li>
 								<?php } ?>
 							</ul>
@@ -157,18 +202,21 @@
 						</div>
 						<?php } ?>
 						
+						<!--
 						<div class="item2">
 							<div class="tt"><a href="javascript:void(0)">其他主题</a></div>
 							<ul>
 								<?php 
 									foreach($zhoubian['pointTypeList'] as $item) { 
-										if (isIn($item['id'], array(1,2,3,4,5,7,9)) && !empty($item['point'])) continue;
+										//if (isIn($item['id'], array(1,2,3,4,5,7,9)) && !empty($item['point'])) continue;
+										//if (!A('Line')->searchNum('z=1&t=1&point_type='.$item['id'])) continue;
 								?>
 								<li><a href="<?php echo U('Line/search?z=1&t=1&point_type='.$item['id']) ?>" target="_blank"><{$item.name}></a></li>
 								<?php } ?>
 							</ul>
 							<div class="clear"></div>
 						</div>
+						-->
 
 					</div>
 					</div>
@@ -178,17 +226,17 @@
 				<div class="item" onmouseover="showDetail(2)" onmouseout="hideDetail(2)">
 					<div class="title">
 						<i class="icon icon_guonei"></i>&nbsp;
-						<span class="text"><a href="<?php echo U('Line/search?province=2') ?>" target="_blank">国内游</a></span>
+						<span class="text"><a href="<?php echo U('Line/guonei') ?>" target="_blank">国内游</a></span>
 						<i class="icon_arrow"></i>
 					</div>
 					<div class="content">
 						<ul>
-							<li style="margin-left:0;"><a href="<?php echo U('Line/search?t=2&point=8') ?>" target="_blank">厦门</a></li>
-							<li><a href="<?php echo U('Line/search?t=2&point=11') ?>" target="_blank">海南</a></li>
-							<li><a href="<?php echo U('Line/search?t=2&point=13') ?>" target="_blank">云南</a></li>
-							<li><a href="<?php echo U('Line/search?t=2&point=22') ?>" target="_blank">桂林</a></li>
-							<li><a href="<?php echo U('Line/search?t=2&point=9') ?>" target="_blank">北京</a></li>
-							<li><a href="<?php echo U('Line/search?t=2&point=9') ?>" target="_blank">湖南</a></li>
+							<li style="margin-left:0;"><a href="<?php echo U('Line/search?province=5&city=2') ?>" target="_blank">厦门</a></li>
+							<li><a href="<?php echo U('Line/search?province=7') ?>" target="_blank">海南</a></li>
+							<li><a href="<?php echo U('Line/search?province=8') ?>" target="_blank">云南</a></li>
+							<li><a href="<?php echo U('Line/search?province=10') ?>" target="_blank">四川</a></li>
+							<li><a href="<?php echo U('Line/search?province=9') ?>" target="_blank">北京</a></li>
+							<li><a href="<?php echo U('Line/search?province=13') ?>" target="_blank">湖南</a></li>
 						</ul>
 					</div>
 					<div id="block2" class="block"></div>
@@ -202,7 +250,10 @@
 						<div class="item2" style="border:0;">
 							<div class="tt"><a href="javascript:void(0)">按主题分</a></div>
 							<ul>
-								<?php foreach($guonei['pointTypeList'] as $item) { ?>
+								<?php 
+									foreach($guonei['pointTypeList'] as $item) { 
+										if (!A('Line')->searchNum('z=2&t=1&point_type='.$item['id'])) continue;
+								?>
 								<li><a href="<?php echo U('Line/search?z=2&t=1&point_type='.$item['id']) ?>" target="_blank"><{$item.name}></a></li>
 								<?php } ?>
 							</ul>
@@ -211,13 +262,17 @@
 						<!--按省份分-->
 						<?php 
 							foreach($guonei['provinceList'] as $item) {
-								if (!isIn($item['id'], array(5,7,8,9,10,11,12))) continue;
+								//if (!isIn($item['id'], array(5,7,8,9,10,11,12))) continue;
 								if (empty($item['point'])) continue;
+								if (!A('Line')->searchNum('province='.$item['id'])) continue;
 						?>
 						<div class="item2">
 							<div class="tt"><a href="<?php echo U('Line/search?province='.$item['id']) ?>" target="_blank"><{$item.name}></a></div>
 							<ul>
-								<?php foreach($item['point'] as $item2) { ?>
+								<?php 
+									foreach($item['point'] as $item2) { 
+										if (!A('Line')->searchNum('t=2&point='.$item2['id'])) continue;
+								?>
 								<li><a href="<?php echo U('Line/search?t=2&point='.$item2['id']) ?>" target="_blank"><{$item2.name_abb}></a></li>
 								<?php } ?>
 							</ul>
@@ -225,18 +280,21 @@
 						</div>
 						<?php } ?>
 						<!--其他地区-->
+						<!--
 						<div class="item2">
 							<div class="tt"><a href="javascript:void(0)">其他地区</a></div>
 							<ul>
 								<?php 
 									foreach($guonei['provinceList'] as $item) {
-										if (isIn($item['id'], array(5,7,8,9,10,11,12)) && !empty($item['point'])) continue;
+										//if (isIn($item['id'], array(5,7,8,9,10,11,12)) && !empty($item['point'])) continue;
+										//if (!A('Line')->searchNum('province='.$item['id'])) continue;
 								?>
 								<li><a href="<?php echo U('Line/search?province='.$item['id']) ?>" target="_blank"><{$item.name}></a></li>
 								<?php } ?>
 							</ul>
 							<div class="clear"></div>
 						</div>
+						-->
 					</div>
 					</div>
 					</div>
@@ -246,17 +304,17 @@
 				<div class="item" onmouseover="showDetail(3)" onmouseout="hideDetail(3)">
 					<div class="title">
 						<i class="icon icon_chujing"></i>&nbsp;
-						<span class="text"><a href="<?php echo U('Line/search?province=1') ?>" target="_blank">出境游</a></span>
+						<span class="text"><a href="<?php echo U('Line/chujing') ?>" target="_blank">出境游</a></span>
 						<i class="icon_arrow"></i>
 					</div>
 					<div class="content">
 						<ul>
-							<li style="margin-left:0;"><a href="<?php echo U('Line/search?t=2&point=15') ?>" target="_blank">泰国</a></li>
-							<li><a href="<?php echo U('Line/search?t=2&point=16') ?>" target="_blank">欧洲</a></li>
-							<li><a href="<?php echo U('Line/search?t=2&point=17') ?>" target="_blank">美国</a></li>
-							<li><a href="<?php echo U('Line/search?t=2&point=18') ?>" target="_blank">香港</a></li>
-							<li><a href="<?php echo U('Line/search?t=2&point=18') ?>" target="_blank">台湾</a></li>
-							<li><a href="<?php echo U('Line/search?t=2&point=18') ?>" target="_blank">游学</a></li>
+							<li style="margin-left:0;"><a href="<?php echo U('Line/search?province=37') ?>" target="_blank">泰国</a></li>
+							<li><a href="<?php echo U('Line/search?province=35') ?>" target="_blank">美国</a></li>
+							<li><a href="<?php echo U('Line/search?province=32') ?>" target="_blank">香港</a></li>
+							<li><a href="<?php echo U('Line/search?province=33') ?>" target="_blank">澳门</a></li>
+							<li><a href="<?php echo U('Line/search?province=34') ?>" target="_blank">台湾</a></li>
+							<li><a href="<?php echo U('Line/search?province=38') ?>" target="_blank">韩国</a></li>
 						</ul>
 					</div>
 					<div id="block3" class="block"></div>
@@ -270,7 +328,10 @@
 						<div class="item2" style="border:0;">
 							<div class="tt"><a href="javascript:void(0)">按主题分</a></div>
 							<ul>
-								<?php foreach($chujing['pointTypeList'] as $item) { ?>
+								<?php 
+									foreach($chujing['pointTypeList'] as $item) {
+										if (!A('Line')->searchNum('z=3&t=1&point_type='.$item['id'])) continue;
+								?>
 								<li><a href="<?php echo U('Line/search?z=3&t=1&point_type='.$item['id']) ?>" target="_blank"><{$item.name}></a></li>
 								<?php } ?>
 							</ul>
@@ -280,11 +341,15 @@
 						<?php 
 							foreach($chujing['provinceList'] as $item) { 
 								if (empty($item['point'])) continue;
+								if (!A('Line')->searchNum('province='.$item['id'])) continue;
 						?>
 						<div class="item2">
 							<div class="tt"><a href="<?php echo U('Line/search?province='.$item['id']) ?>" target="_blank"><{$item.name}></a></div>
 							<ul>
-								<?php foreach($item['point'] as $item2) { ?>
+								<?php 
+									foreach($item['point'] as $item2) {
+										if (!A('Line')->searchNum('t=2&point='.$item2['id'])) continue;
+								?>
 								<li><a href="<?php echo U('Line/search?t=2&point='.$item2['id']) ?>" target="_blank"><{$item2.name_abb}></a></li>
 								<?php } ?>
 							</ul>
@@ -300,14 +365,14 @@
 				<div class="item" onmouseover="showDetail(4)" onmouseout="hideDetail(4)">
 					<div class="title">
 						<i class="icon icon_menpiao"></i>&nbsp;
-						<span class="text"><a href="<?php echo U('Line/search?province=4') ?>" target="_blank">景点门票</a></span>
+						<span class="text"><a href="<?php echo U('Ticket/index') ?>" target="_blank">景点门票</a></span>
 						<i class="icon_arrow"></i>
 					</div>
 					<div class="content">
 						<ul>
-							<li style="margin-left:0;"><a href="<?php echo U('Line/search?t=2&point=25') ?>" target="_blank">上海欢乐谷</a></li>
-							<li><a href="<?php echo U('Line/search?t=2&point=25') ?>" target="_blank">常州恐龙园</a></li>
-							<li><a href="<?php echo U('Line/search?t=2&point=25') ?>" target="_blank">苏州乐园</a></li>
+							<li style="margin-left:0;"><a href="<?php echo U('Point/show?id=62') ?>" target="_blank">上海欢乐谷</a></li>
+							<li><a href="<?php echo U('Point/show?id=59') ?>" target="_blank">常州恐龙园</a></li>
+							<li><a href="<?php echo U('Point/show?id=28') ?>" target="_blank">苏州乐园</a></li>
 						</ul>
 					</div>
 					<div id="block4" class="block"></div>
@@ -321,7 +386,10 @@
 						<div class="item2" style="border:0;">
 							<div class="tt"><a href="javascript:void(0)">按主题分</a></div>
 							<ul>
-								<?php foreach($menpiao['pointTypeList'] as $item) { ?>
+								<?php 
+									foreach($menpiao['pointTypeList'] as $item) {
+										if (!A('Ticket')->searchNum('subject='.$item['id'])) continue;
+								?>
 								<li><a href="<?php echo U('Ticket/search?subject='.$item['id']) ?>" target="_blank"><{$item.name}></a></li>
 								<?php } ?>
 							</ul>
@@ -342,9 +410,12 @@
 						</div>
 						<?php } ?>
 						<div class="item2">
-							<div class="tt"><a href="<?php echo U('Line/search?t=6&line_type=1&z=2') ?>" target="_blank">其他省份</a></div>
+							<div class="tt"><a href="javascript:void(0)">其他省份</a></div>
 							<ul>
-								<?php foreach($banji['provinceGN'] as $item) { ?>
+								<?php 
+									foreach($banji['provinceGN'] as $item) { 
+										if (!A('Ticket')->searchNum('province='.$item['id'])) continue;
+								?>
 								<li><a href="<?php echo U('Ticket/search?province='.$item['id']) ?>" target="_blank"><{$item.name}></a></li>
 								<?php } ?>
 							</ul>

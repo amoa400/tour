@@ -94,8 +94,24 @@ class TicketAction extends Action {
 		$this->ajaxReturn($schedule2);
 	}
 	
+	// 门票搜索（返回线路数量）
+	public function searchNum($s = '') {
+		if (empty($s)) die();
+		// 分解参数
+		$data = array();
+		$arr = split('&', $s);
+		foreach($arr as $item) {
+			$para = split('=', $item);
+			$data[$para[0]] = $para[1];
+		}
+		$data['only_count'] = 1;
+		$num = $this->search($data);
+		return $num;
+	}
+	
 	// 搜索
-	public function search() {
+	public function search($data = array()) {
+		if (!empty($data)) $_GET = $data;
 		// 参数赋值
 		$keyword = $this->_get('k');
 		$data = array();
@@ -103,6 +119,7 @@ class TicketAction extends Action {
 		$data['city_id'] = $this->_get('city');
 		$data['subject_id'] = $this->_get('subject');
 		$data['sort'] = $this->_get('sort');
+		$data['only_count'] = $this->_get('only_count');
 		$page = $this->_get('page');
 		if (empty($page)) $page = 1;
 
@@ -132,6 +149,12 @@ class TicketAction extends Action {
 			if ($flag) {
 				$data['name'] = $keyword;
 			}
+		}
+		
+		// 是否只获取数量
+		if ($data['only_count']) {
+			$count = (int)D('Point')->search($data);
+			return $count;
 		}
 
 		$pointList = D('Point')->search($data, $page);

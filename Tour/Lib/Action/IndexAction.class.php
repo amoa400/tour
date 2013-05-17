@@ -43,7 +43,8 @@ class IndexAction extends Action {
 			foreach($zhoubian['pointTypeList'] as $key => $item2) {
 				if (count($zhoubian['pointTypeList'][$key]['point']) >= 8) continue;
 				if (strstr($item['subject_id'], ','.$item2['id'].',')) {
-						$zhoubian['pointTypeList'][$key]['point'][] = $item;
+						if (A('Line')->searchNum('t=2&point='.$item['id']))
+							$zhoubian['pointTypeList'][$key]['point'][] = $item;
 						break;
 				}
 			}
@@ -59,7 +60,8 @@ class IndexAction extends Action {
 			foreach($guonei['provinceList'] as $key => $item2) {
 				if (count($guonei['provinceList'][$key]['point']) >= 8) continue;
 				if ($item['province_id'] == $item2['id']) {
-						$guonei['provinceList'][$key]['point'][] = $item;
+						if (A('Line')->searchNum('t=2&point='.$item['id']))
+							$guonei['provinceList'][$key]['point'][] = $item;
 						break;
 				}
 			}
@@ -75,7 +77,8 @@ class IndexAction extends Action {
 			foreach($chujing['provinceList'] as $key => $item2) {
 				if (count($chujing['provinceList'][$key]['point']) >= 8) continue;
 				if ($item['province_id'] == $item2['id']) {
-						$chujing['provinceList'][$key]['point'][] = $item;
+						if (A('Line')->searchNum('t=2&point='.$item['id']))
+							$chujing['provinceList'][$key]['point'][] = $item;
 						break;
 				}
 			}

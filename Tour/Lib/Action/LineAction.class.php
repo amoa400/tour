@@ -298,19 +298,35 @@ class LineAction extends Action {
 		$this->display('../Tour/Tpl/Line/productIndex.html');
 	}
 	
+	// 线路搜索（返回线路数量）
+	public function searchNum($s = '') {
+		if (empty($s)) die();
+		// 分解参数
+		$data = array();
+		$arr = split('&', $s);
+		foreach($arr as $item) {
+			$para = split('=', $item);
+			$data[$para[0]] = $para[1];
+		}
+		$data['only_count'] = 1;
+		$num = $this->search($data);
+		return $num;
+	}
+	
 	// 线路搜索页面
-	public function search() {
+	public function search($data = array()) {
+		if (!empty($data)) $_GET = $data;
 		// 处理参数
 		$para['type_id'] = $this->_get('line_type')+1;
 		if ($this->_get('t') == 3) $para['type_id'] = 2;
-		$para['from_province_id'] = $_SESSION['province_id'];
-		$para['from_city_id'] = $_SESSION['city_id'];
+		$para['from_province_id'] = 1;
+		$para['from_city_id'] = 1;
 		$para['to_province_id'] = $this->_get('province');
 		$para['to_city_id'] = $this->_get('city');
 		$para['duration_id'] = 	$this->_get('duration');
 		$para['point_type_id'] = $this->_get('point_type');
 		$para['point_id'] = $this->_get('point');
-		$para['sort_id'] = $this->_get(sort);
+		$para['sort_id'] = $this->_get('sort');
 		$para['begin_date'] = $this->_get('begin_date');
 		$para['end_date'] = $this->_get('end_date');
 		$para['order_id'] = $this->_get('sort');
@@ -319,6 +335,13 @@ class LineAction extends Action {
 		$para['page'] = $this->_get('page');
 		$para['z'] = $this->_get('z');
 		$para['tag_id'] = $this->_get('tag');
+		$para['only_count'] = $this->_get('only_count');
+		
+		// 是否只获取数量
+		if ($para['only_count']) {
+			$count = (int)D('Line')->rList($para);
+			return $count;
+		}
 		
 		// 获取景点类型
 		$this->pointTypeList = D('PointType')->rList();

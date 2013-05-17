@@ -146,8 +146,8 @@ class LineModel extends Model {
 			case '4': $order = '`satisfaction` DESC';  break;
 			case '5': $order = '`price` ASC'; break;
 			case '6': $order = '`price` DESC'; break;
-			case '7': $order = '`recommend` DESC, `id` DESC'; break;
-			default: $order = '`recommend` DESC, `id` DESC'; break;
+			case '7': $order = '`recommend` DESC, `duration` ASC, `id` DESC'; break;
+			default: $order = '`recommend` DESC, `duration` ASC, `id` DESC'; break;
 		}
 
 		$para['begin_date'] = isDate($para['begin_date'], 'Y-m-d');
@@ -155,10 +155,12 @@ class LineModel extends Model {
 		if (!empty($para['begin_date']) && !empty($para['end_date'])) {
 			$sql['LS.line_id'] = array('NEQ', 'NULL');
 			$lineList['count'] = $this->field('COUNT(1) AS count')->join('(SELECT DISTINCT `line_id` FROM `tour_line_schedule` WHERE `date`>=\''.$para['begin_date'].'\' AND `date`<=\''.$para['end_date'].'\') AS LS ON `tour_line`.id = `LS`.line_id')->where($sql)->select();
+			if ($para['only_count']) return $lineList['count'][0]['count'];
 			$lineList['data'] = $this->join('(SELECT DISTINCT `line_id` FROM `tour_line_schedule` WHERE `date`>=\''.$para['begin_date'].'\' AND `date`<=\''.$para['end_date'].'\') AS LS ON `tour_line`.id = `LS`.line_id')->where($sql)->page((int)$para['page'].','.$limit)->order($order)->select();
 		}
 		else {
 			$lineList['count'] = $this->field('COUNT(1) AS count')->where($sql)->select();
+			if ($para['only_count']) return $lineList['count'][0]['count'];
 			$lineList['data'] = $this->where($sql)->page((int)$para['page'].','.$limit)->order($order)->select();
 		}
 

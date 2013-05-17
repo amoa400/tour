@@ -1,21 +1,19 @@
 <?php
 return array(
-
-/*
-	// 数据库
-	'DB_HOST'	=> 	'localhost',// 数据库地址
-	'DB_NAME'	=>	'tour', 	// 数据库名称
-	'DB_USER'	=>	'root',		// 数据库用户名
-	'DB_PWD'	=>	'',			// 数据库密码
-	'DB_PORT'	=>	'3306',		// 数据库端口
-	'DB_PREFIX' => 	'tour_',	// 数据库前缀
-*/
 	
 	// 数据库
 	'DB_HOST'	=> 	'168.63.149.21',// 数据库地址
 	'DB_NAME'	=>	'tour', 	// 数据库名称
 	'DB_USER'	=>	'root',		// 数据库用户名
 	'DB_PWD'	=>	'loveA400',			// 数据库密码
+	'DB_PORT'	=>	'3306',		// 数据库端口
+	'DB_PREFIX' => 	'tour_',	// 数据库前缀
+	
+	// 数据库
+	'DB_HOST'	=> 	'localhost',// 数据库地址
+	'DB_NAME'	=>	'tour2', 	// 数据库名称
+	'DB_USER'	=>	'root',		// 数据库用户名
+	'DB_PWD'	=>	'',			// 数据库密码
 	'DB_PORT'	=>	'3306',		// 数据库端口
 	'DB_PREFIX' => 	'tour_',	// 数据库前缀
 	
@@ -38,6 +36,13 @@ return array(
 	
 	'TMPL_ACTION_ERROR' => 'Page:dispatch', 	// 错误页面
 	'TMPL_ACTION_SUCCESS' => 'Page:dispatch', 	// 成功页面
+	
+	// 静态缓存
+	'HTML_CACHE_ON' 	=> false,	// 开关
+	'HTML_CACHE_TIME'	=> 86400,	// 缓存默认时间
+	'HTML_CACHE_RULES' 	=> array (
+		'Index:index' => array('Index/index'),
+	),
 	
 );
 ?>
