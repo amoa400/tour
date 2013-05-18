@@ -29,5 +29,13 @@ return array(
 	'TMPL_ACTION_ERROR' => 'Page:dispatch', 	// 閿欒椤甸潰
 	'TMPL_ACTION_SUCCESS' => 'Page:dispatch', 	// 鎴愬姛椤甸潰
 	
+	
+	// 静态缓存
+	'PAGE_CACHE' => true,
+	
+	// INCLUDE文件分割
+	'TAGLIB_BEGIN' => '<',
+	'TAGLIB_END'   => '>',
+	
 );
 ?>

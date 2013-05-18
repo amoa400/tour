@@ -70,7 +70,7 @@ function br2nl($text) {
 }
 
 // 递归创建目录
-function recursiveMkdir($path, $mode = 775){
+function recursiveMkdir($path, $mode = 0775){
 	if (!file_exists($path)) {
 		recursiveMkdir(dirname($path), $mode);
 		mkdir($path, $mode);
