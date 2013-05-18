@@ -19,11 +19,21 @@
 					<div class="title"><a href="javascript:void(0);">按天数分</a></div>
 					<div class="content">
 						<ul>
+							<?php if (A('Line')->searchNum('t=5&line_type=1&duration=1')) { ?>
 							<li><a href="<?php echo U('Line/search?t=5&line_type=1&duration=1') ?>" target="_blank">一日游</a></li>
+							<?php } ?>
+							<?php if (A('Line')->searchNum('t=5&line_type=1&duration=2')) { ?>
 							<li><a href="<?php echo U('Line/search?t=5&line_type=1&duration=2') ?>" target="_blank">二日游</a></li>
+							<?php } ?>
+							<?php if (A('Line')->searchNum('t=5&line_type=1&duration=3')) { ?>
 							<li><a href="<?php echo U('Line/search?t=5&line_type=1&duration=3') ?>" target="_blank">三日游</a></li>
+							<?php } ?>
+							<?php if (A('Line')->searchNum('t=5&line_type=1&duration=4')) { ?>
 							<li><a href="<?php echo U('Line/search?t=5&line_type=1&duration=4') ?>" target="_blank">四至六日</a></li>
+							<?php } ?>
+							<?php if (A('Line')->searchNum('t=5&line_type=1&duration=8')) { ?>
 							<li><a href="<?php echo U('Line/search?t=5&line_type=1&duration=8') ?>" target="_blank">七日及以上</a></li>
+							<?php } ?>
 						</ul>
 					</div>
 					<div class="clear"></div>
@@ -34,7 +44,10 @@
 					<div class="title"><a href="javascript:void(0);" target="_blank">按主题分</a></div>
 					<div class="content">
 						<ul>
-							<?php foreach($pointTypeList as $item) { ?>
+							<?php 
+								foreach($pointTypeList as $item) {
+									if (!A('Line')->searchNum('t=7&line_type=1&point_type='.$item['id'])) continue;
+							?>
 							<li><a href="<?php echo U('Line/search?t=7&line_type=1&point_type='.$item['id']) ?>" target="_blank"><{$item.name}></a></li>
 							<?php } ?>
 						</ul>
@@ -47,7 +60,10 @@
 					<div class="title"><a href="javascript:void(0);" target="_blank">按特色分</a></div>
 					<div class="content">
 						<ul>
-							<?php foreach($tagList as $item) { ?>
+							<?php 
+								foreach($tagList as $item) {
+									if (!A('Line')->searchNum('t=8&line_type=1&tag='.$item['id'])) continue;
+							?>
 							<li><a href="<?php echo U('Line/search?t=8&line_type=1&tag='.$item['id']) ?>" target="_blank"><{$item.name}></a></li>
 							<?php } ?>
 						</ul>
@@ -60,7 +76,10 @@
 					<div class="title"><a href="<?php echo U('Line/search?t=6&line_type=1&z=1') ?>" target="_blank">周边游</a></div>
 					<div class="content">
 						<ul>
-							<?php foreach($provinceZB as $item) { ?>
+							<?php 
+								foreach($provinceZB as $item) { 
+									if (!A('Line')->searchNum('t=6&line_type=1&province='.$item['id'])) continue;
+							?>
 							<li><a href="<?php echo U('Line/search?t=6&line_type=1&province='.$item['id']) ?>" target="_blank"><{$item.name}></a></li>
 							<?php } ?>
 						</ul>
@@ -73,7 +92,10 @@
 					<div class="title"><a href="<?php echo U('Line/search?t=6&line_type=1&z=2') ?>" target="_blank">国内游</a></div>
 					<div class="content">
 						<ul>
-							<?php foreach($provinceGN as $item) { ?>
+							<?php 
+								foreach($provinceGN as $item) {
+									if (!A('Line')->searchNum('t=6&line_type=1&province='.$item['id'])) continue;
+							?>
 							<li><a href="<?php echo U('Line/search?t=6&line_type=1&province='.$item['id']) ?>" target="_blank"><{$item.name}></a></li>
 							<?php } ?>
 						</ul>
@@ -98,11 +120,21 @@
 					<div class="title"><a href="javascript:void(0);">按区域分</a></div>
 					<div class="content">
 						<ul>
+							<?php if (A('Line')->searchNum('province=3')) { ?>
 							<li><a href="<?php echo U('Line/search?province=3') ?>" target="_blank">江苏旅游</a></li>
+							<?php } ?>
+							<?php if (A('Line')->searchNum('province=2')) { ?>
 							<li><a href="<?php echo U('Line/search?province=2') ?>" target="_blank">浙江旅游</a></li>
+							<?php } ?>
+							<?php if (A('Line')->searchNum('province=1')) { ?>
 							<li><a href="<?php echo U('Line/search?province=1') ?>" target="_blank">上海旅游</a></li>
+							<?php } ?>
+							<?php if (A('Line')->searchNum('province=4')) { ?>
 							<li><a href="<?php echo U('Line/search?province=4') ?>" target="_blank">安徽旅游</a></li>
+							<?php } ?>
+							<?php if (A('Line')->searchNum('province=6')) { ?>
 							<li><a href="<?php echo U('Line/search?province=6') ?>" target="_blank">江西旅游</a></li>
+							<?php } ?>
 						</ul>
 					</div>
 					<div class="clear"></div>
@@ -112,10 +144,18 @@
 					<div class="title"><a href="javascript:void(0);">按天数分</a></div>
 					<div class="content">
 						<ul>
+							<?php if (A('Line')->searchNum('z=1&t=4&duration=1')) { ?>
 							<li><a href="<?php echo U('Line/search?z=1&t=4&duration=1') ?>" target="_blank">一日游</a></li>
+							<?php } ?>
+							<?php if (A('Line')->searchNum('z=1&t=4&duration=2')) { ?>
 							<li><a href="<?php echo U('Line/search?z=1&t=4&duration=2') ?>" target="_blank">二日游</a></li>
+							<?php } ?>
+							<?php if (A('Line')->searchNum('z=1&t=4&duration=3')) { ?>
 							<li><a href="<?php echo U('Line/search?z=1&t=4&duration=3') ?>" target="_blank">三日游</a></li>
+							<?php } ?>
+							<?php if (A('Line')->searchNum('z=1&t=4&duration=7')) { ?>
 							<li><a href="<?php echo U('Line/search?z=1&t=4&duration=7') ?>" target="_blank">多日游</a></li>
+							<?php } ?>
 						</ul>
 					</div>
 					<div class="clear"></div>
@@ -258,7 +298,12 @@
 			<ul>
 				<?php
 					$flag = false;
-					foreach($pointTypeList as $item) { 
+					foreach($pointTypeList as $item) {
+						$data = array();
+						$data['z'] = $product['z'];
+						$data['type_id'] = $item['id'];
+						$data['ajax'] = 'not';
+						if (!A('Line')->getTypeLineList($data)) continue;
 				?>
 				<li id="type<{$item.id}>" <?php if (!$flag) { ?>class="selected" style="margin-left:0;"<?php } ?> onclick="getTLine(<{$product.z}>, <{$item.id}>)">
 					<{$item.name}>

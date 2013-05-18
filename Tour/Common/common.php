@@ -67,4 +67,12 @@ function getPointPhotoId() {
 // 将br转换成\n
 function br2nl($text) {    
     return preg_replace('/<br\\s*?\/??>/i', '', $text);   
-}  
+}
+
+// 递归创建目录
+function recursiveMkdir($path, $mode = 775){
+	if (!file_exists($path)) {
+		recursiveMkdir(dirname($path), $mode);
+		mkdir($path, $mode);
+	}
+}

@@ -19,8 +19,94 @@ class LineAction extends Action {
 		$this->display();
     }
 	
+	
+	// 班级游首页
+	public function banji() {		
+		// 缓存
+		$cache = A('Cache');
+		$cache->url = 'Line/banji';
+		$cache->tpl = 'Line/productIndex';
+		if ($cache->isCached()) $cache->showPage();
+
+		// 获取线路主题
+		$pointTypeList = D('PointType')->rList();
+		$this->assign('pointTypeList', $pointTypeList);
+		
+		// 获取省份列表
+		$provinceZB = D('Province')->rList(1);
+		$provinceGN = D('Province')->rList(2);
+		$this->assign('provinceZB', $provinceZB);
+		$this->assign('provinceGN', $provinceGN);
+		
+		// 获取特色标签
+		$tagList = D('LineTag')->rList();
+		$this->assign('tagList', $tagList);
+		
+		// 获取推荐线路
+		$recommendList = array();
+		$recommendS = D('Const')->r('bj_recommend');
+		$recommendA = split(';', $recommendS);
+		foreach($recommendA as $item) {
+			if (empty($item)) continue;
+			$s = split(',', $item);
+			$recommendList[] = array();
+			$cnt = count($recommendList);
+			$recommendList[$cnt-1]['id'] = $s[0];
+			$recommendList[$cnt-1]['name'] = $s[1];
+		}
+		$this->assign('recommendList', $recommendList);
+		
+		// 获取特价线路
+		$specialList = array();
+		$specialS = D('Const')->r('bj_special');
+		$specialA = split(';', $specialS);
+		foreach($specialA as $item) {
+			if (empty($item)) continue;
+			$s = split(',', $item);
+			$specialList[] = array();
+			$cnt = count($specialList);
+			$specialList[$cnt-1]['id'] = $s[0];
+			$specialList[$cnt-1]['name'] = $s[1];
+			$specialList[$cnt-1]['price'] = $s[2];
+		}
+		$this->assign('specialList', $specialList);
+		
+		// 获取热门线路
+		$para = array();
+		$para['type_id'] = 2;
+		$para['from_province_id'] = 1;
+		$para['from_city_id'] = 1;
+		$para['order_id'] = 2;
+		$hotList = D('Line')->rList($para, 5);
+		$this->assign('hotList', $hotList['data']);
+	
+		// 产品常量
+		$product = array();
+		$product['z'] = 4;
+		$product['name'] = '班级游';
+		$product['type'] = '班级';
+		$product['typeAbb'] = 'bj';
+		$this->assign('product', $product);
+		
+		$this->assign('pointTypeList', $pointTypeList);
+		$this->assign('headTitle', $product['name']);
+		
+		// 缓存
+		if (!$cache->isCached()) {
+			$cache->tvar = $this->tVar;
+			$cache->cachePage();
+		}
+		$this->display('../Tour/Tpl/Line/productIndex.html');
+	}
+	
 	// 周边游首页
 	public function zhoubian() {
+		// 缓存
+		$cache = A('Cache');
+		$cache->url = 'Line/zhoubian';
+		$cache->tpl = 'Line/productIndex';
+		if ($cache->isCached()) $cache->showPage();
+
 		// 获取线路主题
 		$pointTypeList = D('PointType')->rList();
 		$pointList = D('Point')->rListByProvinceList($this->zhoubian, '`id`,`name_abb`,`subject_id`', '`count` DESC');
@@ -29,7 +115,8 @@ class LineAction extends Action {
 				if (count($pointTypeList[$key]['point']) >= 9) continue;
 				if (strstr($item['subject_id'], ','.$item2['id'].',')) {
 						$item['name_abb'] = mb_substr($item['name_abb'], 0, 5, 'utf-8');
-						$pointTypeList[$key]['point'][] = $item;
+						if (A('Line')->searchNum('t=2&point='.$item['id']))
+							$pointTypeList[$key]['point'][] = $item;
 						break;
 				}
 			}
@@ -84,6 +171,12 @@ class LineAction extends Action {
 		$this->assign('product', $product);
 		
 		$this->assign('headTitle', $product['name']);
+		
+		// 缓存
+		if (!$cache->isCached()) {
+			$cache->tvar = $this->tVar;
+			$cache->cachePage();
+		}
 		$this->display('../Tour/Tpl/Line/productIndex.html');
 	}
 	
@@ -227,73 +320,6 @@ class LineAction extends Action {
 		$product['typeAbb'] = 'cj';
 		$this->assign('product', $product);
 		
-		$this->assign('headTitle', $product['name']);
-		$this->display('../Tour/Tpl/Line/productIndex.html');
-	}
-	
-	// 班级游首页
-	public function banji() {
-		// 获取线路主题
-		$pointTypeList = D('PointType')->rList();
-		$this->assign('pointTypeList', $pointTypeList);
-		
-		// 获取省份列表
-		$provinceZB = D('Province')->rList(1);
-		$provinceGN = D('Province')->rList(2);
-		$this->assign('provinceZB', $provinceZB);
-		$this->assign('provinceGN', $provinceGN);
-		
-		// 获取特色标签
-		$tagList = D('LineTag')->rList();
-		$this->assign('tagList', $tagList);
-		
-		// 获取推荐线路
-		$recommendList = array();
-		$recommendS = D('Const')->r('bj_recommend');
-		$recommendA = split(';', $recommendS);
-		foreach($recommendA as $item) {
-			if (empty($item)) continue;
-			$s = split(',', $item);
-			$recommendList[] = array();
-			$cnt = count($recommendList);
-			$recommendList[$cnt-1]['id'] = $s[0];
-			$recommendList[$cnt-1]['name'] = $s[1];
-		}
-		$this->assign('recommendList', $recommendList);
-		
-		// 获取特价线路
-		$specialList = array();
-		$specialS = D('Const')->r('bj_special');
-		$specialA = split(';', $specialS);
-		foreach($specialA as $item) {
-			if (empty($item)) continue;
-			$s = split(',', $item);
-			$specialList[] = array();
-			$cnt = count($specialList);
-			$specialList[$cnt-1]['id'] = $s[0];
-			$specialList[$cnt-1]['name'] = $s[1];
-			$specialList[$cnt-1]['price'] = $s[2];
-		}
-		$this->assign('specialList', $specialList);
-		
-		// 获取热门线路
-		$para = array();
-		$para['type_id'] = 2;
-		$para['from_province_id'] = 1;
-		$para['from_city_id'] = 1;
-		$para['order_id'] = 2;
-		$hotList = D('Line')->rList($para, 5);
-		$this->assign('hotList', $hotList['data']);
-	
-		// 产品常量
-		$product = array();
-		$product['z'] = 4;
-		$product['name'] = '班级游';
-		$product['type'] = '班级';
-		$product['typeAbb'] = 'bj';
-		$this->assign('product', $product);
-		
-		$this->assign('pointTypeList', $pointTypeList);
 		$this->assign('headTitle', $product['name']);
 		$this->display('../Tour/Tpl/Line/productIndex.html');
 	}
@@ -596,7 +622,8 @@ class LineAction extends Action {
 	}
 
 	// 获取线路列表（按类型）
-	public function getTypeLineList() {
+	public function getTypeLineList($data = 0) {
+		if (!empty($data)) $_POST = $data;
 		$para = array();
 		$para['type_id'] = 1;
 		$para['from_province_id'] = 1;
@@ -615,7 +642,8 @@ class LineAction extends Action {
 			$lineList[$key]['schedule'] = D('LineSchedule')->rByLineIdDate($item['id'], getCntDate(), 7);
 			$lineList[$key] = $this->format($lineList[$key]);
 		}
-		$this->ajaxReturn($lineList);
+		if ($data['ajax'] == 'not') return $lineList;
+		else $this->ajaxReturn($lineList);
 	}
 
 	// 抓数据

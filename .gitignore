@@ -4,3 +4,4 @@ Public/editor
 *.psd
 Tour/Runtime
 Tour/Conf/config.php
+Tour/Tpl/Cache

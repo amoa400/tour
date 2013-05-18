@@ -97,7 +97,7 @@
 
 #line .item .point_name {color:#ff6600;background:#f0fde9;padding:10px;}
 #line .item .point_name span{font-weight:bold;}
-#line .item .point_desc {padding:10px;padding-bottom:0;}
+#line .item .point_desc {padding:10px;padding-bottom:0;line-height:24px;}
 #line .item .point_photo {}
 #line .item .point_photo img {width:310px;height:233px;}
 #line .item .point_photo .point_photo_content {float:left;width:310px;text-align:center;margin-top:10px;margin-left:40px;}

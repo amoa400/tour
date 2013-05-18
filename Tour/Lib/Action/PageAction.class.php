@@ -26,4 +26,9 @@ class PageAction extends Action {
 		$this->assign('headTitle', '办理签证');
 		$this->display();
 	}
+	
+	public function app() {
+		$this->assign('headTitle', '手机758');
+		$this->display();
+	}
 }

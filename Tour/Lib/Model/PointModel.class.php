@@ -86,6 +86,7 @@ class PointModel extends Model {
 			 $map['province_id'] = array('NOT in', array_merge(A('Line')->zhoubian, A('Line')->guonei));
 		else 
 			$map['province_id'] = array('in', $provinceList);
+		
 		$pointList = $this->where($map);
 		if ($field != 'all') $pointList = $pointList->field($field);
 		if ($order != 'none') $pointList = $pointList->order($order);

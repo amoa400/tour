@@ -2,6 +2,11 @@
 
 class IndexAction extends Action {
     public function index(){
+		// 缓存
+		$cache = A('Cache');
+		$cache->url = 'Index/index';
+		if ($cache->isCached()) $cache->showPage();
+
 		// 获取城市列表
 		$cityList = D('City')->rList();
 		$pointList = D('Point')->rList();
@@ -26,7 +31,7 @@ class IndexAction extends Action {
 		$lastOrder['user'] = D('User')->r($lastOrder['user_id']);
 		$lastOrder['user']['nickname'] = substr($lastOrder['user']['nickname'], 0, strlen($lastOrder['user']['nickname'])-2).'***';
 		$lastOrder['user']['school'] = D('School')->rName($lastOrder['user']['school_id']);
-		
+
 		// 获取班级游信息
 		$banji = array();
 		$banji['pointTypeList'] = $pointTypeList;
@@ -50,7 +55,7 @@ class IndexAction extends Action {
 			}
 		}
 		$this->assign('zhoubian', $zhoubian);
-		
+
 		// 获取国内游信息
 		$guonei = array();
 		$guonei['pointTypeList'] = $pointTypeList;
@@ -101,12 +106,18 @@ class IndexAction extends Action {
 			}
 		}
 		$this->assign('menpiao', $menpiao);
-		
+
 		$this->assign('cityList', $cityList);
 		$this->assign('pointList', $pointList);
 		$this->assign('pointTypeList', $pointTypeList);
 		$this->assign('constList', $constList);
 		$this->assign('lastOrder', $lastOrder);
+
+		// 缓存
+		if (!$cache->isCached()) {
+			$cache->tvar = $this->tVar;
+			$cache->cachePage();
+		}
 		$this->display();
     }
 

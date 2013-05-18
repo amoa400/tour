@@ -140,10 +140,10 @@
 						<li><span class="title">优惠价：</span><span class="price" style="font-size:20px;"><{$line.price}></span>元/人起</li>
 					<?php } ?>
 					<?php if ($line['type_id'] == 2) { ?>
-						<li><span class="title">团队价：</span><span class="group">12-21人</span>&nbsp;&nbsp;<span class="price"><{$line.price_group_1}></span>元/人起</li>
-						<li><span class="title"></span><span class="group">22-31人</span>&nbsp;&nbsp;<span class="price"><{$line.price_group_2}></span>元/人起</li>
-						<li><span class="title"></span><span class="group">32-41人</span>&nbsp;&nbsp;<span class="price"><{$line.price_group_3}></span>元/人起</li>
-						<li><span class="title"></span><span class="group">42人及以上</span>&nbsp;&nbsp;更优惠价格&nbsp;&nbsp;<a href="#" class="droptip" data-placement="bottom" title="若您的团队想享受某个等级的价格，但是人数不足，我们可以免费帮您在各高校招募队员。">人数不够？</a></li>
+						<li><span class="title">团队价：</span><span class="group">21人价</span>&nbsp;&nbsp;<span class="price"><{$line.price_group_1}></span>元/人起</li>
+						<li><span class="title"></span><span class="group">33人价</span>&nbsp;&nbsp;<span class="price"><{$line.price_group_2}></span>元/人起</li>
+						<li><span class="title"></span><span class="group">45人价</span>&nbsp;&nbsp;<span class="price"><{$line.price_group_3}></span>元/人起</li>
+						<li><span class="title"></span><span class="group">其它人数</span>&nbsp;&nbsp;咨询客服报价&nbsp;&nbsp;<a href="#" class="droptip" data-placement="bottom" title="若您的团队想享受某个等级的价格，但是人数不足，我们可以免费帮您在各高校招募队员。">人数不够？</a></li>
 					<?php } ?>
 					<li><span class="title">抵用券：</span><i class="icon icon_di"></i><span class="privilege" ><span class="text droptip" data-placement="bottom" title="网上预订即享5元抵扣券优惠"><{$line.di_price}>元</span></span>&nbsp;&nbsp;<i class="icon icon_song"></i><span class="privilege"><span class="text droptip"  data-placement="bottom" title="网上预订即送20元抵扣券"><?php echo $line['di_price']*4 ?>元</span></span></li>
 					<li class="satisfaction"><span class="title">满意度：</span><a href="#"><span class="highlight"><{$line.satisfaction}>%</span></a>&nbsp;&nbsp;<a href="#">已有<span class="highlight"><{$line.comment_count}></span>人点评</a></li>
