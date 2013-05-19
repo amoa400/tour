@@ -597,6 +597,19 @@ class AdminAction extends Action {
 			$data['show_id'] = 9999;
 			D('PointTicket')->c($data);
 		}
+		// 存照片
+		if (!empty($_FILES['photo']['name'])) {
+			import('ORG.Net.UploadFile');
+			$upload = new UploadFile();
+			$upload->maxSize  = 1048576*2;
+			$upload->allowExts = array('jpg');
+			$upload->uploadReplace = true;
+			$upload->savePath = './images/ticket/photo/';
+			$upload->saveRule = $id;
+			if( !$upload->upload() ) {
+				$this->error($upload->getErrorMsg());
+			}
+		}
 		$this->redirect('Admin/cTicket2?id='.$id);
 	}
 	

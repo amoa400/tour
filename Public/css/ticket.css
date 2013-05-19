@@ -39,6 +39,8 @@
 #ticket .hot .item .name {display:inline-block;margin-left:10px;width:110px;vertical-align:top;padding-top:4px;overflow:hidden;}
 #ticket .hot .item .price {display:inline-block;margin-left:10px;font-size:14px;color:#f60;font-weight:bold;width:50px;vertical-align:top;}
 
+#ticket .ad3 {margin-top:10px;}
+
 #ticket .right_panel {float:left;margin-left:10px;width:760px;}
 
 #ticket  .right_panel a {color:#0066cc;}
@@ -48,7 +50,7 @@
 #ticket .right_panel .panel .title {border-bottom:2px solid #69c520;padding:5px;padding-left:0px;font-size:14px;font-weight:bold;}
 #ticket .right_panel .panel .content {border:1px solid #dddddd;padding:10px;}
 
-#ticket .rec .item {width:365px;float:left;margin-left:8px;margin-top:15px;}
+#ticket .rec .item {width:365px;height:60px;float:left;margin-left:8px;margin-top:15px;}
 #ticket .rec .item .pic {float:left;width:120px;}
 #ticket .rec .item .pic img {width:120px;height:60px;}
 #ticket .rec .item .ct {float:left;margin-left:10px;width:235px;position:relative;}

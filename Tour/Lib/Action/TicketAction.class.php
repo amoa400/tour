@@ -6,6 +6,11 @@ class TicketAction extends Action {
 	
 	// 首页
 	public function index() {
+		// 缓存
+		$cache = A('Cache');
+		$cache->url = 'Ticket/index';
+		if ($cache->isCached()) $cache->showPage();
+
 		// 获取景点首页广告
 		$ticketAdList = array();
 		$ticketAdS = D('Const')->r('ticket_ad');
@@ -52,6 +57,12 @@ class TicketAction extends Action {
 		$this->assign('hotList', $hotList);
 		
 		$this->assign('headTitle', '景点门票');
+		
+		// 缓存
+		if (!$cache->isCached()) {
+			$cache->tvar = $this->tVar;
+			$cache->cachePage();
+		}
 		$this->display();
 	}
 	

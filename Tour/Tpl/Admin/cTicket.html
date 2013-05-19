@@ -22,6 +22,16 @@
 			<span class="text"><textarea id="desc" name="desc"><{$ticket.desc}></textarea></span>
 		</li>
 		<li>
+			<span class="title">推荐度：</span>
+			<input name="show_id" type="text" value="<{$ticket.show_id}>">
+			&nbsp;&nbsp;&nbsp;&nbsp;不推荐填0，一般推荐填1，推荐度越高排位越靠前，最高255
+		</li>
+		<li>
+			<span class="title">广告语：</span>
+			<input name="ad" type="text" value="<{$ticket.ad}>">
+			&nbsp;&nbsp;&nbsp;&nbsp;若不推荐至首页则无需填写
+		</li>
+		<li>
 			<span class="title">价格：</span>
 			<input name="price" type="text" value="<{$ticket.price}>">
 		</li>
@@ -80,6 +90,11 @@
 		<li>
 			<span class="title">&nbsp;</span>
 			上面填写提前预订天订票的截止时间，比如上上面填的1，上面填写的20:00，则明天的票将截止到今天晚上8点。
+		</li>
+		<li>
+			<span class="title">照片：</span>
+			<input name="photo" type="file">		
+			<span style="font-size:12px;">&nbsp;&nbsp;若不需要出现在打折门票列表中可不上传</span>
 		</li>
 		<li><span class="title">&nbsp;</span><input type="submit" class="btn btn-inverse" value="下一步"></li>
 		</form>

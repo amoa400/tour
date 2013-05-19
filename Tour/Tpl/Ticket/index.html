@@ -28,13 +28,13 @@
 				<div class="rec">
 					<span>重点推荐</span>
 					<div>
-						<a href="#">上海欢乐谷</a>&nbsp;
-						<a href="#">常州中华恐龙园</a>&nbsp;
-						<a href="#">春秋乐园</a>&nbsp;<br>
-						<a href="#">横店影视城</a>&nbsp;
-						<a href="#">溪口风景区</a>&nbsp;
-						<a href="#">西塘</a>&nbsp;
-						<a href="#">周庄</a>&nbsp;
+						<a href="<?php echo U('Point/show?id=62'); ?>" target="_blank">上海欢乐谷</a>&nbsp;
+						<a href="<?php echo U('Point/show?id=59'); ?>" target="_blank">常州中华恐龙园</a>&nbsp;
+						<a href="<?php echo U('Point/show?id=44'); ?>" target="_blank">春秋乐园</a>&nbsp;<br>
+						<a href="<?php echo U('Point/show?id=84'); ?>" target="_blank">横店影视城</a>&nbsp;
+						<a href="<?php echo U('Point/show?id=74'); ?>" target="_blank">杜莎夫人蜡像馆</a>&nbsp;
+						<a href="<?php echo U('Point/show?id=13'); ?>" target="_blank">西塘</a>&nbsp;
+						<a href="<?php echo U('Point/show?id=12'); ?>" target="_blank">周庄</a>&nbsp;
 					</div>
 				</div>
 			</div>
@@ -64,7 +64,10 @@
 			<div class="title">主题推荐</div>
 			<div class="content">
 				<ul>
-					<?php foreach($pointTypeList as $item) { ?>
+					<?php 
+						foreach($pointTypeList as $item) { 
+							if (!A('Ticket')->searchNum('subject='.$item['id'])) continue;
+					?>
 					<li><a href="<?php echo U('Ticket/search?subject='.$item['id']) ?>" target="_blank"><{$item.name}></a></li>
 					<?php } ?>
 				</ul>
@@ -89,6 +92,10 @@
 				<?php } ?>
 				<div class="clear"></div>
 			</div>
+		</div>
+		
+		<div class="ad3">
+			<a href="<?php echo U('Point/show?id=84'); ?>" target="_blank"><img src="__ROOT__/images/ticket/indexAd/leftbot.jpg"></img></a>
 		</div>
 	</div>
 	
@@ -121,7 +128,7 @@
 	
 		<!--小广告-->
 		<div class="ad2">
-			<a href="#"><img src="http://s3.lvjs.com.cn/opi/off-0426-tianmuhu-740x80.jpg"></img></a>
+			<a  href="<?php echo U('Point/show?id=83'); ?>" target="_blank"><img src="__ROOT__/images/ticket/indexAd/rightmid.jpg"></img></a>
 		</div>
 		
 		<!--特色游玩主题-->
@@ -131,6 +138,7 @@
 				<?php 
 					$cnt = 0;
 					foreach($pointTypeList as $item) {
+						if (empty($item['ticket'])) continue;
 						$cnt++;
 				?>
 				<div class="item" style="<?php if ($cnt%3==1) { ?>margin-left:0;<?php } ?><?php if ($cnt <= 3) { ?>margin-top:0;<?php } ?>">
