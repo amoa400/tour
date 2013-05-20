@@ -37,6 +37,7 @@
 #point .right_panel .panel .title span {border:1px solid #c8c8c8;border-bottom:0;background:#f0f0f0;display:inline-block;padding:5px;padding-left:10px;padding-right:10px;}
 #point .right_panel .panel .content {padding-top:10px;padding-bottom:10px;}
 #point .right_panel .desc .content {line-height:26px;}
+#point .right_panel .desc .content img {margin-top:5px;margin-bottom:5px;}
 
 #point .ticket input {width:51px;height:23px;border:none;background:url("../images/point/order.png");}
 #point .ticket .name {text-align:left;}

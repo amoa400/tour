@@ -133,7 +133,7 @@ class TicketAction extends Action {
 		$data['only_count'] = $this->_get('only_count');
 		$page = $this->_get('page');
 		if (empty($page)) $page = 1;
-
+		
 		// 按关键词搜索
 		if (!empty($keyword)) {
 			$flag = true;
@@ -144,7 +144,7 @@ class TicketAction extends Action {
 				$province = D('Province')->rByName($keyword2);
 				if (!empty($province)) {
 					$data['province_id'] = $province['id'];
-					$data['city_id'] = 0;
+					if (empty($data['city_id'])) $data['city_id'] = 0;
 					$flag = false;
 				}
 			}
@@ -185,7 +185,7 @@ class TicketAction extends Action {
 		$form['sort'] = $data['sort'];
 		$form['page'] = $page;
 		$form['k'] = $keyword;
-		if (!empty($form['province']) && empty($form['city'])) {
+		if (!empty($form['province'])) {
 			$cityList = D('City')->rList($form['province']);
 			$this->assign('cityList', $cityList);
 		}
@@ -206,7 +206,7 @@ class TicketAction extends Action {
 		$point['province'] = D('Province')->rName($point['province_id']);
 		$point['city'] = D('City')->rName($point['province_id'], $point['city_id']);
 		// 景点主题
-		if (empty($this->pointSubjectList)) $this->pointSubjectList = D('PointSubject')->rList();
+		if (empty($this->pointSubjectList)) $this->pointSubjectList = D('PointType')->rList();
 		$subjectList = split(',', $point['subject_id']);
 		foreach($subjectList as $item) {
 			if (empty($item)) continue;

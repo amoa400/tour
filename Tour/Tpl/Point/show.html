@@ -71,7 +71,9 @@
 				<span><a href="#desc">景区简介</a></span>
 				<span><a href="#comment">游客点评</a></span>
 				<span><a href="#traffic">交通信息</a></span>
-				<span><a href="#">收藏景点</a></span>
+				<span>
+					<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">分享给同学</a>
+				</span>
 			</div>
 		</div>
 	</div>
@@ -92,15 +94,9 @@
 		<div class="panel hot">
 			<div class="title">热门景区推荐</div>
 			<div class="content">
-				<span><a href="#"><strong>·</strong> 上海滨海森林公园</a></span>
-				<span><a href="#"><strong>·</strong> 上海滨海森林公园</a></span>
-				<span><a href="#"><strong>·</strong> 上海滨海森林公园</a></span>
-				<span><a href="#"><strong>·</strong> 上海滨海森林公园</a></span>
-				<span><a href="#"><strong>·</strong> 上海滨海森林公园</a></span>
-				<span><a href="#"><strong>·</strong> 上海滨海森林公园</a></span>
-				<span><a href="#"><strong>·</strong> 上海滨海森林公园</a></span>
-				<span><a href="#"><strong>·</strong> 上海滨海森林公园</a></span>
-				<span><a href="#"><strong>·</strong> 上海滨海森林公园</a></span>
+				<?php foreach($hotPointList as $item) { ?>
+				<span><a href="<?php echo U('Point/show?id='.$item['id']) ?>" target="_blank"><strong>·</strong> <{$item.name}></a></span>
+				<?php } ?>
 			</div>
 		</div>
 	</div>
@@ -333,10 +329,10 @@
 
 <script>
 	var jiathis_config = {
-		url:"__ROOT__<?php echo U('Line/show?id='.$line['id']); ?>",
-		title:"[<{$line.name}>]<{$line.character}>",
-		summary:"<?php echo str_replace(chr(13).chr(10), '', $line['introduction']); ?>",
-		pic:"__ROOT__/images/line/photo/<{$line.id}>.jpg",
+		url:"__ROOT__<?php echo U('Point/show?id='.$point['id']); ?>",
+		title:"<{$point.name}>门票，超值优惠，全网最低，点评返奖！____NAME__",
+		summary:"<{$point.desc}>",
+		pic:"__ROOT__/images/point/photo/<{$point.province_id}>/<{$point.city_id}>/<{$point.id}>/1.jpg",
 	}
 </script>
 

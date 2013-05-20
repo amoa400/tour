@@ -94,6 +94,14 @@ class PointModel extends Model {
 		return $pointList;
 	}
 	
+	// 获取景点列表（热门）
+	public function rHotList() {
+		$sql = array();
+		$sql['price'] = array('NEQ', 0);
+		$pointList = $this->where($sql)->order('`sell_count` DESC')->limit(10)->select();
+		return $pointList;
+	}
+	
 	// 获取景点列表
 	public function rListAll() {
 		$pointList = $this->select();

@@ -109,22 +109,13 @@
 			<div  class="itemList">
 			
 				<!--目的城市-->
-				<?php if (!empty($form['province']) && empty($form['city'])) { ?>
+				<?php if (!empty($form['province'])) { ?>
 				<div class="item">
 					<ul>
 						<li id="destination_<?php echo (int)$form['province'] ?>_0" class="c_destnation selected" onclick="destination_change(<?php echo (int)$form['province'] ?>, 0)">不限</li>
-						<?php foreach($cityList as $city) { ?>
+						<?php foreach($cityList as $city) {	?>
 							<li id="destination_<{$city.province_id}>_<{$city.id}>" class="c_destnation" onclick="destination_change(<{$city.province_id}>, <{$city.id}>)"><{$city.name}></li>
 						<?php } ?>
-					</ul>
-					<div class="clear"></div>
-				</div>
-				<?php } ?>
-				
-				<?php if (!empty($form['province']) && !empty($form['city'])) { ?>
-				<div class="item">
-					<ul>
-						<li class="selected"><{$form['city_name']}></li>
 					</ul>
 					<div class="clear"></div>
 				</div>

@@ -6,7 +6,6 @@ class PointAction extends Action {
 		$point = $point[0];
 		$point['province'] = D('Province')->rName($point['province_id']);
 		$point['city'] = D('City')->rName($point['province_id'], $point['city_id']);
-		$point['subject'] = D('PointSubject')->rName($point['subject_id']);
 		$point['desc'] = str_replace('\r\n', '', $point['desc']);
 		$point['desc'] = str_replace('\r', '', $point['desc']);
 		$point['desc'] = str_replace(PHP_EOL, '', $point['desc']);
@@ -24,7 +23,14 @@ class PointAction extends Action {
 		foreach($ticketList as $id => $item) {
 			if ($item['pay_type_id'] == 1)
 				$ticketList[$id]['pay_type'] = '在线支付';
+			if ($item['pay_type_id'] == 2)
+				$ticketList[$id]['pay_type'] = '景区支付';
 		}
+		
+		// 获取热门景区
+		$hotPointList = D('Point')->rHotList();
+		$this->assign('hotPointList', $hotPointList);
+		
 		$this->assign('point', $point);
 		$this->assign('headTitle', $point['name']);
 		$this->assign('ticketList', $ticketList);
