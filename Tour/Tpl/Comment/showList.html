@@ -1,0 +1,18 @@
+<include file="Index:header"/>
+
+<style>
+	#comment .title {font-size:14px;font-weight:bold;color:#0066cc;}
+</style>
+
+<div id="comment" class="main_container wallpaper2">
+	
+	<div class="title" style="padding:20px;">
+		<{$title}>的点评记录
+	</div>
+	<div class="list" style="padding-left:20px;padding-right:20px;">
+		<{:R('Comment/wShowList',array($type, $id, $cntPage, 10, 1), 'Widget')}>
+	</div>
+</div>
+
+
+<include file="Index:footer"/>

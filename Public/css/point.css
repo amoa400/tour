@@ -36,6 +36,7 @@
 #point .right_panel .panel .title {font-size:14px;color:#339900;font-weight:bold;border-bottom:1px solid #c8c8c8;}
 #point .right_panel .panel .title span {border:1px solid #c8c8c8;border-bottom:0;background:#f0f0f0;display:inline-block;padding:5px;padding-left:10px;padding-right:10px;}
 #point .right_panel .panel .content {padding-top:10px;padding-bottom:10px;}
+
 #point .right_panel .desc .content {line-height:26px;}
 #point .right_panel .desc .content img {margin-top:5px;margin-bottom:5px;}
 
@@ -75,3 +76,7 @@
 #point .order .content .count {width:30px;height:15px;font-size:10px;line-height:0;text-align:center;border:1px solid #175728;margin:0;padding:1px;margin-bottom:4px;}
 #point .order .next {text-align:center;margin-top:20px;padding-bottom:100px;}
 #point .order .next .submit{width:119px;height:35px;border:none;background:url("../images/point/next_bg.png");}
+
+#point .comment .content {padding:0px !important;}
+#point .comment a {color:#0066cc;}
+#point .comment a:hover {color:#f60;}

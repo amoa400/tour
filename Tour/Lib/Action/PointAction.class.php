@@ -31,6 +31,16 @@ class PointAction extends Action {
 		$hotPointList = D('Point')->rHotList();
 		$this->assign('hotPointList', $hotPointList);
 		
+		// 获取评论
+		$commentList = D('Comment')->rList(2, $this->_get('id'), 1, 5);
+		$commentCount = $commentList['count'];
+		$commentList = $commentList['data'];
+		foreach($commentList as $key => $item) {
+			$commentList[$key]['time'] = intToTime($commentList[$key]['time']);
+		}
+		$this->assign('commentList', $commentList);
+		$this->assign('commentCount', $commentCount);
+		
 		$this->assign('point', $point);
 		$this->assign('headTitle', $point['name']);
 		$this->assign('ticketList', $ticketList);

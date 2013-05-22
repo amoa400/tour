@@ -100,7 +100,6 @@
 			</div>
 		</div>
 	</div>
-	
 	<!--右面板-->
 	<div class="right_area">
 		<!--路线名称-->
@@ -146,7 +145,7 @@
 						<li><span class="title"></span><span class="group">其它人数</span>&nbsp;&nbsp;咨询客服报价&nbsp;&nbsp;<a href="#" class="droptip" data-placement="bottom" title="若您的团队想享受某个等级的价格，但是人数不足，我们可以免费帮您在各高校招募队员。">人数不够？</a></li>
 					<?php } ?>
 					<li><span class="title">抵用券：</span><i class="icon icon_di"></i><span class="privilege" ><span class="text droptip" data-placement="bottom" title="网上预订即享5元抵扣券优惠"><{$line.di_price}>元</span></span>&nbsp;&nbsp;<i class="icon icon_song"></i><span class="privilege"><span class="text droptip"  data-placement="bottom" title="网上预订即送20元抵扣券"><?php echo $line['di_price']*4 ?>元</span></span></li>
-					<li class="satisfaction"><span class="title">满意度：</span><a href="#"><span class="highlight"><{$line.satisfaction}>%</span></a>&nbsp;&nbsp;<a href="#">已有<span class="highlight"><{$line.comment_count}></span>人点评</a></li>
+					<li class="satisfaction"><span class="title">满意度：</span><a href="#"><span class="highlight"><{$line.satisfaction}>%</span></a>&nbsp;&nbsp;<a href="#">已有<span class="highlight"><{$line.comment_count}></span>条点评</a></li>
 					<li><span class="title">提前报名：</span>建议提前<{$line.day_ahead}>天以上</li>
 					<li><span class="title">特色服务：</span><span class="service droptip" data-placement="bottom" title="网上订购并支付即可使用抵用券优惠">网订优惠</span>&nbsp;&nbsp;<span class="service droptip" data-placement="bottom" title="归来写游记，即有机会获得千元奖金">写游记有奖</span></li>
 				</ul>
@@ -310,13 +309,11 @@
 							<span class="title">友情提示</span>
 							<span class="content"><{$line.precaution}></span>
 						</div>
-
-						<!--提示-->
-						<!--
-						<div class="tip">
-							* 以上行程仅供参考，最终行程以出团通知为准。
+						
+						<div class="item other_info">
+							<{:R('Comment/wShowList',array(1, $line['id']), 'Widget')}>
 						</div>
-						-->
+						
 					</div>
 					
 									
@@ -372,7 +369,7 @@
 
 					<!--点评记录-->
 					<div id="line_comment" class="hidden">
-						暂无点评记录
+						<{:R('Comment/wShowList',array(1, $line['id']), 'Widget')}>
 					</div>
 
 					<!--在线问答-->

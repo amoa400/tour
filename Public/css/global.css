@@ -20,22 +20,22 @@ a:hover {color:#f60;text-decoration:none;}
 .icon-weixin {background:url("../images/icon/weixin.png");}
 .icon_user {width:50px;height:17px;background:url('../images/user/icon_user.gif') no-repeat;}
 
-.wallpaper {background:url('../images/wallpaper.jpg') no-repeat center top;overflow:hidden;}
+.wallpaper {background:url('../images/wallpaper.jpg') no-repeat center top;min-width:1100px;min-height:380px;}
 .wallpaper2 {padding-top:10px;padding-left:10px;padding-right:10px;padding-bottom:10px;border:1px solid #dadada;border-top:0;background:#ffffff;}
 
 .path {margin-bottom:15px;margin-top:5px;}
 
 #header{}
-#header .header_top {background:#f5f5f5;height:30px;border-bottom:1px solid #dcdcdc;}
+#header .header_top {background:#f5f5f5;height:30px;border-bottom:1px solid #dcdcdc;min-width:1100px;}
 #header .header_top .content li {line-height:30px;margin-left:5px;}
 #header .header_top .right {float:right}
 #header .header_top .cart {color:#ff5500;font-weight:bold;}
-#header .header_main {height:90px;overflow:hidden;}
+#header .header_main {height:90px;min-width:1100px;}
 #header .header_main  .logo {margin-top:8px;float:left;}
 #header .header_main  .city {margin-top:35px;float:left;margin-left:15px;}
 #header .header_main  .change_city{color:#888888;}
 #header .header_main  .ad{float:right;}
-#header .header_nav {position:relative;background:url("../images/header/nav_bg.png");height:43px;}
+#header .header_nav {position:relative;background:url("../images/header/nav_bg.png");height:43px;min-width:1100px;}
 #header .header_nav .content {position:relative;}
 #header .header_nav .content a {color:#ffffff;}
 #header .header_nav .content a:hover {color:#f60;text-decoration:none;}
@@ -52,8 +52,8 @@ a:hover {color:#f60;text-decoration:none;}
 #header .header_nav .kefu .icon_kefu {width:20px;height:25px;background:url('../images/header/icon_kefu.png') no-repeat;}
 #header .header_nav .kefu span {display:inline-block;margin-left:2px;color:#ffffff;font-weight:bold;font-size:14px;top:0;}
 
-#footer {}
-#footer .helper {background:#f7f7f7;height:90px;margin-top:10px;border-top:1px solid #e6e6e6;border-bottom:1px solid #e6e6e6;padding:20px;}
+#footer {min-width:1100px;}
+#footer .helper {background:#f7f7f7;height:90px;margin-top:10px;border-top:1px solid #e6e6e6;border-bottom:1px solid #e6e6e6;padding-top:20px;padding-bottom:20px;}
 #footer .helper li {width:176px;padding-left:29px;border-left:1px solid #e6e6e6;height:90px;}
 #footer .helper .title {font-weight:bold;font-size:18px;margin-bottom:10px;}
 #footer .helper span {display:block;}

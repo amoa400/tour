@@ -1,0 +1,128 @@
+<style>
+#commentList {}
+#commentList .head {font-size:14px;font-weight:bold;border-bottom:1px dashed #999999;padding-bottom:10px;}
+#commentList .head img {width:20px;height:20px;display:inline-block;vertical-align:text-bottom;}
+#commentList .it {font-size:12px;border-bottom:1px dashed #999999;padding-bottom:10px;margin-top:20px;}
+#commentList .it .photo {float:left;width:104px;overflow:hidden;}
+#commentList .it .photo span {display:block;text-align:center;margin-top:10px;font-weight:bold;}
+#commentList .it .photo img {width:100px;height:100px;border:1px solid #dddddd;padding:1px;}
+#commentList .it .content {float:left;margin-left:10px;width:80%;}
+#commentList .it .content .satisfication {font-weight:bold;height:20px;overflow:hidden;}
+#commentList .it .content .satisfication img {width:16px;height:16px;display:inline-block;vertical-align:text-bottom;}
+#commentList .it .content .ct {margin-top:3px;height:81px;overflow:hidden;line-height:21px;}
+#commentList .it .content .bot {margin-top:9px;}
+#commentList .it .content .bot span {display:inline-block;margin-left:10px;}
+#commentList .it .content .bot .first {margin-left:0px;}
+#commentList .it .content .bot .time {float:right;margin-right:5px;}
+#commentList .foot {text-align:right;margin-top:15px;}
+</style>
+
+<?php
+	if (!empty($line)) {
+		$type = 1;
+		$product = $line;
+	}
+	else {
+		$type = 2;
+		$product = $point;
+	}
+?>
+
+<div id="commentList">
+	<?php if (!empty($commentList)) { ?>
+	<div class="head" style="margin:0;">
+		<a href="<?php echo U('Comment/showList?type='.$type.'&id='.$product['id']) ?>" target="_blank">共有<{$commentCount}>条点评</a><br>
+		总体评价：
+		<?php 
+			$satisfaction = (int)$line['satisfaction'];
+			if (empty($satisfaction)) $satisfaction = $point['satisfaction'];
+			$tot = 0;
+			for ($i = 0; $i < (int)($satisfaction/20); $i++)  {
+			$tot++;
+		?>
+		<img src="__ROOT__/images/comment/star_orange.png"/>
+		<?php } ?>
+		<?php 
+			if ($satisfaction % 20 != 0)  { 
+				$tot++;
+		?>
+		<img src="__ROOT__/images/comment/star_half_orange.png"/>
+		<?php } ?>
+		<?php for ($i = $tot; $i < 5; $i++)  {?>
+		<img src="__ROOT__/images/comment/star_empty_orange.png"/>
+		<?php } ?>
+		（<?php echo sprintf('%.2f', $satisfaction/20); ?>分）
+	</div>
+
+	<?php foreach($commentList as $item) { ?>
+	<div class="it">
+		<div class="photo">
+			<?php if ($item['user_id'] != 0) { ?>
+			<img src="__ROOT__/images/user/photo/<{$item.user_id}>.jpg">
+			<?php } else { ?>
+			<img src="__ROOT__/images/user/photo.jpg">
+			<?php } ?>
+			<span><{$item.user_name}></span>
+		</div>
+		<div class="content">
+			<div class="satisfication">
+				整体评价：
+				<?php for ($i = 0; $i < $item['satisfaction']; $i++)  { ?>
+				<img src="__ROOT__/images/comment/star_orange.png"/>
+				<?php } ?>
+				<?php for ($i = $item['satisfaction']; $i < 5; $i++)  { ?>
+				<img src="__ROOT__/images/comment/star_empty_orange.png"/>
+				<?php } ?>
+			</div>
+			<div class="ct">
+				<{$item.content}>
+			</div>
+			<div class="bot">
+				<span class="first"><i class="icon-time"></i>&nbsp;<{$item.time}></span>
+				<span><a href="<?php echo U('Comment/show?id='.$item['id']) ?>" target="_blank"><i class="icon-comment"></i>&nbsp;回复(0)</a></span>
+				<span class="time"><a href="<?php echo U('Comment/show?id='.$item['id']) ?>" target="_blank">查看全文&nbsp;&nbsp;>></a></span>
+			</div>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<?php } ?>
+	<div class="foot">
+		<?php if (!$showPagination) { ?>
+		<a href="<?php echo U('Comment/showList?type='.$type.'&id='.$product['id']) ?>" target="_blank">查看全部点评</a>
+		<?php } else { ?>
+		<div class="pagination">
+			<ul>
+				<?php if (empty($cntPage)) $cntPage = 1; ?>
+				<?php if ($cntPage >= 5) { ?>
+				<li><a href="<?php echo U('Comment/showList?type='.$type.'&id='.$id.'&page=1') ?>">1</a></li>
+				<?php } ?>
+				<?php if ($cntPage > 5) { ?>
+				<li class="disable"><a>...</a></li>
+				<?php } ?>
+				<?php for($i = $cntPage-3; $i < $cntPage; $i++) { if ($i <= 0) continue; ?>
+				<li><a href="<?php echo U('Comment/showList?type='.$type.'&id='.$id.'&page='.$i) ?>"><{$i}></a></li>
+				<?php } ?>
+				<li class="active"><a href="#")"><{$cntPage}></a></li>
+				<?php for($i = $cntPage+1; $i <= $cntPage+3; $i++) { if ($i > $totPage) break; ?>
+				<li><a href="<?php echo U('Comment/showList?type='.$type.'&id='.$id.'&page='.$i) ?>"><{$i}></a></li>
+				<?php } ?>
+				<?php if ($cntPage < $totPage-4) { ?>
+				<li class="disable"><a>...</a></li>
+				<?php } ?>
+				<?php if ($cntPage <= $totPage-4) { ?>
+				<li><a href="<?php echo U('Comment/showList?type='.$type.'&id='.$id.'&page='.$totPage) ?>"><{$totPage}></a></li>
+				<?php } ?>
+			</ul>
+		</div>
+		<?php } ?>
+	</div>
+	<?php } else { ?>
+	<a href="<?php echo U('Comment/showList?type='.$type.'&id='.$line['id']) ?>" target="_blank">暂无点评，立刻来发表点评吧！</a>
+	<?php } ?>
+</div>
+
+<script>
+	var width = parseInt($('#commentList').css('width'));
+	$('#commentList').css('width', width+'px')
+	$('#commentList .it .content').css('width', width-104-10+'px');
+</script>

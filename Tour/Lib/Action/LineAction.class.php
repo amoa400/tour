@@ -13,6 +13,10 @@ class LineAction extends Action {
 		$line['schedule'] = D('LineSchedule')->rByLineIdDate($line['id'], getCntDate(), 70);
 		$line['point'] = D('Point')->rByString($line['point_id'], true);
 		$line = $this->format($line);
+		
+		// 获取评论
+
+		
 		$headTitle = $line['name'].'__'.$line['to_province'].$line['to_city'];
 		$this->assign('line', $line);
 		$this->assign('headTitle', $headTitle);
