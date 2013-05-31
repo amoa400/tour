@@ -7,30 +7,32 @@
 				<ul>
 					<li style="border:0;">
 						<span class="title">游客中心</span>
-						<span>&nbsp;&nbsp;<a href="#">免费注册</a></span>
-						<span>&nbsp;&nbsp;<a href="#">订单查询</a></span>
-						<span>&nbsp;&nbsp;<a href="#">订阅__NAME2__优惠信息</a></span>
+						<span>&nbsp;&nbsp;<a href="<?php echo U('User/register') ?>">免费注册</a></span>
+						<span>&nbsp;&nbsp;<a href="<?php echo U('User/home') ?>">个人中心</a></span>
+						<span>&nbsp;&nbsp;<a href="<?php echo U('User/order') ?>">订单查询</a></span>
 					</li>
 					<li>
-						<span class="title">预订帮助</span>
-						<span>&nbsp;&nbsp;<a href="#">预订常见问题</a></span>
-						<span>&nbsp;&nbsp;<a href="#">付款与安全</a></span>
-						<span>&nbsp;&nbsp;<a href="#">其它注意事项</a></span>
+						<span class="title">关于我们</span>
+						<span>&nbsp;&nbsp;<a href="<?php echo U('Page/about') ?>">关于我们</a></span>
+						<span>&nbsp;&nbsp;<a href="<?php echo U('Page/join') ?>">加入我们</a></span>
+						<span>&nbsp;&nbsp;<a href="<?php echo U('Page/contact') ?>">联系我们</a></span>
 					</li>
 					<li>
 						<a href="__ROOT__"><img src="__ROOT__/images/footer/logo.png"/></a>
 					</li>
 					<li>
-						<span class="title">企业服务</span>
-						<span>&nbsp;&nbsp;<a href="#">旅行社加盟</a></span>
-						<span>&nbsp;&nbsp;<a href="#">营销合作</a></span>
-						<span>&nbsp;&nbsp;<a href="#">旅游同业社区</a></span>
+						<span class="title">免责投诉</span>
+						<span>&nbsp;&nbsp;<a href="<?php echo U('Page/mianze') ?>">免责声明</a></span>
+						<span>&nbsp;&nbsp;<a href="<?php echo U('Page/tousu') ?>">投诉建议</a></span>
 					</li>
-					<li style="width:147px;">
+					<li style="width:147px;position:relative;">
 						<span class="title">关注我们</span>
-						<span>&nbsp;&nbsp;<a href="#"><i class="icon-renren"></i>&nbsp;__NAME2__人人主页</a></span>
-						<span>&nbsp;&nbsp;<a href="#"><i class="icon-weibo"></i>&nbsp;__NAME2__新浪微博</a></span>
-						<span>&nbsp;&nbsp;<a href="#"><i class="icon-weixin"></i>&nbsp;扫描微信二维码</a></span>
+						<span>&nbsp;&nbsp;<a href="http://page.renren.com/601509075" target="_blank"><i class="icon-renren"></i>&nbsp;__NAME2__人人主页</a></span>
+						<!--<span>&nbsp;&nbsp;<a href="#"><i class="icon-weibo"></i>&nbsp;__NAME2__新浪微博</a></span>-->
+						<span onmouseover="weixin_code2_open()" onmouseout="weixin_code2_close()">&nbsp;&nbsp;<a href="#"><i class="icon-weixin"></i>&nbsp;扫描微信二维码</a></span>
+						<div id="weixin_code2" style="position:absolute;bottom:0px;z-index:999;width:100px;height:100px;right:-120px;margin:0;padding:0;display:none;" onmouseover="weixin_code2_open()" onmouseout="weixin_code2_close()">
+							<img src="__ROOT__/images/index/weixin_code.jpg" style="margin:0;padding:0;">
+						</div>
 					</li>
 				</ul>
 			</div>
@@ -38,17 +40,17 @@
 		
 		<div class="link main_container">
 			<ul>
-				<li><a href="#">关于__NAME2__</a></li>
+				<li><a href="<?php echo U('Page/about') ?>">关于__NAME2__</a></li>
 				<li class="divide">|</li>
-				<li><a href="#">加入__NAME2__</a></li>
+				<li><a href="<?php echo U('Page/join') ?>">加入__NAME2__</a></li>
 				<li class="divide">|</li>
-				<li><a href="#">免责声明</a></li>
+				<li><a href="<?php echo U('Page/mianze') ?>">免责声明</a></li>
 				<li class="divide">|</li>
-				<li><a href="#">联系__NAME2__</a></li>
+				<li><a href="<?php echo U('Page/contact') ?>">联系__NAME2__</a></li>
 				<li class="divide">|</li>
-				<li><a href="#">建议与投诉</a></li>
+				<li><a href="<?php echo U('Page/tousu') ?>">建议与投诉</a></li>
 				<li class="divide">|</li>
-				<li><a href="#">旅行社加盟</a></li>
+				<li><a href="<?php echo U('User/register') ?>">免费注册</a></li>
 			</ul>
 		</div>
 		<div class="clear"></div>

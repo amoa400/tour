@@ -18,3 +18,16 @@ function ajaxGetUserInfo() {
 		}
 	);
 }
+
+						function weixin_code_open() {
+								$('#weixin_code').css('display', 'block');
+						}
+						function weixin_code_close() {
+								$('#weixin_code').css('display', 'none');
+						}
+						function weixin_code2_open() {
+								$('#weixin_code2').css('display', 'block');
+						}
+						function weixin_code2_close() {
+								$('#weixin_code2').css('display', 'none');
+						}

@@ -31,4 +31,29 @@ class PageAction extends Action {
 		$this->assign('headTitle', '手机758');
 		$this->display();
 	}
+	
+	public function about() {
+		$this->assign('headTitle', '关于我们');
+		$this->display();
+	}
+	
+	public function join() {
+		$this->assign('headTitle', '加入我们');
+		$this->display();
+	}
+	
+	public function contact() {
+		$this->assign('headTitle', '联系我们');
+		$this->display();
+	}
+	
+	public function mianze() {
+		$this->assign('headTitle', '免责声明');
+		$this->display();
+	}
+	
+	public function tousu() {
+		$this->assign('headTitle', '投诉建议');
+		$this->display();
+	}
 }
